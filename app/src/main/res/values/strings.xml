@@ -1,0 +1,109 @@
+<resources>
+    <string name="app_name">RPPM</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="openDrawer">open_drawer</string>
+    <string name="closeDrawer">close_drawer</string>
+
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_home">Home</string>
+    <string name="nav_check_beacon">Check iBeacons</string>
+    <string name="nav_arm">Arms</string>
+    <string name="nav_leg">Legs</string>
+
+    <!-- Toolbar titles when navigation menu item is selected -->
+    <string-array name="nav_item_activity_titles">
+        <item>Home</item>
+        <item>Check iBeacon</item>
+        <item>Arms</item>
+        <item>Legs</item>
+    </string-array>
+
+    <string name="activity_title_about_us">About Us</string>
+    <string name="activity_title_privacy_policy">Privacy Policy</string>
+    <string name="action_clear_all">Clear All</string>
+    <string name="action_logout">Logout</string>
+    <string name="action_mark_all_read">Mark All as Read</string>
+    <string name="privacy_policy">Privacy Policy</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sliding">SlidingMenuActivity</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="nav_content_other">Other</string>
+
+    <!-- OLD STRING DATA FROM ARSM-->
+    <!-- Popular Word -->
+    <string name="ok">OK</string>
+
+    <!-- MainActivity -->
+    <string name="tArmL">L Arm</string>
+    <string name="tArmR">R Arm</string>
+    <string name="tKneeL">L Knee</string>
+    <string name="tKneeR">R Knee</string>
+    <string name="tAnkleL">L Ankle</string>
+    <string name="tAnkleR">R Ankle</string>
+    <string name="tShinL">L Shin</string>
+    <string name="tShinR">R Shin</string>
+    <string name="tAngleL">L KneeAngle</string>
+    <string name="tAngleR">R KneeAngle</string>
+    <string name="tAllSensor"><font size="16"><b>All Sensor</b></font></string>
+    <string name="button_getData">Show Distance</string>
+    <string name="button_findAngle">Find Angle</string>
+
+    <!-- Menu -->
+    <string name="menu_home">HOME</string>
+    <string name="menu_allBeacon">All Beacons</string>
+    <string name="menu_newRound">New Round</string>
+    <string name="menu_history">History</string>
+
+    <!--New Round Activity -->
+    <string name="newRound_button_startRound">Start Running</string>
+
+    <!-- RunningActivity -->
+    <string name="running_button_stopScan">Stop Running</string>
+
+    <!-- ResultActivity -->
+    <string name="tResult_RoundSummary">Round Summary</string>
+    <string name="tResult_LeftPercent">Left :</string>
+    <string name="tResult_RightPercent">Right :</string>
+    <string name="tResult_AngleSim">Angle Simulation</string>
+    <string name="tResult_Status">Status</string>
+    <string name="title_activity_nevigation_drawer">NevigationDrawerActivity</string>
+
+    <string name="under_header_line">_</string>
+
+    <!-- allBeaconActivity -->
+    <string name="allbeacon_textView_device_connect">Connected</string>
+    <string name="allbeacon_textView_device_not_found">Not Found</string>
+
+    <!-- historyActivity -->
+    <string name="history_textView_header">Round History</string>
+    <string name="history_button_clearHistory">Clear History</string>
+
+    <!-- Beacon -->
+    <string name="beacon_50_16_D2">50:8C:B1:75:16:D2</string>
+    <string name="beacon_50_1C_3C">50:8C:B1:75:1C:3C</string>
+    <string name="beacon_D4_57_D0">D4:36:39:DE:57:D0</string>
+    <string name="beacon_D4_56_C6">D4:36:39:DE:56:C6</string>
+
+    <!-- fragment_check_beacon_content -->
+    <string name="fragment_chk_beacon_caption">iBeacons STATUS CHECKING</string>
+    <string name="fragment_chk_beacon_desc">ตรวจสอบสถานะอุปกรณ์เซ็นเซอร์ iBeacon</string>
+
+    <!-- fragment_arm_home_content -->
+    <string name="fragment_arm_home_caption">ARMS RECOVERING</string>
+    <string name="fragment_arm_home_desc">กายภาพบำบัดส่วนแขน</string>
+
+    <!-- fragment_leg_home_content -->
+    <string name="fragment_leg_home_caption">LEGS RECOVERING</string>
+    <string name="fragment_leg_home_desc">กายภาพบำบัดส่วนขา</string>
+
+    <!-- fragment_home_content -->
+    <string name="fragment_home_caption">SELECT YOUR PROGRAMS</string>
+    <string name="fragment_home_desc">เลือกประเภทการทำกายภาพบำบัดที่ต้องการ</string>
+
+</resources>

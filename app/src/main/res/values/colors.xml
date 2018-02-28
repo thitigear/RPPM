@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#59a0b7</color>
+    <color name="colorPrimaryDark">#2e515c</color>
+    <color name="colorAccent">#FFFFFF</color>
+
+    <!--old color data-->
+    <color name="arsm_colorPrimary">#69c7d2</color>
+
+    <color name="BGPrimary">#FFFFFF</color>
+    <color name="BGSecondary">#969999</color>
+    <color name="BG_beacon_connect">#56dc29</color>
+
+    <color name="arsm_colorPrimaryDark">#303F9F</color>
+    <color name="arsm_colorAccent">#FF4081</color>
+    <color name="textPrimary">#000000</color>
+    <color name="textSecondary">#FFFFFF</color>
+    <color name="textHeader">#ff4646</color>
+    <color name="outputTextBackground">#dfdfdf</color>
+
+    <color name="buttonBackground">#69c7d2</color>
+    <color name="buttonRed">#ff4848</color>
+</resources>
