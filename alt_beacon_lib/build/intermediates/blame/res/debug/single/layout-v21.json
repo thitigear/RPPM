@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "D:\\AndroidStudioProjects\\rppm2\\alt_beacon_lib\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action.xml",
+        "source": "C:\\Users\\Gear\\.android\\build-cache\\907a4580f383924ec736d1d78a9fcad129ebb8d1\\output\\res\\layout-v21\\notification_action.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudioProjects\\rppm2\\alt_beacon_lib\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_icon_group.xml",
+        "source": "C:\\Users\\Gear\\.android\\build-cache\\907a4580f383924ec736d1d78a9fcad129ebb8d1\\output\\res\\layout-v21\\notification_template_icon_group.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudioProjects\\rppm2\\alt_beacon_lib\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_template_custom_big.xml",
+        "source": "C:\\Users\\Gear\\.android\\build-cache\\907a4580f383924ec736d1d78a9fcad129ebb8d1\\output\\res\\layout-v21\\notification_template_custom_big.xml"
+    },
+    {
+        "merged": "D:\\AndroidStudioProjects\\rppm2\\alt_beacon_lib\\build\\intermediates\\res\\merged\\debug\\layout-v21\\notification_action_tombstone.xml",
+        "source": "C:\\Users\\Gear\\.android\\build-cache\\907a4580f383924ec736d1d78a9fcad129ebb8d1\\output\\res\\layout-v21\\notification_action_tombstone.xml"
+    }
+]
