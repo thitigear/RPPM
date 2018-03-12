@@ -106,4 +106,7 @@
     <string name="fragment_home_caption">SELECT YOUR PROGRAMS</string>
     <string name="fragment_home_desc">เลือกประเภทการทำกายภาพบำบัดที่ต้องการ</string>
 
+    <!-- Caution -->
+    <string name="caution_header">ข้อควรระวัง</string>
+
 </resources>

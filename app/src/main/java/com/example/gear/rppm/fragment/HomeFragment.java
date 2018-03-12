@@ -3,12 +3,24 @@ package com.example.gear.rppm.fragment;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import java.lang.System.*;
 
 import com.example.gear.rppm.R;
+import com.example.gear.rppm.activity.MainActivity;
+import com.example.gear.rppm.other.LoadFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,15 +30,28 @@ import com.example.gear.rppm.R;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private int navItemIndex = 0;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Button frag_home_choice_arm;
+    private Button frag_home_choice_leg;
+
+    private static String TAG_HOME = "home";
+    private static String TAG_ARM = "arm";
+    private static String TAG_LEG = "leg";
+
+    public static String CURRENT_TAG = TAG_HOME;
+
+    private MainActivity mainActivity;
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +90,29 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+
+        frag_home_choice_arm = (Button) v.findViewById(R.id.fragment_home_choice_arms);
+        frag_home_choice_leg = (Button) v.findViewById( R.id.fragment_home_choice_legs);
+
+        frag_home_choice_arm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG_ARM, "ARM!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                navItemIndex = 2;
+                Fragment fragment = new ArmHomeFragment();
+                replaceFragment(fragment);
+            }
+        });
+
+        frag_home_choice_leg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(TAG_LEG, "LEG!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            }
+        });
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -81,8 +128,8 @@ public class HomeFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            //throw new RuntimeException(context.toString()
-            //        + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -106,4 +153,21 @@ public class HomeFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public void replaceFragment(final Fragment someFragment) {
+
+        Runnable mPendingRunnable = new Runnable() {
+            @Override
+            public void run() {
+                // update the main content by replacing fragments
+                Fragment fragment = someFragment;
+                FragmentTransaction fragmentTransaction = fragment.getFragmentManager().beginTransaction();
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                        android.R.anim.fade_out);
+                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+                fragmentTransaction.commitAllowingStateLoss();
+            }
+        };
+    }
+
 }

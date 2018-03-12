@@ -2,6 +2,7 @@ package com.example.gear.rppm.activity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +32,11 @@ import com.example.gear.rppm.fragment.CheckBeaconFragment;
 import com.example.gear.rppm.fragment.ArmHomeFragment;
 import com.example.gear.rppm.fragment.LegHomeFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements HomeFragment.OnFragmentInteractionListener
+        , CheckBeaconFragment.OnFragmentInteractionListener
+        , ArmHomeFragment.OnFragmentInteractionListener
+        , LegHomeFragment.OnFragmentInteractionListener{
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -41,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private Button fragment_home_choice_legs;
 
     // index to identify current nav menu item
-    public static int navItemIndex = 0;
+    private int navItemIndex = 0;
 
     // tags used to attach the fragments
     private static final String TAG_HOME = "home";
@@ -73,38 +78,9 @@ public class MainActivity extends AppCompatActivity {
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //fab = (FloatingActionButton) findViewById(R.id.fab);
 
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
-
-        /**fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadNewRoundFragmentByFab();
-            }
-        });*/
-
-
-        fragment_home_choice_arms = (Button) findViewById(R.id.fragment_home_content_choice_arms);
-        fragment_home_choice_legs = (Button) findViewById(R.id.fragment_home_content_choice_legs);
-
-
-        /**fragment_home_choice_arms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadArmFragment();
-            }
-        });*/
-
-
-        /**fragment_home_choice_legs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadLegFragment();
-            }
-        });*/
-
 
         setUpNavigationView();
 
@@ -113,12 +89,6 @@ public class MainActivity extends AppCompatActivity {
             CURRENT_TAG = TAG_HOME;
             loadFragment();
         }
-
-        //TextView out_armL = findViewById(R.id.home_fragment_output_armL);
-
-
-
-
     }
 
     /***
@@ -127,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
      * name, website, notifications action view (dot)
      */
 
-    private void loadFragment() {
+    public void loadFragment() {
         // selecting appropriate nav menu item
         selectNavMenu();
 
@@ -176,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
         invalidateOptionsMenu();
     }
 
-    private Fragment getFragment() {
+    public Fragment getFragment() {
         switch (navItemIndex) {
             case 0:
                 // home fragment
@@ -200,17 +170,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setToolbarTitle() {
+    public void setToolbarTitle() {
         getSupportActionBar().setTitle(activityTitles[navItemIndex]);
     }
 
-    private void selectNavMenu() {
+    public void selectNavMenu() {
         //navigationView.getMenu().getItem(navItemIndex).setChecked(true);
         //navigationView.getMenu().getItem(navItemIndex);
         navigationView.getMenu().getItem(navItemIndex);
     }
 
-    private void setUpNavigationView() {
+    public void setUpNavigationView() {
         //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
@@ -301,24 +271,14 @@ public class MainActivity extends AppCompatActivity {
         super.onBackPressed();
     }
 
-    // show or hide the fab
-    /**private void toggleFab() {
-        if (navItemIndex == 0)
-            fab.show();
-        else
-            fab.hide();
-    }*/
+    public void loadArmFragment(){
 
-    private void loadArmFragment(){
         navItemIndex = 2;
         CURRENT_TAG = TAG_ARM;
         selectNavMenu();
         setToolbarTitle();
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
-
-            // show or hide the fab button
-            /**toggleFab();*/
         }
 
         Runnable mPendingRunnable = new Runnable() {
@@ -338,12 +298,12 @@ public class MainActivity extends AppCompatActivity {
         if (mPendingRunnable != null) {
             mHandler.post(mPendingRunnable);
         }
-        /**toggleFab();*/
+
         drawer.closeDrawers();
         invalidateOptionsMenu();
     }
 
-    private void loadLegFragment(){
+    public void loadLegFragment(){
         navItemIndex = 3;
         CURRENT_TAG = TAG_LEG;
         selectNavMenu();
@@ -375,6 +335,11 @@ public class MainActivity extends AppCompatActivity {
         /**toggleFab();*/
         drawer.closeDrawers();
         invalidateOptionsMenu();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 
     /**    private void scanBeacon(){
@@ -409,5 +374,7 @@ public class MainActivity extends AppCompatActivity {
  }
  });
  }*/
+
+
 
 }
