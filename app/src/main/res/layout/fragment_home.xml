@@ -6,36 +6,131 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <!--include
-        layout="@layout/fragment_home_content"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/-->
+        android:layout_height="match_parent">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
-
-        <!--ImageView
-            android:layout_alignParentTop="true"
-            android:id="@+id/fragment_home_content_logo"
+        <TextView android:id="@+id/fragment_home_header1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/rppm_logo2"
-            android:scaleX="5"
-            android:scaleY="5"
+
+            android:text="@string/fragment_home_header"
+            android:textSize="@dimen/text_header"
+            android:textColor="#00b606"
+            android:textAlignment="center"
+            android:textStyle="bold"
+
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="90dp"/-->
-        <TextView
-            android:layout_marginTop="60dp"
-            android:id="@+id/fragment_home_header1"
+            android:layout_marginTop="@dimen/text_header_mtop"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"/>
+
+        <TextView android:id="@+id/fragment_home_content1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/caution_header"
+
+            android:text="@string/fragment_home_content1"
+            android:textSize="@dimen/text_content"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="110dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            />
+
+        <TextView android:id="@+id/fragment_home_content2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/fragment_home_content2"
+            android:textSize="@dimen/text_content"
+
+            android:layout_marginTop="170dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            />
+
+        <TextView android:id="@+id/fragment_home_content3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/fragment_home_content3"
+            android:textSize="@dimen/text_content"
+
+            android:layout_marginTop="230dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            />
+
+        <TextView android:id="@+id/fragment_home_content4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/fragment_home_content4"
+            android:textSize="@dimen/text_content"
+
+            android:layout_marginTop="310dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            />
+
+        <TextView android:id="@+id/fragment_home_content5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/fragment_home_content5"
+            android:textSize="@dimen/text_content"
+
+            android:layout_marginTop="350dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            />
+
+        <TextView android:id="@+id/fragment_home_content6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/fragment_home_content6"
+            android:textSize="@dimen/text_content"
+
+            android:layout_marginTop="410dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            />
+
+        <TextView android:id="@+id/fragment_home_contentChoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/fragment_home_contentChoice"
+            android:textSize="@dimen/text_content"
+            android:textStyle="bold"
+
+            android:layout_marginTop="470dp"
             android:layout_centerHorizontal="true"/>
 
-        <TextView
-            android:id="@+id/fragment_home_textView"
+        <Button android:id="@+id/fragment_home_button1"
+            android:layout_width="170dp"
+            android:layout_height="80dp"
+
+            android:background="@drawable/rppm_fm_home_choice_arms"
+
+            android:layout_marginTop="500dp"
+            android:layout_alignStart="@id/fragment_home_content1"
+            />
+
+        <Button android:id="@+id/fragment_home_button2"
+            android:layout_width="170dp"
+            android:layout_height="80dp"
+
+            android:background="@drawable/rppm_fm_home_choice_legs"
+
+            android:layout_marginTop="500dp"
+            android:layout_alignEnd="@id/fragment_home_content1"/>
+
+
+
+        <!--TextView android:id="@+id/fragment_home_textView"
             android:textSize="@dimen/text_header01"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
@@ -70,7 +165,7 @@
             android:layout_height="100dp"
             android:scaleType="fitXY"
             android:layout_marginTop="400dp"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true" /-->
 
     </RelativeLayout>
 

@@ -27,6 +27,7 @@ import android.widget.Toast;
 import android.os.Bundle;
 
 import com.example.gear.rppm.R;
+import com.example.gear.rppm.fragment.CautionFragment;
 import com.example.gear.rppm.fragment.HomeFragment;
 import com.example.gear.rppm.fragment.CheckBeaconFragment;
 import com.example.gear.rppm.fragment.ArmHomeFragment;
@@ -36,7 +37,8 @@ public class MainActivity extends AppCompatActivity
         implements HomeFragment.OnFragmentInteractionListener
         , CheckBeaconFragment.OnFragmentInteractionListener
         , ArmHomeFragment.OnFragmentInteractionListener
-        , LegHomeFragment.OnFragmentInteractionListener{
+        , LegHomeFragment.OnFragmentInteractionListener
+        , CautionFragment.OnFragmentInteractionListener{
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -174,9 +176,16 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle(activityTitles[navItemIndex]);
     }
 
+    public void setToolbarTitle(int navItemIndex) {
+        getSupportActionBar().setTitle(activityTitles[navItemIndex]);
+    }
+
+    public void setToolbarTitleById(int stringID) {
+        getSupportActionBar().setTitle(stringID);
+    }
+
     public void selectNavMenu() {
         //navigationView.getMenu().getItem(navItemIndex).setChecked(true);
-        //navigationView.getMenu().getItem(navItemIndex);
         navigationView.getMenu().getItem(navItemIndex);
     }
 
@@ -267,80 +276,18 @@ public class MainActivity extends AppCompatActivity
                 loadFragment();
                 return;
             }
+            else {
+                setToolbarTitle(0);
+            }
         }
         super.onBackPressed();
-    }
-
-    public void loadArmFragment(){
-
-        navItemIndex = 2;
-        CURRENT_TAG = TAG_ARM;
-        selectNavMenu();
-        setToolbarTitle();
-        if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
-            drawer.closeDrawers();
-        }
-
-        Runnable mPendingRunnable = new Runnable() {
-            @Override
-            public void run() {
-                // update the main content by replacing fragments
-                Fragment fragment = getFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
-                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
-                fragmentTransaction.commitAllowingStateLoss();
-            }
-        };
-
-        // If mPendingRunnable is not null, then add to the message queue
-        if (mPendingRunnable != null) {
-            mHandler.post(mPendingRunnable);
-        }
-
-        drawer.closeDrawers();
-        invalidateOptionsMenu();
-    }
-
-    public void loadLegFragment(){
-        navItemIndex = 3;
-        CURRENT_TAG = TAG_LEG;
-        selectNavMenu();
-        setToolbarTitle();
-        if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
-            drawer.closeDrawers();
-
-            // show or hide the fab button
-            /**toggleFab();*/
-        }
-
-        Runnable mPendingRunnable = new Runnable() {
-            @Override
-            public void run() {
-                // update the main content by replacing fragments
-                Fragment fragment = getFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
-                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
-                fragmentTransaction.commitAllowingStateLoss();
-            }
-        };
-
-        // If mPendingRunnable is not null, then add to the message queue
-        if (mPendingRunnable != null) {
-            mHandler.post(mPendingRunnable);
-        }
-        /**toggleFab();*/
-        drawer.closeDrawers();
-        invalidateOptionsMenu();
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
+
 
     /**    private void scanBeacon(){
 

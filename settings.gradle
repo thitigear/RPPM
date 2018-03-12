@@ -1,1 +1,1 @@
-include ':app', ':alt_beacon_lib'
+include ':app'

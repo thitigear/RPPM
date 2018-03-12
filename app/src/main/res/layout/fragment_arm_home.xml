@@ -27,7 +27,7 @@
             android:layout_marginTop="90dp"/>
 
         <TextView
-            android:textSize="@dimen/text_header01"
+            android:textSize="@dimen/text_header"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +35,7 @@
             android:layout_marginTop="200dp"/>
 
         <TextView
-            android:textSize="@dimen/text_header02"
+            android:textSize="@dimen/text_sub_header"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

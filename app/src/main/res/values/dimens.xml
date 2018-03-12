@@ -8,6 +8,12 @@
 
     <dimen name="content_header_space_height">60dp</dimen>
 
-    <dimen name="text_header01">20dp</dimen>
-    <dimen name="text_header02">16dp</dimen>
+    <!-- Text Header & Content -->
+    <dimen name="text_header">24dp</dimen>
+    <dimen name="text_sub_header">22dp</dimen>
+    <dimen name="text_content">18dp</dimen>
+
+    <dimen name="text_header_mtop">30dp</dimen>
+
+
 </resources>
