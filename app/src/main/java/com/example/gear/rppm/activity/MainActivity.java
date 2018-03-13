@@ -33,6 +33,7 @@ import com.example.gear.rppm.fragment.CheckBeaconFragment;
 import com.example.gear.rppm.fragment.ArmHomeFragment;
 import com.example.gear.rppm.fragment.LegHomeFragment;
 
+
 public class MainActivity extends AppCompatActivity
         implements HomeFragment.OnFragmentInteractionListener
         , CheckBeaconFragment.OnFragmentInteractionListener
