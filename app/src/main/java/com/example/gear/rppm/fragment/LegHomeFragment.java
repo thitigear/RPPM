@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.example.gear.rppm.R;
+import com.example.gear.rppm.other.CustomListViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +32,14 @@ public class LegHomeFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private View view;
+    private CustomListViewAdapter chooseTreatmentAdapter;
+
+    private int[] resId = { R.drawable.ic_action_menu_add
+            , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history};
+
+    private String[] legTreat = { "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน", "กางและหุบข้อตะโพก", "หมุนข้อตะโพกเข้าและออก"};
 
     public LegHomeFragment() {
         // Required empty public constructor
@@ -65,7 +76,21 @@ public class LegHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_leg_home, container, false);
+        view = inflater.inflate(R.layout.fragment_leg_home, container, false);
+
+        //Choose Arm Treatment
+        chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),legTreat, resId);
+
+        ListView legListView = (ListView) view.findViewById(R.id.fragment_leg_home_lv);
+
+        legListView.setAdapter(chooseTreatmentAdapter);
+        legListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -106,4 +131,6 @@ public class LegHomeFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

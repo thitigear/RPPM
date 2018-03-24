@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="400dp"
+    android:layout_centerInParent="true"
+    android:padding="10dp">
+
+    <TextView
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/caution_header"
+        android:textAlignment="center"
+        android:textColor="@color/textPrimary"
+        android:layout_marginTop="20dp"/>
+
+    <ScrollView
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="90dp"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp">
+
+        <TableLayout
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true">
+
+            <TextView android:text="@string/caution_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+
+            <TextView android:text="@string/caution_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+
+            <TextView android:text="@string/caution_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+
+            <TextView android:text="@string/caution_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+
+            <TextView android:text="@string/caution_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+
+            <TextView android:text="@string/caution_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+
+
+            <!-- Test Scrollbar -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caution_5"
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caution_5"
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caution_5"
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caution_5"
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caution_5"
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caution_5"
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caution_5"
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/caution_5"
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+
+        </TableLayout>
+    </ScrollView>
+
+
+
+    <!--Button android:id="@+id/list_caution_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:text="เข้าใจ"
+        android:textSize="@dimen/text_content"
+        android:textColor="@color/textSecondary"
+        android:textStyle="bold"
+
+        android:background="@color/colorPrimary"
+
+        android:layout_alignParentBottom="true"/-->
+
+</RelativeLayout>

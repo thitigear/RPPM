@@ -11,11 +11,19 @@
     <color name="BGSecondary">#969999</color>
     <color name="BG_beacon_connect">#56dc29</color>
 
+    <color name="lv_highlight">#b0d5ff</color>
+
     <color name="arsm_colorPrimaryDark">#303F9F</color>
     <color name="arsm_colorAccent">#FF4081</color>
+
     <color name="textPrimary">#000000</color>
     <color name="textSecondary">#FFFFFF</color>
     <color name="textHeader">#ff4646</color>
+
+    <color name="alert_text_positive">#0077ff</color>
+
+    <color name="treatment_good">#00b606</color>
+
     <color name="outputTextBackground">#dfdfdf</color>
 
     <color name="buttonBackground">#69c7d2</color>

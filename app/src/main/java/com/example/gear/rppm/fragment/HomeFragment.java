@@ -1,6 +1,10 @@
 package com.example.gear.rppm.fragment;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +17,9 @@ import android.widget.Button;
 
 import com.example.gear.rppm.R;
 import com.example.gear.rppm.activity.MainActivity;
+import com.example.gear.rppm.other.CautionAdapter;
+
+import java.util.Objects;
 
 
 /**
@@ -38,10 +45,14 @@ public class HomeFragment extends Fragment{
     private Button frag_home_choice_arm;
     private Button frag_home_choice_leg;
 
+    private static String TAG_CURRENT = "";
+
     private static String TAG_ARM = "arm";
     private static String TAG_LEG = "leg";
 
     private OnFragmentInteractionListener mListener;
+    private CautionAdapter cautionAdapter;
+    private View v;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -79,7 +90,9 @@ public class HomeFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        v = inflater.inflate(R.layout.fragment_home, container, false);
+
+        cautionAdapter = new CautionAdapter(getContext());
 
         frag_home_choice_arm = (Button) v.findViewById(R.id.fragment_home_button1);
         frag_home_choice_leg = (Button) v.findViewById( R.id.fragment_home_button2);
@@ -88,8 +101,8 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Log.e(TAG_ARM, "ARM!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                ((MainActivity)getActivity()).setToolbarTitle(2);
-                replaceNewFragment(new ArmHomeFragment(), "arm");
+                TAG_CURRENT = TAG_ARM;
+                showCaution();
 
             }
         });
@@ -98,8 +111,8 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Log.e(TAG_LEG, "LEG!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                ((MainActivity)getActivity()).setToolbarTitle(3);
-                replaceNewFragment(new LegHomeFragment(), "leg");
+                TAG_CURRENT = TAG_LEG;
+                showCaution();
 
             }
         });
@@ -156,6 +169,36 @@ public class HomeFragment extends Fragment{
         transaction.replace(R.id.frame, someFragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    private void showCaution(){
+
+        AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(v.getContext());
+        mAlertBuilder.setView(R.layout.list_caution);
+
+        mAlertBuilder.setPositiveButton(R.string.caution_button, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if (Objects.equals(TAG_CURRENT, TAG_ARM)){
+                    ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนแขน");
+                    replaceNewFragment(new ArmHomeFragment(), "arm");
+                    TAG_CURRENT = "";
+
+                } else if (Objects.equals(TAG_CURRENT, TAG_LEG)){
+                    ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนขา");
+                    replaceNewFragment(new LegHomeFragment(), "leg");
+                    TAG_CURRENT = "";
+
+                }
+
+            }
+        });
+
+        AlertDialog alertDialog = mAlertBuilder.create();
+        alertDialog.show();
+        alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setBackgroundResource(R.drawable.button_buttom);
+
     }
 
 }

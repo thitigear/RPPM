@@ -7,8 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.example.gear.rppm.*;
+import com.example.gear.rppm.other.CheckBeaconListViewAdapter;
+import com.example.gear.rppm.other.CustomListViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +33,22 @@ public class CheckBeaconFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private View view;
+    private CheckBeaconListViewAdapter beaconListAdapter;
+
+    private int[] resId = { R.drawable.ic_action_menu_add
+            , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history};
+
+    private String[][] beaconList = { {"Beacon1","Beacon1 UUID"}
+            , {"Beacon2", "Beacon2 UUID"}
+            , {"Beacon3", "Beacon3 UUID"}
+            , {"Beacon4", "Beacon4 UUID"}
+            , {"Beacon5", "Beacon5 UUID"}
+            , {"Beacon6", "Beacon6 UUID"}
+            , {"Beacon7", "Beacon7 UUID"}
+            , {"Beacon8", "Beacon8 UUID"}};
+
 
     public CheckBeaconFragment() {
         // Required empty public constructor
@@ -65,7 +85,21 @@ public class CheckBeaconFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_check_beacon, container, false);
+        view = inflater.inflate(R.layout.fragment_check_beacon, container, false);
+
+        beaconListAdapter = new CheckBeaconListViewAdapter(getContext(),beaconList);
+
+        ListView beaconListView = (ListView) view.findViewById(R.id.fragment_chk_beacon_lv);
+        beaconListView.setAdapter(beaconListAdapter);
+        beaconListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+            }
+        });
+
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -1,33 +1,21 @@
 package com.example.gear.rppm.activity;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.os.Bundle;
 
 import com.example.gear.rppm.R;
-import com.example.gear.rppm.fragment.CautionFragment;
 import com.example.gear.rppm.fragment.HomeFragment;
 import com.example.gear.rppm.fragment.CheckBeaconFragment;
 import com.example.gear.rppm.fragment.ArmHomeFragment;
@@ -38,15 +26,11 @@ public class MainActivity extends AppCompatActivity
         implements HomeFragment.OnFragmentInteractionListener
         , CheckBeaconFragment.OnFragmentInteractionListener
         , ArmHomeFragment.OnFragmentInteractionListener
-        , LegHomeFragment.OnFragmentInteractionListener
-        , CautionFragment.OnFragmentInteractionListener{
+        , LegHomeFragment.OnFragmentInteractionListener{
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private Toolbar toolbar;
-    //private FloatingActionButton fab;
-    private Button fragment_home_choice_arms;
-    private Button fragment_home_choice_legs;
 
     // index to identify current nav menu item
     private int navItemIndex = 0;
@@ -75,6 +59,7 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar); //in app_bar_sliding_menu_xml
         setSupportActionBar(toolbar);
 
+
         //selectToolbarNav();
 
         mHandler = new Handler();
@@ -90,8 +75,10 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             navItemIndex = 0;
             CURRENT_TAG = TAG_HOME;
+            setToolbarTitle("หน้าแรก");
             loadFragment();
         }
+
     }
 
     /***
@@ -105,22 +92,15 @@ public class MainActivity extends AppCompatActivity
         selectNavMenu();
 
         // set toolbar title
-        setToolbarTitle();
+        //setToolbarTitle("หน้าแรก");
 
-        // if user select the current navigation menu again, don't do anything
-        // just close the navigation drawer
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
 
-            // show or hide the fab button
-            /**toggleFab();*/
             return;
         }
 
-        // Sometimes, when fragment has huge data, screen seems hanging
-        // when switching between navigation menus
-        // So using runnable, the fragment is loaded with cross fade effect
-        // This effect can be seen in GMail app
+        // loaded with cross fade effect
         Runnable mPendingRunnable = new Runnable() {
             @Override
             public void run() {
@@ -173,16 +153,14 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void setToolbarTitle() {
+    /**
+     * public void setToolbarTitle(int navItemIndex) {
         getSupportActionBar().setTitle(activityTitles[navItemIndex]);
-    }
 
-    public void setToolbarTitle(int navItemIndex) {
-        getSupportActionBar().setTitle(activityTitles[navItemIndex]);
-    }
+     }*/
 
-    public void setToolbarTitleById(int stringID) {
-        getSupportActionBar().setTitle(stringID);
+    public void setToolbarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 
     public void selectNavMenu() {
@@ -263,6 +241,11 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawers();
+
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
+            fragmentTransaction.commitAllowingStateLoss();
             return;
         }
 
@@ -278,7 +261,7 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
             else {
-                setToolbarTitle(0);
+                setToolbarTitle("หน้าแรก");
             }
         }
         super.onBackPressed();

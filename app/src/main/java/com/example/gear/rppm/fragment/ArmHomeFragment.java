@@ -1,14 +1,20 @@
 package com.example.gear.rppm.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.example.gear.rppm.R;
+import com.example.gear.rppm.other.CautionAdapter;
+import com.example.gear.rppm.other.CustomListViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +35,16 @@ public class ArmHomeFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private CustomListViewAdapter chooseTreatmentAdapter;
+    private CautionAdapter cautionAdapter;
+
+    private int[] resId = { R.drawable.ic_action_menu_add
+            , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history
+            , R.drawable.ic_action_menu_home, R.drawable.ic_action_menu_setting};
+
+    private String[] armTreat = { "ยกแขนขึ้นและลง", "กางแขนและหุบแขนทางข้างลำตัว", "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว"
+            , "หมุนข้อไหล่ขึ้นและลง", "เหยียดและงอข้อศอก"};
 
     public ArmHomeFragment() {
         // Required empty public constructor
@@ -65,7 +81,23 @@ public class ArmHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_arm_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_arm_home, container, false);
+
+        //Choose Arm Treatment
+        chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),armTreat, resId);
+
+        ListView armListView = (ListView) view.findViewById(R.id.fragment_arm_home_lv);
+
+        armListView.setAdapter(chooseTreatmentAdapter);
+        armListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+
+            }
+        });
+
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

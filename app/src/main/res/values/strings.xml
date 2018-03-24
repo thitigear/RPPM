@@ -115,6 +115,12 @@
     <string name="fragment_home_contentChoice">เลือกประเภทการทำกายภาพบำบัดที่ต้องการ</string>
 
     <!-- Caution -->
-    <string name="caution_header">ข้อควรระวัง</string>
+    <string name="caution_header">ข้อควรระวังของการทำกายภาพบำบัด</string>
+    <string name="caution_button"><b>เข้าใจ</b></string>
+    <string name="caution_1">1. aaaaaaaaaaaaaaaaa</string>
+    <string name="caution_2">2. bbbbbbbbbbbbbbbbb</string>
+    <string name="caution_3">3. ccccccccccccccccc</string>
+    <string name="caution_4">4. ddddddddddddddddd</string>
+    <string name="caution_5">5. eeeeeeeeeeeeeeeee</string>
 
 </resources>

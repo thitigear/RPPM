@@ -16,7 +16,7 @@
 
             android:text="@string/fragment_home_header"
             android:textSize="@dimen/text_header"
-            android:textColor="#00b606"
+            android:textColor="@color/treatment_good"
             android:textAlignment="center"
             android:textStyle="bold"
 
@@ -25,78 +25,68 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"/>
 
-        <TextView android:id="@+id/fragment_home_content1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:text="@string/fragment_home_content1"
-            android:textSize="@dimen/text_content"
-
-            android:layout_centerHorizontal="true"
+        <ScrollView android:id="@+id/fragment_home_scrollview"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
             android:layout_marginTop="110dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            />
+            android:layout_centerHorizontal="true">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        <TextView android:id="@+id/fragment_home_content2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                <TextView android:id="@+id/fragment_home_content1"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
 
-            android:text="@string/fragment_home_content2"
-            android:textSize="@dimen/text_content"
+                    android:text="@string/fragment_home_content1"
+                    android:textSize="@dimen/text_content" />
+                <TextView />
 
-            android:layout_marginTop="170dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            />
+                <TextView android:id="@+id/fragment_home_content2"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
 
-        <TextView android:id="@+id/fragment_home_content3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                    android:text="@string/fragment_home_content2"
+                    android:textSize="@dimen/text_content" />
+                <TextView />
 
-            android:text="@string/fragment_home_content3"
-            android:textSize="@dimen/text_content"
+                <TextView android:id="@+id/fragment_home_content3"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
 
-            android:layout_marginTop="230dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            />
+                    android:text="@string/fragment_home_content3"
+                    android:textSize="@dimen/text_content"
+                    />
+                <TextView />
 
-        <TextView android:id="@+id/fragment_home_content4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                <TextView android:id="@+id/fragment_home_content4"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
 
-            android:text="@string/fragment_home_content4"
-            android:textSize="@dimen/text_content"
+                    android:text="@string/fragment_home_content4"
+                    android:textSize="@dimen/text_content" />
+                <TextView />
 
-            android:layout_marginTop="310dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            />
+                <TextView android:id="@+id/fragment_home_content5"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
 
-        <TextView android:id="@+id/fragment_home_content5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+                    android:text="@string/fragment_home_content5"
+                    android:textSize="@dimen/text_content" />
+                <TextView />
 
-            android:text="@string/fragment_home_content5"
-            android:textSize="@dimen/text_content"
+                <TextView android:id="@+id/fragment_home_content6"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
 
-            android:layout_marginTop="350dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            />
+                    android:text="@string/fragment_home_content6"
+                    android:textSize="@dimen/text_content" />
+                <TextView />
 
-        <TextView android:id="@+id/fragment_home_content6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            </TableLayout>
 
-            android:text="@string/fragment_home_content6"
-            android:textSize="@dimen/text_content"
 
-            android:layout_marginTop="410dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginEnd="40dp"
-            />
+        </ScrollView>
 
         <TextView android:id="@+id/fragment_home_contentChoice"
             android:layout_width="wrap_content"
@@ -104,68 +94,30 @@
 
             android:text="@string/fragment_home_contentChoice"
             android:textSize="@dimen/text_content"
+            android:textColor="@color/textPrimary"
             android:textStyle="bold"
 
-            android:layout_marginTop="470dp"
+            android:layout_marginTop="320dp"
             android:layout_centerHorizontal="true"/>
 
         <Button android:id="@+id/fragment_home_button1"
-            android:layout_width="170dp"
-            android:layout_height="80dp"
+            android:layout_width="230dp"
+            android:layout_height="90dp"
 
             android:background="@drawable/rppm_fm_home_choice_arms"
 
-            android:layout_marginTop="500dp"
-            android:layout_alignStart="@id/fragment_home_content1"
+            android:layout_marginTop="360dp"
+            android:layout_centerHorizontal="true"
             />
 
         <Button android:id="@+id/fragment_home_button2"
-            android:layout_width="170dp"
-            android:layout_height="80dp"
+            android:layout_width="230dp"
+            android:layout_height="90dp"
 
             android:background="@drawable/rppm_fm_home_choice_legs"
 
-            android:layout_marginTop="500dp"
-            android:layout_alignEnd="@id/fragment_home_content1"/>
-
-
-
-        <!--TextView android:id="@+id/fragment_home_textView"
-            android:textSize="@dimen/text_header01"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/fragment_home_caption"
-            android:layout_marginTop="200dp"/>
-
-        <TextView
-            android:id="@+id/fragment_home_textView2"
-            android:textSize="@dimen/text_header02"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="230dp"
-            android:text="@string/fragment_home_desc" />
-
-        <Button
-            android:id="@+id/fragment_home_choice_arms"
-            android:background="@drawable/rppm_fm_home_choice_arms"
-            android:text=""
-            android:layout_width="250dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:layout_marginTop="280dp"
+            android:layout_marginTop="450dp"
             android:layout_centerHorizontal="true"/>
-
-        <Button
-            android:id="@+id/fragment_home_choice_legs"
-            android:background="@drawable/rppm_fm_home_choice_legs"
-            android:text=""
-            android:layout_width="250dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            android:layout_marginTop="400dp"
-            android:layout_centerHorizontal="true" /-->
 
     </RelativeLayout>
 
