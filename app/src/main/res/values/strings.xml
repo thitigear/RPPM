@@ -14,10 +14,10 @@
 
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
-        <item>Home</item>
-        <item>Check iBeacon</item>
-        <item>Arms</item>
-        <item>Legs</item>
+        <item>หน้าแรก</item>
+        <item>ตรวจสอบสถานะอุปกรณ์</item>
+        <item>การกายภาพบำบัดส่วนแขน</item>
+        <item>การกายภาพบำบัดส่วนขา</item>
     </string-array>
 
     <string name="activity_title_about_us">About Us</string>
@@ -90,22 +90,22 @@
     <string name="beacon_D4_57_D0">D4:36:39:DE:57:D0</string>
     <string name="beacon_D4_56_C6">D4:36:39:DE:56:C6</string>
 
-    <!-- fragment_check_beacon_content -->
+    <!-- fragment_check_beacon -->
     <string name="fragment_chk_beacon_caption">iBeacons STATUS CHECKING</string>
     <string name="fragment_chk_beacon_desc">ตรวจสอบสถานะอุปกรณ์เซ็นเซอร์ iBeacon</string>
 
-    <!-- fragment_arm_home_content -->
+    <!-- fragment_home -->
+    <string name="fragment_home_contentChoice">เลือกประเภทการทำกายภาพบำบัดที่ต้องการ</string>
+
+    <!-- fragment_arm_home -->
     <string name="fragment_arm_home_title">Arms</string>
     <string name="fragment_arm_home_caption">ARMS RECOVERING</string>
     <string name="fragment_arm_home_desc">กายภาพบำบัดส่วนแขน</string>
 
-    <!-- fragment_leg_home_content -->
+    <!-- fragment_leg_home -->
     <string name="fragment_leg_home_title">Arms</string>
     <string name="fragment_leg_home_caption">LEGS RECOVERING</string>
     <string name="fragment_leg_home_desc">กายภาพบำบัดส่วนขา</string>
-
-    <!-- fragment_home_content -->
-    <string name="fragment_home_contentChoice">เลือกประเภทการทำกายภาพบำบัดที่ต้องการ</string>
 
     <!-- Caution -->
     <string name="caution_header">ข้อควรระวังของการทำกายภาพบำบัด</string>
@@ -124,6 +124,6 @@
     <string name="load_app_content4">4. ช่วยกระตุ้นระบบหมุนเวียนโลหิต</string>
     <string name="load_app_content5">5. ช่วยให้สภาพภายในของข้อต่ออยู่ในสภาพปกติ</string>
     <string name="load_app_content6">6. ลด และป้องกันอาการปวด, เมื่อย ตามข้อและกล้ามเนื้อ</string>
-    <string name="load_app_button">เข้าสู่แอพพลิเคชั่น</string>
+    <string name="load_app_button">เริ่มทำกายภาพ</string>
 
 </resources>

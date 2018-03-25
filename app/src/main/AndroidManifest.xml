@@ -11,26 +11,27 @@
 
         <!-- android:roundIcon="@mipmap/ic_launcher_round" -->
 
+        <!-- Load App Activity -->
         <activity android:name=".activity.LoadAppActivity">
             <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <!-- Main Activity -->
         <activity android:name=".activity.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <!--category android:name="android.intent.category.LAUNCHER" /-->
+                <action android:name="android.intent.action.GET_CONTENT"/>
             </intent-filter>
         </activity>
 
+        <!-- Sliding Activity -->
         <activity
             android:name=".activity.SlidingActivity"
             android:label="@string/title_activity_sliding"
             android:theme="@style/AppTheme.NoActionBar">
-
         </activity>
 
     </application>

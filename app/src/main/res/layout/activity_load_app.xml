@@ -24,8 +24,8 @@
 
     <ScrollView android:id="@+id/fragment_home_scrollview"
         android:layout_width="300dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="110dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="115dp"
         android:layout_centerHorizontal="true">
         <TableLayout
             android:layout_width="match_parent"
@@ -87,12 +87,12 @@
     <Button android:id="@+id/load_app_button1"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="500dp"
 
         android:background="@drawable/button_buttom"
         android:text="@string/load_app_button"
         android:textSize="@dimen/text_sub_header"
         android:textAlignment="center"
-        android:textColor="@color/textSecondary"/>
+        android:textColor="@color/textSecondary"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

@@ -92,28 +92,24 @@ public class HomeFragment extends Fragment{
 
         v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        cautionAdapter = new CautionAdapter(getContext());
-
         frag_home_choice_arm = (Button) v.findViewById(R.id.fragment_home_button1);
-        frag_home_choice_leg = (Button) v.findViewById( R.id.fragment_home_button2);
+        frag_home_choice_leg = (Button) v.findViewById(R.id.fragment_home_button2);
 
         frag_home_choice_arm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG_ARM, "ARM!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Log.e(TAG_ARM, "ARM!!!!!!!!!!!!");
                 TAG_CURRENT = TAG_ARM;
                 showCaution();
-
             }
         });
 
         frag_home_choice_leg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG_LEG, "LEG!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                Log.e(TAG_LEG, "LEG!!!!!!!!!!!!");
                 TAG_CURRENT = TAG_LEG;
                 showCaution();
-
             }
         });
 
@@ -161,12 +157,11 @@ public class HomeFragment extends Fragment{
         void onFragmentInteraction(Uri uri);
     }
 
-    public void replaceNewFragment(final Fragment someFragment, final String tag) {
+    public void replaceNewFragment(final Fragment newFragment, final String tag) {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(android.R.anim.fade_in,
-                android.R.anim.fade_out);
-        transaction.replace(R.id.frame, someFragment, tag);
+        //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        transaction.replace(R.id.frame, newFragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -182,12 +177,12 @@ public class HomeFragment extends Fragment{
 
                 if (Objects.equals(TAG_CURRENT, TAG_ARM)){
                     ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนแขน");
-                    replaceNewFragment(new ArmHomeFragment(), "arm");
+                    replaceNewFragment(new ArmHomeFragment(), TAG_ARM);
                     TAG_CURRENT = "";
 
                 } else if (Objects.equals(TAG_CURRENT, TAG_LEG)){
                     ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนขา");
-                    replaceNewFragment(new LegHomeFragment(), "leg");
+                    replaceNewFragment(new LegHomeFragment(), TAG_LEG);
                     TAG_CURRENT = "";
 
                 }

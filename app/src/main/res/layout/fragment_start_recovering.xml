@@ -1,0 +1,74 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.gear.rppm.fragment.StartRecoveringFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView android:text="Start Recovering"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+
+            android:textSize="@dimen/text_header"
+            android:textColor="@color/textPrimary"/>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp">
+
+            <TableRow>
+
+                <TextView android:text="ชื่อท่า"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+
+                    android:textSize="@dimen/text_content"
+                    android:textColor="@color/textPrimary"/>
+                <TextView android:id="@+id/fragment_startRe_treatName"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+
+                    android:background="#b6b6b6"
+
+                    android:text="" />
+            </TableRow>
+
+            <TableRow>
+                <TextView android:text="ทำไปแล้ว"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+
+                    android:textSize="@dimen/text_content"
+                    android:textColor="@color/textPrimary"/>
+
+                <TextView android:id="@+id/fragment_startRe_timeNumber"
+                    android:layout_width="10dp"
+                    android:layout_height="wrap_content"
+
+                    android:background="#b6b6b6"
+
+                    android:text="" />
+
+                <TextView android:text="ครั้ง"
+                    android:textSize="@dimen/text_sub_header"
+                    android:textColor="@color/textPrimary"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+
+
+    </RelativeLayout>
+
+</FrameLayout>

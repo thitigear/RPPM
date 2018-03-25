@@ -13,20 +13,22 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.database.sqlite.*;
 
 import com.example.gear.rppm.R;
 import com.example.gear.rppm.fragment.HomeFragment;
 import com.example.gear.rppm.fragment.CheckBeaconFragment;
 import com.example.gear.rppm.fragment.ArmHomeFragment;
 import com.example.gear.rppm.fragment.LegHomeFragment;
+import com.example.gear.rppm.fragment.StartRecoveringFragment;
 
 
 public class MainActivity extends AppCompatActivity
         implements HomeFragment.OnFragmentInteractionListener
         , CheckBeaconFragment.OnFragmentInteractionListener
         , ArmHomeFragment.OnFragmentInteractionListener
-        , LegHomeFragment.OnFragmentInteractionListener{
+        , LegHomeFragment.OnFragmentInteractionListener
+        , StartRecoveringFragment.OnFragmentInteractionListener{
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -59,7 +61,6 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar); //in app_bar_sliding_menu_xml
         setSupportActionBar(toolbar);
 
-
         //selectToolbarNav();
 
         mHandler = new Handler();
@@ -88,15 +89,13 @@ public class MainActivity extends AppCompatActivity
      */
 
     public void loadFragment() {
+
         // selecting appropriate nav menu item
         selectNavMenu();
-
-        // set toolbar title
-        //setToolbarTitle("หน้าแรก");
+        setToolbarTitle();
 
         if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
             drawer.closeDrawers();
-
             return;
         }
 
@@ -107,8 +106,7 @@ public class MainActivity extends AppCompatActivity
                 // update the main content by replacing fragments
                 Fragment fragment = getFragment();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
+                //fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                 fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
                 fragmentTransaction.commitAllowingStateLoss();
             }
@@ -118,9 +116,6 @@ public class MainActivity extends AppCompatActivity
         if (mPendingRunnable != null) {
             mHandler.post(mPendingRunnable);
         }
-
-        // show or hide the fab button
-        /**toggleFab();*/
 
         //Closing drawer on item click
         drawer.closeDrawers();
@@ -134,18 +129,22 @@ public class MainActivity extends AppCompatActivity
             case 0:
                 // home fragment
                 HomeFragment homeFragment = new HomeFragment();
+                setToolbarTitle("หน้าแรก");
                 return homeFragment;
             case 1:
                 // check beacon fragment
                 CheckBeaconFragment checkBeaconFragment = new CheckBeaconFragment();
+                setToolbarTitle("ตรวจสอบสภานะอุปกรณ์");
                 return checkBeaconFragment;
             case 2:
                 // arm fragment
                 ArmHomeFragment armHomeFragment = new ArmHomeFragment();
+                setToolbarTitle("การทำกายภาพบำบัดส่วนแขน");
                 return armHomeFragment;
             case 3:
                 // leg fragment
                 LegHomeFragment legHomeFragment = new LegHomeFragment();
+                setToolbarTitle("การทำกายภาพบำบัดส่วนขา");
                 return legHomeFragment;
 
             default:
@@ -163,9 +162,13 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle(title);
     }
 
-    public void selectNavMenu() {
+    public void setToolbarTitle() {
+        getSupportActionBar().setTitle(activityTitles[navItemIndex]);
+    }
+
+    public void selectNavMenu() { navigationView.getMenu().getItem(navItemIndex).setChecked(true);
         //navigationView.getMenu().getItem(navItemIndex).setChecked(true);
-        navigationView.getMenu().getItem(navItemIndex);
+
     }
 
     public void setUpNavigationView() {
@@ -243,8 +246,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawers();
 
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                    android.R.anim.fade_out);
+            //fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out);
             fragmentTransaction.commitAllowingStateLoss();
             return;
         }
@@ -271,41 +273,5 @@ public class MainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
-
-
-    /**    private void scanBeacon(){
-
-     final TextView shin = findViewById(R.id.home_fragment_output_shinL);
-
-     bluetoothLeScanner.startScan(new ScanCallback() {
-    @Override
-    public void onScanResult(int callbackType, ScanResult result) {
-    super.onScanResult(callbackType, result);
-
-    shin.setText("" + deviceList.size());
-    scanResult = result;
-
-    if (scanResult.getDevice().getName() != null) {
-    int[] capsuleRssiTxPower = {scanResult.getRssi(), scanResult.getScanRecord().getTxPowerLevel()};
-
-    Log.e(TAG, "******************* Device Key : " +
-    deviceList.keySet());
-    if (deviceList.containsKey(scanResult.getDevice().getAddress())) {
-    /* Update Device Rssi & TxPowerLevel */
-/**                        deviceList.put(scanResult.getDevice().getAddress(), capsuleRssiTxPower);
-
- } else {
- /* Add Device to DeviceList */
-/**                        deviceList.put(scanResult.getDevice().getAddress(), capsuleRssiTxPower);
- }
-
- setCoreF_deviceList();
-
- }
- }
- });
- }*/
-
-
 
 }

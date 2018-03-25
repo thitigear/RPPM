@@ -1,5 +1,6 @@
 package com.example.gear.rppm.activity;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,12 +27,26 @@ public class LoadAppActivity extends AppCompatActivity {
             }
         });
 
-        while (isClickButton){
-            Intent i = new Intent(getApplicationContext() ,MainActivity.class);
-            startActivity(i);
-            finish();
-        }
 
+        Thread loadAppThread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    super.run();
+                    //sleep(5000);  //Delay of 10 seconds
+                    while(!isClickButton){sleep(10);}
+
+                } catch (Exception e) {
+
+                } finally {
+                    //Start MainActivity
+                    Intent i = new Intent(getApplicationContext() ,MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+            }
+        };
+        loadAppThread.start();
 
     }
 }

@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,14 @@ public class ArmHomeFragment extends Fragment {
 
     private CustomListViewAdapter chooseTreatmentAdapter;
     private CautionAdapter cautionAdapter;
+
+    private String TAG_CURRENT = "";
+    private String TAG_ARMHOME = "armHome";
+    private String TAG_TREAT1 = "ยกแขนขึ้นและลง";
+    private String TAG_TREAT2 = "กางแขนและหุบแขนทางข้างลำตัว";
+    private String TAG_TREAT3 = "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว";
+    private String TAG_TREAT4 = "หมุนข้อไหล่ขึ้นและลง";
+    private String TAG_TREAT5 = "เหยียดและงอข้อศอก";
 
     private int[] resId = { R.drawable.ic_action_menu_add
             , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history
@@ -90,12 +99,10 @@ public class ArmHomeFragment extends Fragment {
 
         armListView.setAdapter(chooseTreatmentAdapter);
         armListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+            public void onItemClick(AdapterView<?> arg0, View arg1, int treatNumber, long arg3) {
 
             }
         });
-
-
 
         return view;
     }
@@ -113,8 +120,8 @@ public class ArmHomeFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            //throw new RuntimeException(context.toString()
-            //        + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -138,4 +145,14 @@ public class ArmHomeFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public void onSelectTreatment(int armListViewItemSelected){
+        switch (armListViewItemSelected){
+            case 0:
+                Log.e(TAG_ARMHOME, "Treat:"+armTreat[armListViewItemSelected]);
+                break;
+
+        }
+    }
+
 }

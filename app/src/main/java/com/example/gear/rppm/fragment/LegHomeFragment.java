@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,12 @@ public class LegHomeFragment extends Fragment {
 
     private View view;
     private CustomListViewAdapter chooseTreatmentAdapter;
+
+    private String TAG_CURRENT = "";
+    private String TAG_LEGHOME = "armHome";
+    private String TAG_TREAT1 = "กางและหุบข้อตะโพก";
+    private String TAG_TREAT2 = "กางแขนและหุบแขนทางข้างลำตัว";
+    private String TAG_TREAT3 = "หมุนข้อตะโพกเข้าและออก";
 
     private int[] resId = { R.drawable.ic_action_menu_add
             , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history};
@@ -85,8 +92,8 @@ public class LegHomeFragment extends Fragment {
 
         legListView.setAdapter(chooseTreatmentAdapter);
         legListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-
+            public void onItemClick(AdapterView<?> arg0, View arg1, int treatNumber, long arg3) {
+                Log.e(TAG_LEGHOME, "Treat:"+legTreat[treatNumber]);
             }
         });
 
@@ -106,8 +113,8 @@ public class LegHomeFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            //throw new RuntimeException(context.toString()
-            //        + " must implement OnFragmentInteractionListener");
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 

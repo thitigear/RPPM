@@ -7,8 +7,9 @@
     <!-- TODO: Update blank fragment layout -->
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <TextView android:id="@+id/fragment_home_contentChoice"
             android:layout_width="wrap_content"
@@ -19,26 +20,25 @@
             android:textColor="@color/textPrimary"
             android:textStyle="bold"
 
-            android:layout_marginTop="320dp"
             android:layout_centerHorizontal="true"/>
 
         <Button android:id="@+id/fragment_home_button1"
-            android:layout_width="230dp"
-            android:layout_height="90dp"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
 
             android:background="@drawable/rppm_fm_home_choice_arms"
 
-            android:layout_marginTop="360dp"
+            android:layout_marginTop="40dp"
             android:layout_centerHorizontal="true"
             />
 
         <Button android:id="@+id/fragment_home_button2"
-            android:layout_width="230dp"
-            android:layout_height="90dp"
+            android:layout_width="250dp"
+            android:layout_height="100dp"
 
             android:background="@drawable/rppm_fm_home_choice_legs"
 
-            android:layout_marginTop="450dp"
+            android:layout_marginTop="135dp"
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
