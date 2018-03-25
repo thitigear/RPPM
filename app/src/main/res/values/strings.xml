@@ -105,13 +105,6 @@
     <string name="fragment_leg_home_desc">กายภาพบำบัดส่วนขา</string>
 
     <!-- fragment_home_content -->
-    <string name="fragment_home_header">ประโยชน์ของการทำกายภาพบำบัด</string>
-    <string name="fragment_home_content1">1. ช่วยลดการยึดติดของเนื้อเยื่อต่างๆ เช่น กล้ามเนื้อ, เอ็นกล้ามเนื้อ เป็นต้น</string>
-    <string name="fragment_home_content2">2. ช่วยรักษาสภาพของข้อต่อ และเนื้อเยื่อบริเวณนั้นให้เป็นปกติ</string>
-    <string name="fragment_home_content3">3. ช่วยลดอาการเกร็งของกล้ามเนื้อ และช่วยทำให้กล้ามเนื้อมีสภาพความยืดหยุ่นปกติ</string>
-    <string name="fragment_home_content4">4. ช่วยกระตุ้นระบบหมุนเวียนโลหิต</string>
-    <string name="fragment_home_content5">5. ช่วยให้สภาพภายในของข้อต่ออยู่ในสภาพปกติ</string>
-    <string name="fragment_home_content6">6. ลด และป้องกันอาการปวด, เมื่อย ตามข้อและกล้ามเนื้อ</string>
     <string name="fragment_home_contentChoice">เลือกประเภทการทำกายภาพบำบัดที่ต้องการ</string>
 
     <!-- Caution -->
@@ -122,5 +115,15 @@
     <string name="caution_3">3. ccccccccccccccccc</string>
     <string name="caution_4">4. ddddddddddddddddd</string>
     <string name="caution_5">5. eeeeeeeeeeeeeeeee</string>
+
+    <!-- Load App -->
+    <string name="load_app_header">ประโยชน์ของการทำกายภาพบำบัด</string>
+    <string name="load_app_content1">1. ช่วยลดการยึดติดของเนื้อเยื่อต่างๆ เช่น กล้ามเนื้อ, เอ็นกล้ามเนื้อ เป็นต้น</string>
+    <string name="load_app_content2">2. ช่วยรักษาสภาพของข้อต่อ และเนื้อเยื่อบริเวณนั้นให้เป็นปกติ</string>
+    <string name="load_app_content3">3. ช่วยลดอาการเกร็งของกล้ามเนื้อ และช่วยทำให้กล้ามเนื้อมีสภาพความยืดหยุ่นปกติ</string>
+    <string name="load_app_content4">4. ช่วยกระตุ้นระบบหมุนเวียนโลหิต</string>
+    <string name="load_app_content5">5. ช่วยให้สภาพภายในของข้อต่ออยู่ในสภาพปกติ</string>
+    <string name="load_app_content6">6. ลด และป้องกันอาการปวด, เมื่อย ตามข้อและกล้ามเนื้อ</string>
+    <string name="load_app_button">เข้าสู่แอพพลิเคชั่น</string>
 
 </resources>
