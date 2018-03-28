@@ -13,7 +13,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.database.sqlite.*;
 
 import com.example.gear.rppm.R;
 import com.example.gear.rppm.fragment.HomeFragment;
@@ -21,6 +20,15 @@ import com.example.gear.rppm.fragment.CheckBeaconFragment;
 import com.example.gear.rppm.fragment.ArmHomeFragment;
 import com.example.gear.rppm.fragment.LegHomeFragment;
 import com.example.gear.rppm.fragment.StartRecoveringFragment;
+
+import org.altbeacon.beacon.Beacon;
+import org.altbeacon.beacon.BeaconManager;
+import org.altbeacon.beacon.BeaconParser;
+import org.altbeacon.beacon.BeaconTransmitter;
+
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 
 
 public class MainActivity extends AppCompatActivity
@@ -50,7 +58,10 @@ public class MainActivity extends AppCompatActivity
 
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
+
     private Handler mHandler;
+    private BeaconManager mBeaconManager;
+    private Collection<Beacon> beacons = new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +90,30 @@ public class MainActivity extends AppCompatActivity
             setToolbarTitle("หน้าแรก");
             loadFragment();
         }
+
+        //Beacon
+
+        /**mBeaconManager = BeaconManager.getInstanceForApplication(this);
+        mBeaconManager.setForegroundScanPeriod(100);
+        mBeaconManager.setForegroundBetweenScanPeriod(500);
+        mBeaconManager.setBackgroundScanPeriod(100);
+        mBeaconManager.setBackgroundBetweenScanPeriod(500);
+
+        mBeaconManager.getBeaconParsers().add(new BeaconParser().setBeaconLayout("m:2-3=0215,i:4-19,i:20-21,i:22-23,p:24-24"));
+        mBeaconManager.bind((BeaconConsumer) this);*/
+        /**Beacon beacon = new Beacon.Builder()
+                .setId1("2f234454-cf6d-4a0f-adf2-f4911ba9ffa6")
+                .setId2("1")
+                .setId3("2")
+                .setManufacturer(0x0118)
+                .setTxPower(-59)
+                .setDataFields(Arrays.asList(new Long[] {0l}))
+                .build();
+        BeaconParser beaconParser = new BeaconParser()
+                .setBeaconLayout("m:2-3=beac,i:4-19,i:20-21,i:22-23,p:24-24,d:25-25");
+        BeaconTransmitter beaconTransmitter = new BeaconTransmitter(getApplicationContext(), beaconParser);
+        beaconTransmitter.startAdvertising(beacon);*/
+
 
     }
 
@@ -273,5 +308,24 @@ public class MainActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    /**private void startBeaconRangeFinderService() {
+        mBeaconManager.setRangeNotifier(new RangeNotifier() {
+            @Override
+            public void didRangeBeaconsInRegion(Collection<Beacon> collection, Region region) {
+                try {
+                    if (beacons.size() > 0) {
+                        for (Beacon b : beacons) {
+                            Log.e(TAG_HOME, ""+b);
+                        }
+                    }
+                } catch (Exception ex) {
+                    Log.e(TAG_HOME, "Error was thrown: " + ex.getMessage());
+                }
+            }
+        });
+        mBeaconManager.startRangingBeaconsInRegion(new Region());
+
+    }*/
 
 }

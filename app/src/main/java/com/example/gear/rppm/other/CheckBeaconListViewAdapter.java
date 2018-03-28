@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import com.example.gear.rppm.R;
 
+import java.util.Map;
+
 /**
  * Created by Gear on 3/24/2018.
  */
@@ -17,10 +19,16 @@ public class CheckBeaconListViewAdapter extends BaseAdapter {
 
     private Context mContext;
     private String[][] beaconList;
+    private Map<String, int[]> mBeaconList;
 
     public CheckBeaconListViewAdapter(Context mContext, String[][] beaconList) {
         this.mContext = mContext;
         this.beaconList = beaconList;
+    }
+
+    public CheckBeaconListViewAdapter(Context mContext, Map<String,int[]> beaconList) {
+        this.mContext = mContext;
+        this.mBeaconList = beaconList;
     }
 
     @Override
@@ -47,14 +55,16 @@ public class CheckBeaconListViewAdapter extends BaseAdapter {
             convertView = mInflater.inflate(android.R.layout.simple_list_item_2 ,parent, false);
 
         TextView beaconName = (TextView)convertView.findViewById(android.R.id.text1);
-        beaconName.setText(beaconList[position][0]);
+        beaconName.setText(mBeaconList.keySet().toArray()[position].toString());
 
         TextView beaconDetail = (TextView)convertView.findViewById(android.R.id.text2);
-        beaconDetail.setText(beaconList[position][1]);
+        beaconDetail.setText(mBeaconList.get(mBeaconList.keySet().toArray()[position].toString()).toString());
 
         //ImageView imageView = (ImageView)convertView.findViewById(R.id.clv_row_imageView);
         //imageView.setBackgroundResource(resId[position]);
 
         return convertView;
     }
+
+
 }
