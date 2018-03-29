@@ -37,9 +37,11 @@
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
 
-                    android:background="#b6b6b6"
+                    android:background="#d4d4d4"
 
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/textPrimary"
+                    android:textSize="20sp" />
             </TableRow>
 
             <TableRow>
@@ -55,9 +57,11 @@
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"
 
-                    android:background="#b6b6b6"
+                    android:background="#d4d4d4"
 
-                    android:text="" />
+                    android:text=""
+                    android:textColor="@color/textPrimary"
+                    android:textSize="20sp" />
 
                 <TextView android:text="ครั้ง"
                     android:textSize="@dimen/text_sub_header"
@@ -68,6 +72,16 @@
         </TableLayout>
 
 
+        <Button android:id="@+id/fragment_startRe_buttonStop"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+
+            android:background="@drawable/button_buttom_red"
+            android:text="Stop"
+            android:textSize="@dimen/text_sub_header"
+            android:textAlignment="center"
+            android:textColor="@color/textSecondary"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 

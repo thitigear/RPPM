@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.gear.rppm.R;
+import com.example.gear.rppm.activity.MainActivity;
 import com.example.gear.rppm.other.CustomListViewAdapter;
 
 /**
@@ -27,16 +29,6 @@ public class LegHomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    private View view;
-    private CustomListViewAdapter chooseTreatmentAdapter;
-
     private String TAG_CURRENT = "";
     private String TAG_LEGHOME = "armHome";
     private String TAG_TREAT1 = "กางและหุบข้อตะโพก";
@@ -47,6 +39,18 @@ public class LegHomeFragment extends Fragment {
             , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history};
 
     private String[] legTreat = { "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน", "กางและหุบข้อตะโพก", "หมุนข้อตะโพกเข้าและออก"};
+
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
+    private static String CURRENT_TREAT;
+
+    private OnFragmentInteractionListener mListener;
+
+    private View view;
+    private CustomListViewAdapter chooseTreatmentAdapter;
+
+
 
     public LegHomeFragment() {
         // Required empty public constructor
@@ -85,6 +89,8 @@ public class LegHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_leg_home, container, false);
 
+        ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนขา");
+
         //Choose Arm Treatment
         chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),legTreat, resId);
 
@@ -94,6 +100,7 @@ public class LegHomeFragment extends Fragment {
         legListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int treatNumber, long arg3) {
                 Log.e(TAG_LEGHOME, "Treat:"+legTreat[treatNumber]);
+                onSelectTreatment(treatNumber);
             }
         });
 
@@ -137,6 +144,28 @@ public class LegHomeFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void onSelectTreatment(int itemSelected){
+        CURRENT_TREAT = legTreat[itemSelected];
+        replaceNewFragment(new StartRecoveringFragment(), ""+CURRENT_TREAT);
+    }
+
+    public void replaceNewFragment(final Fragment newFragment, final String tag) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+        //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+
+        StartRecoveringFragment.CURRENT_TREAT = getCURRENT_TREAT();
+        StartRecoveringFragment.FLAG_TREAT = "leg";
+
+        transaction.replace(R.id.frame, newFragment, tag);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public static String getCURRENT_TREAT() {
+        return CURRENT_TREAT;
     }
 
 

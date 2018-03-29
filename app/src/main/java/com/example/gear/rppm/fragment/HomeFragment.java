@@ -171,17 +171,15 @@ public class HomeFragment extends Fragment{
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(v.getContext());
         mAlertBuilder.setView(R.layout.list_caution);
 
-        mAlertBuilder.setPositiveButton(R.string.caution_button, new DialogInterface.OnClickListener() {
+        mAlertBuilder.setPositiveButton("เข้าใจ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
                 if (Objects.equals(TAG_CURRENT, TAG_ARM)){
-                    ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนแขน");
                     replaceNewFragment(new ArmHomeFragment(), TAG_ARM);
                     TAG_CURRENT = "";
 
                 } else if (Objects.equals(TAG_CURRENT, TAG_LEG)){
-                    ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนขา");
                     replaceNewFragment(new LegHomeFragment(), TAG_LEG);
                     TAG_CURRENT = "";
 

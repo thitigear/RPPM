@@ -1,14 +1,23 @@
 package com.example.gear.rppm.fragment;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.gear.rppm.R;
+import com.example.gear.rppm.activity.MainActivity;
+
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,15 +33,21 @@ public class StartRecoveringFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private static int treatTime = 0;
+    private static float[] thisBody;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    protected static String CURRENT_TREAT;
+    protected static String FLAG_TREAT;
 
     private OnFragmentInteractionListener mListener;
 
     private View view;
 
-    private String treatName = "";
+    private TextView treatName;
+    private Button butStop;
 
     public StartRecoveringFragment() {
         // Required empty public constructor
@@ -71,6 +86,21 @@ public class StartRecoveringFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_start_recovering, container, false);
 
+        ((MainActivity)getActivity()).setToolbarTitle("เริ่มทำกายภาพ");
+
+        treatName = (TextView) view.findViewById(R.id.fragment_startRe_treatName);
+        treatName.setText(CURRENT_TREAT);
+
+        butStop = (Button) view.findViewById(R.id.fragment_startRe_buttonStop);
+        butStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showCaution();
+            }
+        });
+
+
+        //checkAngle(new float[]{1,2,3,4,5,6});
 
 
         return view;
@@ -100,6 +130,12 @@ public class StartRecoveringFragment extends Fragment {
         mListener = null;
     }
 
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -113,5 +149,43 @@ public class StartRecoveringFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void checkAngle(float[] correctBody){
+        treatTime += 1;
+    }
+
+
+    @SuppressLint("ResourceAsColor")
+    private void showCaution(){
+
+        AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
+         mAlertBuilder.setTitle("หยุดชั่วคราว");
+
+        mAlertBuilder.setPositiveButton("ืทำต่อ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+
+            }
+        });
+        mAlertBuilder.setNegativeButton("กลับไปหน้าก่อนหน้า", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                /**if(FLAG_TREAT == "arm"){
+                    replaceNewFragment(new ArmHomeFragment(), FLAG_TREAT);
+
+                } else if (FLAG_TREAT == "leg"){
+                    replaceNewFragment(new LegHomeFragment(), FLAG_TREAT);
+                }*/
+                ((MainActivity)getActivity()).onBackPressed();
+            }
+        });
+
+        AlertDialog alertDialog = mAlertBuilder.create();
+        alertDialog.show();
+        alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setBackgroundColor(R.color.buttonBackground);
+        alertDialog.getButton(alertDialog.BUTTON_NEGATIVE).setBackgroundColor(R.color.buttonRed);
+
     }
 }

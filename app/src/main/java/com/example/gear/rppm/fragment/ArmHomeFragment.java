@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.gear.rppm.R;
+import com.example.gear.rppm.activity.MainActivity;
 import com.example.gear.rppm.other.CautionAdapter;
 import com.example.gear.rppm.other.CustomListViewAdapter;
 
@@ -30,6 +32,21 @@ public class ArmHomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private String TAG_CURRENT = "";
+    private String TAG_ARMHOME = "armHome";
+    private String TAG_TREAT1 = "ยกแขนขึ้นและลง";
+    private String TAG_TREAT2 = "กางแขนและหุบแขนทางข้างลำตัว";
+    private String TAG_TREAT3 = "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว";
+    private String TAG_TREAT4 = "หมุนข้อไหล่ขึ้นและลง";
+    private String TAG_TREAT5 = "เหยียดและงอข้อศอก";
+    private static String CURRENT_TREAT = "";
+
+    private int[] resId = { R.drawable.ic_action_menu_add
+            , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history
+            , R.drawable.ic_action_menu_home, R.drawable.ic_action_menu_setting};
+
+    private String[] armTreat = { "ยกแขนขึ้นและลง", "กางแขนและหุบแขนทางข้างลำตัว", "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว"
+            , "หมุนข้อไหล่ขึ้นและลง", "เหยียดและงอข้อศอก"};
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -40,20 +57,9 @@ public class ArmHomeFragment extends Fragment {
     private CustomListViewAdapter chooseTreatmentAdapter;
     private CautionAdapter cautionAdapter;
 
-    private String TAG_CURRENT = "";
-    private String TAG_ARMHOME = "armHome";
-    private String TAG_TREAT1 = "ยกแขนขึ้นและลง";
-    private String TAG_TREAT2 = "กางแขนและหุบแขนทางข้างลำตัว";
-    private String TAG_TREAT3 = "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว";
-    private String TAG_TREAT4 = "หมุนข้อไหล่ขึ้นและลง";
-    private String TAG_TREAT5 = "เหยียดและงอข้อศอก";
 
-    private int[] resId = { R.drawable.ic_action_menu_add
-            , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history
-            , R.drawable.ic_action_menu_home, R.drawable.ic_action_menu_setting};
 
-    private String[] armTreat = { "ยกแขนขึ้นและลง", "กางแขนและหุบแขนทางข้างลำตัว", "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว"
-            , "หมุนข้อไหล่ขึ้นและลง", "เหยียดและงอข้อศอก"};
+
 
     public ArmHomeFragment() {
         // Required empty public constructor
@@ -92,6 +98,8 @@ public class ArmHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_arm_home, container, false);
 
+        ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนแขน");
+
         //Choose Arm Treatment
         chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),armTreat, resId);
 
@@ -100,7 +108,7 @@ public class ArmHomeFragment extends Fragment {
         armListView.setAdapter(chooseTreatmentAdapter);
         armListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int treatNumber, long arg3) {
-
+                onSelectTreatment(treatNumber);
             }
         });
 
@@ -146,13 +154,22 @@ public class ArmHomeFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void onSelectTreatment(int armListViewItemSelected){
-        switch (armListViewItemSelected){
-            case 0:
-                Log.e(TAG_ARMHOME, "Treat:"+armTreat[armListViewItemSelected]);
-                break;
-
-        }
+    public void onSelectTreatment(int itemSelected){
+        CURRENT_TREAT = armTreat[itemSelected];
+        replaceNewFragment(new StartRecoveringFragment(), ""+CURRENT_TREAT);
     }
 
+    public void replaceNewFragment(final Fragment newFragment, final String tag) {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        StartRecoveringFragment.CURRENT_TREAT = getCURRENT_TREAT();
+        StartRecoveringFragment.FLAG_TREAT = "arm";
+        transaction.replace(R.id.frame, newFragment, tag);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public static String getCURRENT_TREAT() {
+        return CURRENT_TREAT;
+    }
 }
