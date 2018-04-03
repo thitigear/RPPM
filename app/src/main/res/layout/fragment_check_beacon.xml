@@ -36,6 +36,14 @@
             android:layout_marginTop="120dp"
             android:layout_centerHorizontal="true" />
 
+        <!--Button android:id="@+id/fragment_chk_beacon_bt_refresh"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+
+            android:background="@drawable/rppm_fm_chk_beacon_refresh"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"/-->
+
     </RelativeLayout>
 
 </FrameLayout>

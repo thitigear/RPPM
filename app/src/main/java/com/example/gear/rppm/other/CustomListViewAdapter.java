@@ -56,6 +56,7 @@ public class CustomListViewAdapter extends BaseAdapter{
 
         TextView textView = (TextView)convertView.findViewById(R.id.clv_row_textView);
         textView.setText(strName[position]);
+        textView.setBackgroundResource(R.color.tv_001);
 
         //ImageView imageView = (ImageView)convertView.findViewById(R.id.clv_row_imageView);
         //imageView.setBackgroundResource(resId[position]);

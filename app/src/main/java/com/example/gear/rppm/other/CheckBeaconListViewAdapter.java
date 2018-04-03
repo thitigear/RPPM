@@ -19,17 +19,17 @@ import java.util.Map;
 public class CheckBeaconListViewAdapter extends BaseAdapter {
 
     private Context mContext;
-    private String[][] beaconList;
     private Map<String, int[]> mBeaconList;
+    private Map<String, String> sBeaconList;
 
-    public CheckBeaconListViewAdapter(Context mContext, String[][] beaconList) {
-        this.mContext = mContext;
-        this.beaconList = beaconList;
-    }
-
-    public CheckBeaconListViewAdapter(Context mContext, Map<String,int[]> beaconList) {
+    /**public CheckBeaconListViewAdapter(Context mContext, Map<String,int[]> beaconList) {
         this.mContext = mContext;
         this.mBeaconList = beaconList;
+    }*/
+
+    public CheckBeaconListViewAdapter(Context mContext, Map<String,String> beaconList) {
+        this.mContext = mContext;
+        this.sBeaconList = beaconList;
     }
 
     /*public CheckBeaconListViewAdapter(Context mContext, String[][] beaconList) {
@@ -39,7 +39,7 @@ public class CheckBeaconListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return mBeaconList.size();
+        return sBeaconList.size();
     }
 
     @Override
@@ -64,15 +64,14 @@ public class CheckBeaconListViewAdapter extends BaseAdapter {
         //Log.e("SBEACONLIST NAME", beaconList[position][0]);
 
         TextView beaconName = (TextView)convertView.findViewById(android.R.id.text1);
-        //beaconName.setText(sBeaconList.keySet().toArray()[position].toString());
-        beaconName.setText(beaconList[position][0]);
+        beaconName.setText(sBeaconList.keySet().toArray()[position].toString());
+        //beaconName.setText(mBeaconList.keySet().toArray()[position].toString());
 
 
-        Log.e("SBEACONLIST ADDRESS", beaconList[position][1]);
+        //Log.e("SBEACONLIST ADDRESS", mBeaconList.keySet().toArray()[position].toString());
         TextView beaconDetail = (TextView)convertView.findViewById(android.R.id.text2);
         //beaconDetail.setText(mBeaconList.get(mBeaconList.keySet().toArray()[position].toString()).toString());
-        //beaconDetail.setText(sBeaconList.get(sBeaconList.keySet().toArray()[position]).toString());
-        beaconDetail.setText(beaconList[position][1]);
+        beaconDetail.setText(sBeaconList.get(sBeaconList.keySet().toArray()[position]).toString());
 
         //ImageView imageView = (ImageView)convertView.findViewById(R.id.clv_row_imageView);
         //imageView.setBackgroundResource(resId[position]);
@@ -80,5 +79,15 @@ public class CheckBeaconListViewAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void setmContext(Context mContext) {
+        this.mContext = mContext;
+    }
 
+    public void setmBeaconList(Map<String, int[]> mBeaconList) {
+        this.mBeaconList = mBeaconList;
+    }
+
+    public void setsBeaconList(Map<String, String> sBeaconList) {
+        this.sBeaconList = sBeaconList;
+    }
 }

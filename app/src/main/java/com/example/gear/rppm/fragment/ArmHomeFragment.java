@@ -108,7 +108,8 @@ public class ArmHomeFragment extends Fragment {
         armListView.setAdapter(chooseTreatmentAdapter);
         armListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int treatNumber, long arg3) {
-                onSelectTreatment(treatNumber);
+                CURRENT_TREAT = armTreat[treatNumber];
+                replaceNewFragment(new DoingFragment(), ""+CURRENT_TREAT);
             }
         });
 
@@ -156,17 +157,20 @@ public class ArmHomeFragment extends Fragment {
 
     public void onSelectTreatment(int itemSelected){
         CURRENT_TREAT = armTreat[itemSelected];
-        replaceNewFragment(new StartRecoveringFragment(), ""+CURRENT_TREAT);
+        replaceNewFragment(new DoingFragment(), ""+CURRENT_TREAT);
     }
 
     public void replaceNewFragment(final Fragment newFragment, final String tag) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        StartRecoveringFragment.CURRENT_TREAT = getCURRENT_TREAT();
-        StartRecoveringFragment.FLAG_TREAT = "arm";
+
+
+        DoingFragment.CURRENT_TREAT = getCURRENT_TREAT();
+        DoingFragment.FLAG_TREAT = "arm";
+
         transaction.replace(R.id.frame, newFragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
+
     }
 
     public static String getCURRENT_TREAT() {

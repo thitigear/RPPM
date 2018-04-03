@@ -1,10 +1,15 @@
 package com.example.gear.rppm.fragment;
 
+import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanFilter;
+import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanResult;
+import android.bluetooth.le.ScanSettings;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.net.Uri;
@@ -18,10 +23,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.gear.rppm.*;
+import com.example.gear.rppm.activity.ScanDeviceActivity;
 import com.example.gear.rppm.other.CheckBeaconListViewAdapter;
 import com.example.gear.rppm.other.CustomListViewAdapter;
+import com.example.gear.rppm.other.ScanFilterUtils;
+import com.example.gear.rppm.other.UuidAdapter;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconConsumer;
@@ -31,9 +40,16 @@ import org.altbeacon.beacon.Identifier;
 import org.altbeacon.beacon.RangeNotifier;
 import org.altbeacon.beacon.Region;
 
+import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,42 +65,54 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";;
     private static final boolean IS_SCAN_BEACON = true;
+    private static final String TAG = "MainActivity";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
     private View view;
-    private CheckBeaconListViewAdapter beaconListAdapter;
 
+    //-------------------------------------------------------------------------------------
     private BeaconManager beaconManager;
 
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private BluetoothLeScanner bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
 
-    private static final String TAG = "MainActivity";
-    //private CoreF coreF = new CoreF();
-    private Map<String, int[]> deviceList = new HashMap<String, int[]>();
-    private String[][] sDeviceList;
+    private CheckBeaconListViewAdapter beaconListAdapter;
+
     private int[] capsuleRssiTxPower;
     private int[] tempCapsuleRssiTxPower;
 
-    private ScanResult scanResult;
+    private List<ScanFilter> filter;
+    private ListView beaconListView;
 
 
-    private int[] resId = { R.drawable.ic_action_menu_add
-            , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history};
 
-    private String[][] beaconList = { {"Beacon1","Beacon1 UUID"}
-            , {"Beacon2", "Beacon2 UUID"}
+    //private Map<String, int[]> deviceList = new HashMap<String, int[]>();
+    private Map<String, String> sDeviceList = new HashMap<>();
+    //private Map<String, ArrayList<>> oDeviceList = new HashMap<String, Object[]>();
+
+    private ScanResult mScanResult;
+    //private ScanFilter mScanFilter;
+    //private ScanSettings mScanSettings;
+
+    private String my_UUID = "b911df37-a9d0-43bf-af14-0b4a3e20b50c";
+
+    private String[][] deviceListWithPart = { {"D4:36:39:DE:56:FC","HMSoft"}
+            , {"D4:36:39:DE:57:D0", "HMSoft"}
             , {"Beacon3", "Beacon3 UUID"}
             , {"Beacon4", "Beacon4 UUID"}
             , {"Beacon5", "Beacon5 UUID"}
             , {"Beacon6", "Beacon6 UUID"}
             , {"Beacon7", "Beacon7 UUID"}
             , {"Beacon8", "Beacon8 UUID"}};
+
+    /**private int[] resId = { R.drawable.ic_action_menu_add
+            , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history};
+
+    */
 
 
     public CheckBeaconFragment() {
@@ -124,76 +152,42 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_check_beacon, container, false);
 
-        //beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), deviceList);
+        //uuidAdapter = new UuidAdapter();
 
-        final ListView beaconListView = (ListView) view.findViewById(R.id.fragment_chk_beacon_lv);
+        //Log.e("SCANFILTER",ScanFilterUtils.getScanFilter().getDeviceName());
+
+        //sDeviceList = ((ScanDeviceActivity)getActivity()).getsDeviceList();
+
+        beaconListView = (ListView) view.findViewById(R.id.fragment_chk_beacon_lv);
+
+        beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), sDeviceList);
 
 
-        bluetoothLeScanner.startScan(new ScanCallback() {
+
+        //setScanFilter();
+        //setScanSettings();
+
+        bluetoothLeScanner.startScan(mScanCallback);
+
+
+        beaconListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onScanResult(int callbackType, ScanResult result) {
-                super.onScanResult(callbackType, result);
-
-                scanResult = result;
-
-                //if ("hm".contains(scanResult.getDevice().getName().toLowerCase())) {
-
-                    capsuleRssiTxPower = new int[]{scanResult.getRssi(), scanResult.getScanRecord().getTxPowerLevel()};
-
-                    Log.e(TAG, "******************* Device NAME : " +scanResult.getDevice().getName());
-                    Log.e(TAG, "******************* Device Key : " +deviceList.keySet());
-
-                Log.e(TAG, "!!!!!!!!!!!!!!!!!! BeaconList : " +beaconList);
-                beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), beaconList);
-
-                    //if(sDeviceList[0].equals())
-
-                    //if (sDeviceList.containsKey(scanResult.getDevice().getName())) { //getAddress()
-                    /* Update Device Rssi & TxPowerLevel*/
-                        //deviceList.put(scanResult.getDevice().getAddress(), capsuleRssiTxPower);
-                     /**   deviceList.put(scanResult.getDevice().getName(), capsuleRssiTxPower);
-                        sDeviceList.put(scanResult.getDevice().getName(), scanResult.getDevice().getAddress());*/
-                        //tempCapsuleRssiTxPower = capsuleRssiTxPower;
-
-                    //} else {
-                    /* Add Device to DeviceList */
-                        //deviceList.put(scanResult.getDevice().getAddress(), capsuleRssiTxPower);}
-                     /**   deviceList.put(scanResult.getDevice().getName(), capsuleRssiTxPower);
-                        sDeviceList.put(scanResult.getDevice().getName(), scanResult.getDevice().getAddress());*/
-                        //beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), deviceList);
-
-                        //Log.e("UUID", ""+result.getDevice().getUuids());
-
-                    /**if (deviceList.size() >= 3) {
-                        long start = System.currentTimeMillis();
-                        long elapsedTimeMillis = System.currentTimeMillis()-start;
-                        while(elapsedTimeMillis < 2){
-                             //op_kneeL.setText("" + core.calculateDistance(deviceList.get("D4:36:39:DE:56:C6")[0], deviceList.get("D4:36:39:DE:56:C6")[1]));
-                             //op_kneeL.setText("" + core.calculateDistance(deviceList.get("50:8C:B1:75:1C:3C")[0], deviceList.get("50:8C:B1:75:1C:3C")[1]));
-                             //op_ankleL.setText("" + core.calculateDistance(deviceList.get("D4:36:39:DE:57:D0")[0], deviceList.get("D4:36:39:DE:57:D0")[1]-20));
-                             start = System.currentTimeMillis();
-                        }
-                    }*/
-
-                    Log.e(TAG, "******************* Device Key : " +sDeviceList);
-                    //beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), deviceList);
-
-                //}
-
-                beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), beaconList);
-                beaconListView.setAdapter(beaconListAdapter);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(view.getContext(), sDeviceList.keySet().toArray()[position].toString(), Toast.LENGTH_LONG).show();
+                showDeviceDesc(position);
             }
         });
 
+        /**
+         * bluetoothLeScanner.startScan(new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+        super.onScanResult(callbackType, result);
         //register();
         //beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), deviceList);
         //beaconListView.setAdapter(beaconListAdapter);
-
-        beaconListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-
-            }
-        });
+        }
+        });*/
 
         return view;
     }
@@ -224,6 +218,11 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
     }
 
     @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
@@ -239,72 +238,6 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
         super.onDetach();
         mListener = null;
     }
-/**
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        try {
-            // Unbind scan beacon progress
-            if (beaconManager != null)
-                beaconManager.unbind(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }*/
-/*
-    @Override
-    public void onBeaconServiceConnect() {
-        beaconManager.setRangeNotifier(new RangeNotifier() {
-            @Override
-            public void didRangeBeaconsInRegion(
-                    Collection<Beacon> beacons, Region region) {
-                Log.i("", "IS_SCAN_BEACON " + CheckBeaconFragment.IS_SCAN_BEACON);
-
-                if (CheckBeaconFragment.IS_SCAN_BEACON) {
-                    Log.i("", "Found " + beacons.size() + " beacon!");
-
-                    if (beacons.size() > 0) {*/
-                        /**
-                         * Begin transfer data
-                         */
-                        /**for (final Beacon beacon : beacons) {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    /*getDataViaBLE(getActivity(), beacon.getId1() + "",
-                                            beacon.getId2() + "", beacon.getId3() + "");*/
-                                    /**Log.e("com.example.gear.rppm", ":"+ beacon.getId1()+","+beacon.getId2()+","+beacon.getId3());
-                                }
-                            });
-
-                        }
-                    }
-                }
-            }
-        });
-
-        try {
-            beaconManager.startRangingBeaconsInRegion(
-                    new Region(UUID, null, null, null));
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        }
-    }*/
-/**
-    @Override
-    public Context getApplicationContext() {
-        return getActivity().getApplicationContext();
-    }
-
-    @Override
-    public void unbindService(ServiceConnection serviceConnection) {
-        getActivity().unbindService(serviceConnection);
-    }
-
-    @Override
-    public boolean bindService(Intent intent, ServiceConnection serviceConnection, int i) {
-        return getActivity().bindService(intent, serviceConnection, i);
-    }*/
 
     /**
      * This interface must be implemented by activities that contain this
@@ -321,7 +254,104 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
         void onFragmentInteraction(Uri uri);
     }
 
-    public static String UUID = "ok";
+    //setScanFilter, setScanSetting
 
-    //private void getDataViaBLE(FragmentActivity activity, Identifier id1, Identifier id2, Identifier id3);
+    /**
+    private void setScanFilter() {
+        ScanFilter.Builder mBuilder = new ScanFilter.Builder();
+        ByteBuffer mManufacturerData = ByteBuffer.allocate(23);
+        ByteBuffer mManufacturerDataMask = ByteBuffer.allocate(24);
+        //byte[] uuid = UuidAdapter.getBytesFromUUID(UUID.fromString(my_UUID));
+        byte[] uuid = null;
+        mManufacturerData.put(0, (byte)0xBE);
+        mManufacturerData.put(1, (byte)0xAC);
+        for (int i=2; i<=17; i++) {
+            mManufacturerData.put(i, uuid[i-2]);
+        }
+        for (int i=0; i<=17; i++) {
+            mManufacturerDataMask.put((byte)0x01);
+        }
+        mBuilder.setManufacturerData(224, mManufacturerData.array(), mManufacturerDataMask.array());
+        mScanFilter = mBuilder.build();
+    }
+
+    /**private void setScanSettings() {
+        ScanSettings.Builder mBuilder = new ScanSettings.Builder();
+        mBuilder.setReportDelay(0);
+        mBuilder.setScanMode(ScanSettings.SCAN_MODE_LOW_POWER);
+        mScanSettings = mBuilder.build();
+    }*/
+
+    protected ScanCallback mScanCallback = new ScanCallback() {
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+
+            ScanRecord mScanRecord = result.getScanRecord();
+            //byte[] manufacturerData = mScanRecord.getManufacturerSpecificData(224);
+            //int mRssi = result.getRssi();
+
+            mScanResult = result;
+
+            Log.e("ScanResult:", ""+ mScanResult.toString());
+            Log.e("Device Name:", ""+ mScanResult.getDevice().getName());
+            Log.e("Device Address:", ""+ mScanResult.getDevice().getAddress());
+            //Log.e("Device UUID:", ""+ Arrays.toString(mScanResult.getDevice().getUuids()));
+            Log.e("Device UUID:", ""+ mScanRecord.getServiceUuids().toArray());
+            Log.e("Device Type:", ""+ mScanResult.getDevice().getType());
+            // int mScanRecord.getTxPowerLevel()
+
+
+            if (mScanResult.getDevice().getUuids() == null){//-------------------------------------- Update Device Rssi & TxPowerLevel
+
+
+                if (sDeviceList.containsKey( mScanResult.getDevice().getAddress())) { //getAddress()
+
+                    sDeviceList.put(result.getDevice().getAddress(), ""+result.getDevice().getName());
+
+                    beaconListAdapter.setsBeaconList(sDeviceList);
+                    beaconListView.setAdapter(beaconListAdapter);
+
+                    //deviceList.put(scanResult.getDevice().getAddress(), capsuleRssiTxPower);
+                    //beaconListAdapter.setmBeaconList(deviceList);
+                    //deviceList.put(scanResult.getDevice().getName(), capsuleRssiTxPower);
+                    //tempCapsuleRssiTxPower = capsuleRssiTxPower;
+
+                } else {//-------------------------------------------------------------------------- Add Device to DeviceList
+
+                    sDeviceList.put(result.getDevice().getAddress(), ""+result.getDevice().getName());
+
+                    beaconListAdapter.setsBeaconList(sDeviceList);
+                    beaconListView.setAdapter(beaconListAdapter);
+
+                    //deviceList.put(scanResult.getDevice().getAddress(), capsuleRssiTxPower);
+                    //beaconListAdapter.setmBeaconList(deviceList);
+                }
+                Log.e(TAG, "******************* Device Key : " +sDeviceList);
+            }
+
+        }
+
+    };
+
+    public void showDeviceDesc(int position){
+
+        AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
+        mAlertBuilder.setView(R.layout.chk_beacon_device_desc_view);
+        mAlertBuilder.setTitle("Detail");
+
+        mAlertBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        AlertDialog alertDialog = mAlertBuilder.create();
+        alertDialog.show();
+        alertDialog.getButton(alertDialog.BUTTON_POSITIVE);
+    }
+
+
+
+
 }

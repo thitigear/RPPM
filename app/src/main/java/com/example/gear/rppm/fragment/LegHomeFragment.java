@@ -148,7 +148,7 @@ public class LegHomeFragment extends Fragment {
 
     public void onSelectTreatment(int itemSelected){
         CURRENT_TREAT = legTreat[itemSelected];
-        replaceNewFragment(new StartRecoveringFragment(), ""+CURRENT_TREAT);
+        replaceNewFragment(new DoingFragment(), ""+CURRENT_TREAT);
     }
 
     public void replaceNewFragment(final Fragment newFragment, final String tag) {
@@ -156,8 +156,8 @@ public class LegHomeFragment extends Fragment {
 
         //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
 
-        StartRecoveringFragment.CURRENT_TREAT = getCURRENT_TREAT();
-        StartRecoveringFragment.FLAG_TREAT = "leg";
+        DoingFragment.CURRENT_TREAT = getCURRENT_TREAT();
+        DoingFragment.FLAG_TREAT = "leg";
 
         transaction.replace(R.id.frame, newFragment, tag);
         transaction.addToBackStack(null);

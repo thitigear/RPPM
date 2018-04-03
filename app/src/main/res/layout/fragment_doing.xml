@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.DoingFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView android:text="Start Recovering"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+
+            android:textSize="@dimen/text_header"
+            android:textColor="@color/textPrimary"/>
+
+            <TextView android:text="ชื่อท่า" android:id="@+id/fragment_doing_tv_treatName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="80dp"
+
+                android:textSize="@dimen/text_content"
+                android:textColor="@color/textPrimary" />
+
+            <TextView android:id="@+id/fragment_startRe_treatName"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/fragment_doing_tv_treatName"
+                android:layout_marginStart="100dp"
+
+                android:background="#d4d4d4"
+
+                android:text=""
+                android:textColor="@color/textPrimary"
+                android:textSize="20sp" />
+
+            <TextView android:text="ทำไปแล้ว" android:id="@+id/fragment_doing_tv_doTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="130dp"
+
+                android:textSize="@dimen/text_content"
+                android:textColor="@color/textPrimary"/>
+
+            <TextView android:id="@+id/fragment_doing_timeNumber"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_alignBaseline="@id/fragment_doing_tv_doTime"
+
+                android:background="#d4d4d4"
+
+                android:text=""
+                android:textColor="@color/textPrimary"
+                android:textSize="20sp" />
+
+            <TextView android:text="ครั้ง"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_toEndOf="@id/fragment_doing_timeNumber"
+                android:layout_alignBaseline="@id/fragment_doing_tv_doTime"
+
+                android:textSize="@dimen/text_sub_header"
+                android:textColor="@color/textPrimary"/>
+
+
+    <Button android:id="@+id/fragment_doing_buttonStop"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+
+        android:background="@drawable/button_buttom_red2"
+        android:text="Stop"
+        android:textSize="@dimen/text_sub_header"
+        android:textAlignment="center"
+        android:textColor="@color/textSecondary"
+        android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
+</FrameLayout>
