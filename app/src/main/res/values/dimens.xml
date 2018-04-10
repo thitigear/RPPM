@@ -17,5 +17,7 @@
 
     <dimen name="text_header_mtop">30dp</dimen>
 
+    <!--Dialog Dimension -->
+    <dimen name="dialog_mtop">40dp</dimen>
 
 </resources>

@@ -35,9 +35,13 @@
             android:name=".activity.SlidingActivity"
             android:label="@string/title_activity_sliding"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity android:name=".activity.RangingActivity" />
-        <activity android:name=".activity.MonitoringActivity"></activity>
-        <activity android:name=".activity.ScanDeviceActivity"></activity>
+
+        <activity android:name=".activity.MonitoringActivity"/>
+
+        <activity android:name=".activity.ScanDeviceActivity"/>
+
     </application>
 
 </manifest>

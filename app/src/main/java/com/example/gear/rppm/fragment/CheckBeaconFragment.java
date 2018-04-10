@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.gear.rppm.*;
+import com.example.gear.rppm.activity.MainActivity;
 import com.example.gear.rppm.activity.ScanDeviceActivity;
 import com.example.gear.rppm.other.CheckBeaconListViewAdapter;
 import com.example.gear.rppm.other.CustomListViewAdapter;
@@ -75,7 +76,6 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
     private View view;
 
     //-------------------------------------------------------------------------------------
-    private BeaconManager beaconManager;
 
     private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     private BluetoothLeScanner bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
@@ -152,17 +152,11 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_check_beacon, container, false);
 
-        //uuidAdapter = new UuidAdapter();
-
-        //Log.e("SCANFILTER",ScanFilterUtils.getScanFilter().getDeviceName());
-
-        //sDeviceList = ((ScanDeviceActivity)getActivity()).getsDeviceList();
+        ((MainActivity)getActivity()).setToolbarTitle("ตรวจสอบสถานะอุปกรณ์");
 
         beaconListView = (ListView) view.findViewById(R.id.fragment_chk_beacon_lv);
 
         beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), sDeviceList);
-
-
 
         //setScanFilter();
         //setScanSettings();

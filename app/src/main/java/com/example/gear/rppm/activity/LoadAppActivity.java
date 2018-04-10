@@ -17,7 +17,7 @@ import org.altbeacon.beacon.Region;
 import org.altbeacon.beacon.startup.BootstrapNotifier;
 import org.altbeacon.beacon.startup.RegionBootstrap;
 
-public class LoadAppActivity extends AppCompatActivity implements BootstrapNotifier, BeaconConsumer {
+public class LoadAppActivity extends AppCompatActivity {//implements BootstrapNotifier, BeaconConsumer {
 
     private Button load_app_button;
     private boolean isClickButton = false;
@@ -74,10 +74,12 @@ public class LoadAppActivity extends AppCompatActivity implements BootstrapNotif
         };
         loadAppThread.start();
 
+
+
         Log.e(TAG, "HEREEEEEEEEEEEEEEEEEEEEEE");
 
     }
-
+/**
     @Override
     public void didEnterRegion(Region region) {
         Log.e(TAG, "Got a didEnterRegion call!!!" + region);
@@ -104,5 +106,5 @@ public class LoadAppActivity extends AppCompatActivity implements BootstrapNotif
     @Override
     public void onBeaconServiceConnect() {
 
-    }
+    }*/
 }

@@ -12,12 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.gear.rppm.R;
 import com.example.gear.rppm.activity.MainActivity;
 import com.example.gear.rppm.other.CautionAdapter;
 import com.example.gear.rppm.other.CustomListViewAdapter;
+import com.example.gear.rppm.other.ReplaceFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,7 +30,7 @@ import com.example.gear.rppm.other.CustomListViewAdapter;
  * Use the {@link ArmHomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ArmHomeFragment extends Fragment {
+public class ArmHomeFragment extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -39,8 +42,13 @@ public class ArmHomeFragment extends Fragment {
     private String TAG_TREAT3 = "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว";
     private String TAG_TREAT4 = "หมุนข้อไหล่ขึ้นและลง";
     private String TAG_TREAT5 = "เหยียดและงอข้อศอก";
+
     private static String CURRENT_TREAT = "";
 
+
+
+    // TODO: Rename and change types of parameters
+    private int setRoundNumber = 0;
     private int[] resId = { R.drawable.ic_action_menu_add
             , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history
             , R.drawable.ic_action_menu_home, R.drawable.ic_action_menu_setting};
@@ -48,17 +56,21 @@ public class ArmHomeFragment extends Fragment {
     private String[] armTreat = { "ยกแขนขึ้นและลง", "กางแขนและหุบแขนทางข้างลำตัว", "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว"
             , "หมุนข้อไหล่ขึ้นและลง", "เหยียดและงอข้อศอก"};
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    /* UI Component */
+    private EditText setRoundEditText;
+    private ListView armListView;
+
+    private View view;
+
+    private CautionAdapter cautionAdapter;
+    private CustomListViewAdapter chooseTreatmentAdapter;
+
     private OnFragmentInteractionListener mListener;
 
-    private CustomListViewAdapter chooseTreatmentAdapter;
-    private CautionAdapter cautionAdapter;
-
-
-
+    private ReplaceFragment mReplaceFragment;
 
 
     public ArmHomeFragment() {
@@ -96,20 +108,21 @@ public class ArmHomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_arm_home, container, false);
+        view = inflater.inflate(R.layout.fragment_arm_home, container, false);
 
         ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนแขน");
 
-        //Choose Arm Treatment
+        /*Choose Arm Treatment*/
         chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),armTreat, resId);
 
-        ListView armListView = (ListView) view.findViewById(R.id.fragment_arm_home_lv);
+        armListView = (ListView) view.findViewById(R.id.fragment_arm_home_lv);
 
         armListView.setAdapter(chooseTreatmentAdapter);
         armListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int treatNumber, long arg3) {
+                showSetRound();
                 CURRENT_TREAT = armTreat[treatNumber];
-                replaceNewFragment(new DoingFragment(), ""+CURRENT_TREAT);
+                //replaceDoingFragment(armTreat[treatNumber], "arm");
             }
         });
 
@@ -155,25 +168,55 @@ public class ArmHomeFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void onSelectTreatment(int itemSelected){
-        CURRENT_TREAT = armTreat[itemSelected];
-        replaceNewFragment(new DoingFragment(), ""+CURRENT_TREAT);
-    }
+    public void replaceDoingFragment(String currentTreat, String flagTreat, int setRoundNumber) {
 
-    public void replaceNewFragment(final Fragment newFragment, final String tag) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
+        DoingFragment.setCurrentTreat(currentTreat);
+        DoingFragment.setFlagTreat(flagTreat);
+        DoingFragment.setMaxSet(setRoundNumber);
 
-        DoingFragment.CURRENT_TREAT = getCURRENT_TREAT();
-        DoingFragment.FLAG_TREAT = "arm";
-
-        transaction.replace(R.id.frame, newFragment, tag);
+        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        transaction.replace(R.id.frame, new DoingFragment(), flagTreat);
         transaction.addToBackStack(null);
         transaction.commit();
-
     }
 
-    public static String getCURRENT_TREAT() {
-        return CURRENT_TREAT;
+    private void showSetRound(){
+        AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
+        mAlertBuilder.setTitle("ตั้งค่าการกายภาพบำบัด");
+        mAlertBuilder.setView(R.layout.dialog_set_round);
+
+        mAlertBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(setRoundEditText.getText().equals("")){
+                    Toast.makeText(view.getContext(), "กรุณาใส่จำนวนรอบที่ต้องการ", Toast.LENGTH_LONG).show();
+                } else {
+                    setRoundNumber = Integer.parseInt(""+setRoundEditText.getText());
+                    if(setRoundNumber > 0 && setRoundNumber <= 5){
+                        replaceDoingFragment(CURRENT_TREAT, "arm", setRoundNumber);
+                    } else {
+                        Toast.makeText(view.getContext(), "จำนวนต้องอยู่ระหว่าง 1 ถึง 5", Toast.LENGTH_LONG).show();
+                        Log.e("No. of Round:", ""+ setRoundNumber);
+                    }
+                }
+
+            }
+        });
+
+        mAlertBuilder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+
+        AlertDialog alertDialog = mAlertBuilder.create();
+        alertDialog.show();
+        alertDialog.getButton(alertDialog.BUTTON_POSITIVE);
+        alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
+        setRoundEditText = (EditText) alertDialog.findViewById(R.id.dialog_setRound_editText_num);
+        setRoundEditText.setHint("ไม่ควรเกิน 5 รอบ");
     }
+
 }

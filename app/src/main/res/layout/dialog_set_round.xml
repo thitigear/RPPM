@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+
+    <TextView android:id="@+id/dialog_setRound_tv_1"
+
+        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        android:text="ทำ"
+        android:textAlignment="textStart"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_sub_header"/>
+
+    <EditText android:id="@+id/dialog_setRound_editText_num"
+        android:ems="7"
+        android:inputType="numberDecimal"
+
+        android:text=""
+        android:layout_alignBaseline="@id/dialog_setRound_tv_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_setRound_tv_1" />
+
+    <TextView android:id="@+id/dialog_setRound_tv_2"
+
+        android:layout_alignBaseline="@id/dialog_setRound_tv_1"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/dialog_setRound_editText_num"
+        android:layout_width="50dp"
+
+        android:text="รอบ"
+        android:textAlignment="textEnd"
+        android:textColor="@color/textPrimary"
+        android:textSize="@dimen/text_sub_header"/>
+
+
+</RelativeLayout>

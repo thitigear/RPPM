@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private Handler mHandler;
     private BeaconManager mBeaconManager;
-    private ScanDeviceActivity scanDeviceActivity;
+    //private ScanDeviceActivity scanDeviceActivity;
 
     // index to identify current nav menu item
     private int navItemIndex = 0;
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity
             loadFragment();
         }
 
-        scanDeviceActivity = new ScanDeviceActivity();
+        //scanDeviceActivity = new ScanDeviceActivity();
 
     }
 
@@ -101,7 +101,6 @@ public class MainActivity extends AppCompatActivity
      */
 
     public void loadFragment() {
-
         // selecting appropriate nav menu item
         selectNavMenu();
         setToolbarTitle();
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity
                 // update the main content by replacing fragments
                 Fragment fragment = getFragment();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                //fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                 fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
                 fragmentTransaction.commitAllowingStateLoss();
             }
@@ -146,7 +145,6 @@ public class MainActivity extends AppCompatActivity
             case 1:
                 // check beacon fragment
                 CheckBeaconFragment checkBeaconFragment = new CheckBeaconFragment();
-                setToolbarTitle("ตรวจสอบสภานะอุปกรณ์");
                 return checkBeaconFragment;
             case 2:
                 // arm fragment
@@ -258,7 +256,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawers();
 
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            //fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out);
+            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out);
             fragmentTransaction.commitAllowingStateLoss();
             return;
         }

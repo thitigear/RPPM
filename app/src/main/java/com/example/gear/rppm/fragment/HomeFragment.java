@@ -92,6 +92,8 @@ public class HomeFragment extends Fragment{
 
         v = inflater.inflate(R.layout.fragment_home, container, false);
 
+        ((MainActivity)getActivity()).setToolbarTitle("หน้าแรก");
+
         frag_home_choice_arm = (Button) v.findViewById(R.id.fragment_home_button1);
         frag_home_choice_leg = (Button) v.findViewById(R.id.fragment_home_button2);
 
@@ -160,7 +162,7 @@ public class HomeFragment extends Fragment{
     public void replaceNewFragment(final Fragment newFragment, final String tag) {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         transaction.replace(R.id.frame, newFragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();

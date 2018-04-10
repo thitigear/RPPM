@@ -85,8 +85,6 @@
     <string name="history_button_clearHistory">Clear History</string>
 
     <!-- Beacon -->
-    <string name="beacon_50_16_D2">50:8C:B1:75:16:D2</string>
-    <string name="beacon_50_1C_3C">50:8C:B1:75:1C:3C</string>
     <string name="beacon_D4_57_D0">D4:36:39:DE:57:D0</string>
     <string name="beacon_D4_56_C6">D4:36:39:DE:56:C6</string>
 
@@ -108,13 +106,12 @@
     <string name="fragment_leg_home_desc">กายภาพบำบัดส่วนขา</string>
 
     <!-- Caution -->
-    <string name="caution_header">ข้อควรระวังของการทำกายภาพบำบัด</string>
+    <string name="caution_header">ข้อห้ามและข้อควรระวังของการทำกายภาพบำบัด</string>
     <string name="caution_button"><b>เข้าใจ</b></string>
-    <string name="caution_1">1. aaaaaaaaaaaaaaaaa</string>
-    <string name="caution_2">2. bbbbbbbbbbbbbbbbb</string>
-    <string name="caution_3">3. ccccccccccccccccc</string>
-    <string name="caution_4">4. ddddddddddddddddd</string>
-    <string name="caution_5">5. eeeeeeeeeeeeeeeee</string>
+    <string name="caution_1">1. ห้ามเคลื่อนไหวข้อต่อเกินองศาปกติ</string>
+    <string name="caution_2">2. ผู้ป่วยที่มีกระดูกหักและยังไม่ติดไม่ควรทำ</string>
+    <string name="caution_3">3. ผู้ป่วยมีภาวะโรคหลอดเลือดอุดตันควรระมัดระวัง</string>
+    <string name="caution_4">4. ผู้ป่วยที่มีข้ออักเสบระยะเฉียบพลันหรือมีแผลเปิดควรระมัดระวัง</string>
 
     <!-- Load App -->
     <string name="load_app_header">ประโยชน์ของการทำกายภาพบำบัด</string>
@@ -125,5 +122,16 @@
     <string name="load_app_content5">5. ช่วยให้สภาพภายในของข้อต่ออยู่ในสภาพปกติ</string>
     <string name="load_app_content6">6. ลด และป้องกันอาการปวด, เมื่อย ตามข้อและกล้ามเนื้อ</string>
     <string name="load_app_button">เริ่มทำกายภาพ</string>
+
+    <!-- ชื่อท่า Treat Name -->
+    <string name="treat_arm_1">ยกแขนขึ้นและลง</string>
+    <string name="treat_arm_2">กางแขนและหุบแขนทางข้างลำตัว</string>
+    <string name="treat_arm_3">กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว</string>
+    <string name="treat_arm_4">หมุนข้อไหล่ขึ้นและลง</string>
+    <string name="treat_arm_5">เหยียดและงอข้อศอก</string>
+
+    <string name="treat_leg_1">งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน</string>
+    <string name="treat_leg_2">กางและหุบข้อตะโพก</string>
+    <string name="treat_leg_3">หมุนข้อตะโพกเข้าและออก</string>
 
 </resources>

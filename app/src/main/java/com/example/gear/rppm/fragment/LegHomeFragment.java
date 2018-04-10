@@ -1,6 +1,8 @@
 package com.example.gear.rppm.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.gear.rppm.R;
 import com.example.gear.rppm.activity.MainActivity;
@@ -30,9 +34,9 @@ public class LegHomeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String TAG_CURRENT = "";
-    private String TAG_LEGHOME = "armHome";
-    private String TAG_TREAT1 = "กางและหุบข้อตะโพก";
-    private String TAG_TREAT2 = "กางแขนและหุบแขนทางข้างลำตัว";
+    private String TAG_LEGHOME = "LegHome";
+    private String TAG_TREAT1 = "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน";
+    private String TAG_TREAT2 = "กางและหุบข้อตะโพก";
     private String TAG_TREAT3 = "หมุนข้อตะโพกเข้าและออก";
 
     private int[] resId = { R.drawable.ic_action_menu_add
@@ -41,15 +45,19 @@ public class LegHomeFragment extends Fragment {
     private String[] legTreat = { "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน", "กางและหุบข้อตะโพก", "หมุนข้อตะโพกเข้าและออก"};
 
     // TODO: Rename and change types of parameters
+    private int setRoundNumber;
     private String mParam1;
     private String mParam2;
     private static String CURRENT_TREAT;
+
+    /* UI Component */
+    private EditText setRoundEditText;
+    private ListView legListView;
 
     private OnFragmentInteractionListener mListener;
 
     private View view;
     private CustomListViewAdapter chooseTreatmentAdapter;
-
 
 
     public LegHomeFragment() {
@@ -94,20 +102,22 @@ public class LegHomeFragment extends Fragment {
         //Choose Arm Treatment
         chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),legTreat, resId);
 
-        ListView legListView = (ListView) view.findViewById(R.id.fragment_leg_home_lv);
+        legListView = (ListView) view.findViewById(R.id.fragment_leg_home_lv);
 
         legListView.setAdapter(chooseTreatmentAdapter);
         legListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int treatNumber, long arg3) {
-                Log.e(TAG_LEGHOME, "Treat:"+legTreat[treatNumber]);
-                onSelectTreatment(treatNumber);
+                showSetRound();
+                CURRENT_TREAT = legTreat[treatNumber];
             }
         });
+
 
         return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -146,27 +156,50 @@ public class LegHomeFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void onSelectTreatment(int itemSelected){
-        CURRENT_TREAT = legTreat[itemSelected];
-        replaceNewFragment(new DoingFragment(), ""+CURRENT_TREAT);
-    }
-
-    public void replaceNewFragment(final Fragment newFragment, final String tag) {
+    public void replaceDoingFragment(String currentTreat, String flagTreat, int setRoundNumber) {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-        //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        DoingFragment.setCurrentTreat(currentTreat);
+        DoingFragment.setFlagTreat(flagTreat);
+        DoingFragment.setMaxSet(setRoundNumber);
 
-        DoingFragment.CURRENT_TREAT = getCURRENT_TREAT();
-        DoingFragment.FLAG_TREAT = "leg";
-
-        transaction.replace(R.id.frame, newFragment, tag);
+        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        transaction.replace(R.id.frame, new DoingFragment(), flagTreat);
         transaction.addToBackStack(null);
         transaction.commit();
     }
 
-    public static String getCURRENT_TREAT() {
-        return CURRENT_TREAT;
-    }
+    private void showSetRound(){
+        AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
+        mAlertBuilder.setTitle("ตั้งค่าการกายภาพบำบัด");
+        mAlertBuilder.setView(R.layout.dialog_set_round);
 
+        mAlertBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                setRoundNumber = Integer.parseInt(""+setRoundEditText.getText());
+                if(setRoundNumber <= 0 || setRoundNumber > 5){
+                    Toast.makeText(view.getContext(), "จำนวนต้องอยู่ระหว่าง 1 ถึง 5", Toast.LENGTH_LONG).show();
+                    Log.e("No. of Round:", ""+ setRoundNumber);
+                } else {
+                    replaceDoingFragment(CURRENT_TREAT, "leg", setRoundNumber);
+                }
+            }
+        });
+
+        mAlertBuilder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        AlertDialog alertDialog = mAlertBuilder.create();
+        alertDialog.show();
+        alertDialog.getButton(alertDialog.BUTTON_POSITIVE);
+        alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
+        setRoundEditText = (EditText) alertDialog.findViewById(R.id.dialog_setRound_editText_num);
+        setRoundEditText.setHint("ไม่ควรเกิน 5 รอบ");
+    }
 
 }

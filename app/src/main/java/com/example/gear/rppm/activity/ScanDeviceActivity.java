@@ -5,6 +5,7 @@ import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanRecord;
 import android.bluetooth.le.ScanResult;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +27,22 @@ public class ScanDeviceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         startScan();
+
+        /**Thread scanDeviceInBackground = new Thread() {
+            @Override
+            public void run() {
+                try {
+
+                } catch (Exception e){
+                    Log.e("ScanDeviceBG:", ""+e);
+                }
+                //finally {
+
+                //}
+            }
+        };
+
+        scanDeviceInBackground.start();*/
 
     }
 
