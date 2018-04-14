@@ -20,6 +20,7 @@ import com.example.gear.rppm.fragment.HomeFragment;
 import com.example.gear.rppm.fragment.CheckBeaconFragment;
 import com.example.gear.rppm.fragment.ArmHomeFragment;
 import com.example.gear.rppm.fragment.LegHomeFragment;
+import com.example.gear.rppm.fragment.ManualFragment;
 
 import org.altbeacon.beacon.Beacon;
 import org.altbeacon.beacon.BeaconManager;
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity
         , CheckBeaconFragment.OnFragmentInteractionListener
         , ArmHomeFragment.OnFragmentInteractionListener
         , LegHomeFragment.OnFragmentInteractionListener
-        , DoingFragment.OnFragmentInteractionListener{
+        , DoingFragment.OnFragmentInteractionListener
+        , ManualFragment.OnFragmentInteractionListener{
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG_CHECK_BEACON = "check beacon";
     private static final String TAG_ARM = "arm";
     private static final String TAG_LEG = "leg";
-    private static final String TAG_SETTINGS = "settings";
+    private static final String TAG_MANUAL = "manual";
     public static String CURRENT_TAG = TAG_HOME;
 
     // toolbar titles respected to selected nav menu item
@@ -149,13 +151,15 @@ public class MainActivity extends AppCompatActivity
             case 2:
                 // arm fragment
                 ArmHomeFragment armHomeFragment = new ArmHomeFragment();
-                setToolbarTitle("การทำกายภาพบำบัดส่วนแขน");
                 return armHomeFragment;
             case 3:
                 // leg fragment
                 LegHomeFragment legHomeFragment = new LegHomeFragment();
-                setToolbarTitle("การทำกายภาพบำบัดส่วนขา");
                 return legHomeFragment;
+            case 4:
+                // leg fragment
+                ManualFragment manualFragment = new ManualFragment();
+                return manualFragment;
 
             default:
                 return new HomeFragment();
@@ -167,6 +171,10 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setTitle(activityTitles[navItemIndex]);
 
      }*/
+
+    public void setToolbarTitle(int title_id) {
+        getSupportActionBar().setTitle(title_id);
+    }
 
     public void setToolbarTitle(String title) {
         getSupportActionBar().setTitle(title);
@@ -182,16 +190,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void setUpNavigationView() {
-        //Setting Navigation View Item Selected Listener to handle the item click of the navigation menu
+        /*Setting Navigation View Item Selected Listener to handle the item click of the navigation menu*/
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
 
-            // This method will trigger on item Click of navigation menu
+            /*This method will trigger on item Click of navigation menu*/
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
 
-                //Check to see which item was being clicked and perform appropriate action
+                /*Check to see which item was being clicked and perform appropriate action*/
                 switch (menuItem.getItemId()) {
-                    //Replacing the main content with ContentFragment Which is our Inbox View;
+                    /*Replacing the main content with ContentFragment Which is our Inbox View;*/
                     case R.id.nav_home:
                         navItemIndex = 0;
                         CURRENT_TAG = TAG_HOME;
@@ -207,6 +215,10 @@ public class MainActivity extends AppCompatActivity
                     case R.id.nav_leg:
                         navItemIndex = 3;
                         CURRENT_TAG = TAG_LEG;
+                        break;
+                    case R.id.nav_manual:
+                        navItemIndex = 4;
+                        CURRENT_TAG = TAG_MANUAL;
                         break;
                     default:
                         navItemIndex = 0;
@@ -226,26 +238,29 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer) {
+        ActionBarDrawerToggle actionBarDrawerToggle =
+                new ActionBarDrawerToggle(this, drawer, toolbar, R.string.openDrawer, R.string.closeDrawer) {
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                // Code here will be triggered once the drawer closes as we dont want anything to happen so we leave this blank
+                /* Code here will be triggered once the drawer closes as
+                 * we don't want anything to happen so we leave this blank */
                 super.onDrawerClosed(drawerView);
             }
 
             @Override
             public void onDrawerOpened(View drawerView) {
-                // Code here will be triggered once the drawer open as we dont want anything to happen so we leave this blank
+                /* Code here will be triggered once the drawer open as
+                 * we don't want anything to happen so we leave this blank */
                 super.onDrawerOpened(drawerView);
             }
         };
 
-        //Setting the actionbarToggle to drawer layout
+        //Setting the actionbarToggle to drawer layout*/
         drawer.setDrawerListener(actionBarDrawerToggle);
 
 
-        //calling sync state is necessary or else your hamburger icon wont show up
+        /*calling sync state is necessary or else your hamburger icon wont show up*/
         actionBarDrawerToggle.syncState();
 
     }
@@ -261,11 +276,11 @@ public class MainActivity extends AppCompatActivity
             return;
         }
 
-        // This code loads home fragment when back key is pressed
-        // when user is in other fragment than home
+        /* This code loads home fragment when back key is pressed
+         * when user is in other fragment than home */
         if (shouldLoadHomeFragOnBackPress) {
-            // checking if user is on other navigation menu
-            // rather than home
+            /* checking if user is on other navigation menu
+             * rather than home */
             if (navItemIndex != 0) {
                 navItemIndex = 0;
                 CURRENT_TAG = TAG_HOME;
@@ -281,26 +296,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-
+        //Empty
     }
-
-    /**private void startBeaconRangeFinderService() {
-        mBeaconManager.setRangeNotifier(new RangeNotifier() {
-            @Override
-            public void didRangeBeaconsInRegion(Collection<Beacon> collection, Region region) {
-                try {
-                    if (beacons.size() > 0) {
-                        for (Beacon b : beacons) {
-                            Log.e(TAG_HOME, ""+b);
-                        }
-                    }
-                } catch (Exception ex) {
-                    Log.e(TAG_HOME, "Error was thrown: " + ex.getMessage());
-                }
-            }
-        });
-        mBeaconManager.startRangingBeaconsInRegion(new Region());
-
-    }*/
 
 }

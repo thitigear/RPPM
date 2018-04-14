@@ -32,14 +32,5 @@
 
     </FrameLayout>
 
-    <!--android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="@color/colorPrimary"
-        app:srcCompat="@drawable/ic_svg_menu_add_white_24px"/-->
-    <!-- app:srcCompat="@drawable/ic_svg_menu_add_24px" -->
 
 </android.support.design.widget.CoordinatorLayout>

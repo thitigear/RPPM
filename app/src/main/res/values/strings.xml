@@ -7,10 +7,11 @@
     <string name="closeDrawer">close_drawer</string>
 
     <!-- Navigation Drawer menu labels -->
-    <string name="nav_home">Home</string>
-    <string name="nav_check_beacon">Check iBeacons</string>
-    <string name="nav_arm">Arms</string>
-    <string name="nav_leg">Legs</string>
+    <string name="nav_home">หน้าแรก</string>
+    <string name="nav_check_beacon">ตรวจสอบสถานะอุปกรณ์</string>
+    <string name="nav_arm">การกายภาพบำบัดส่วนแขน</string>
+    <string name="nav_leg">การกายภาพบำบัดส่วนขา</string>
+    <string name="nav_manual">คู่มือการใช้งาน</string>
 
     <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
@@ -18,6 +19,7 @@
         <item>ตรวจสอบสถานะอุปกรณ์</item>
         <item>การกายภาพบำบัดส่วนแขน</item>
         <item>การกายภาพบำบัดส่วนขา</item>
+        <item>วิธีการใช้งาน</item>
     </string-array>
 
     <string name="activity_title_about_us">About Us</string>

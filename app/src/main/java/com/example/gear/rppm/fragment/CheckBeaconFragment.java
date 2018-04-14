@@ -77,8 +77,8 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
 
     //-------------------------------------------------------------------------------------
 
-    private BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-    private BluetoothLeScanner bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+    BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    BluetoothLeScanner bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
 
     private CheckBeaconListViewAdapter beaconListAdapter;
 
@@ -151,7 +151,6 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_check_beacon, container, false);
-
         ((MainActivity)getActivity()).setToolbarTitle("ตรวจสอบสถานะอุปกรณ์");
 
         beaconListView = (ListView) view.findViewById(R.id.fragment_chk_beacon_lv);
@@ -160,20 +159,19 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
 
         //setScanFilter();
         //setScanSettings();
-
-        bluetoothLeScanner.startScan(mScanCallback);
+        startScan();
+        //bluetoothLeScanner.startScan(mScanCallback);
 
 
         beaconListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //Toast.makeText(view.getContext(), sDeviceList.keySet().toArray()[position].toString(), Toast.LENGTH_LONG).show();
-                showDeviceDesc(position);
+                //showDeviceDesc(position);
             }
         });
 
-        /**
-         * bluetoothLeScanner.startScan(new ScanCallback() {
+        /**bluetoothLeScanner.startScan(new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
         super.onScanResult(callbackType, result);
@@ -181,7 +179,7 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
         //beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), deviceList);
         //beaconListView.setAdapter(beaconListAdapter);
         }
-        });*/
+        }); */
 
         return view;
     }
@@ -327,7 +325,7 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
 
     };
 
-    public void showDeviceDesc(int position){
+    /*public void showDeviceDesc(int position){
 
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
         mAlertBuilder.setView(R.layout.chk_beacon_device_desc_view);
@@ -343,9 +341,12 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
         AlertDialog alertDialog = mAlertBuilder.create();
         alertDialog.show();
         alertDialog.getButton(alertDialog.BUTTON_POSITIVE);
+    }*/
+
+
+    private void startScan(){
+        bluetoothLeScanner.startScan(mScanCallback);
     }
-
-
 
 
 }
