@@ -1,13 +1,16 @@
 package com.example.gear.rppm.other;
 
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.util.ArrayMap;
+
+import com.example.gear.rppm.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataArray {
+public class DataArray extends Fragment {
     private double lElbow;
     private double rElbow;
     private double lWrist;
@@ -18,7 +21,6 @@ public class DataArray {
     private double rAnkle;
     private double[] currentTreatData;
     private double[][] defaultBodyData = new double[8][8]; //แยกเป็นท่าๆ
-
     private String[] treatName = new String[]{
             "ยกแขนขึ้นและลง"
             , "กางแขนและหุบแขนทางข้างลำตัว"
@@ -29,31 +31,36 @@ public class DataArray {
             , "กางและหุบข้อตะโพก"
             , "หมุนข้อตะโพกเข้าและออก"};
 
+    //private String[] deviceAddress = getResources().getStringArray(R.array.device_address);
+
     private String[] deviceAddress = new String[]{
             "D4:36:39:DE:54:CB"
             , "D4:36:39:DE:54:CD"
             , "D4:36:39:DE:55:82"
-            , "D4:36:39:DE:56:A1"
+            , "D4:36:39:DE:56:A1"};
+
+    /**= new String[]{
             , "D4:36:39:DE:56:FC"
             , "D4:36:39:DE:57:5D"
             , "D4:36:39:DE:57:AA"
             , "D4:36:39:DE:57:D0"
-    };
+    };*/
 
     private static double[][] defaultTreatData = new double[][]
-            {                             //{lElbow, rElbow, lWrist, rWrist, lKnee, rKnee, lAnkle, rAnkle}
+            {                   //{Elbow, Wrist, Knee, Ankle}
                                 //Default เหนือไหล่
-             {0,0,0,0,0,0,0,0}            //arm ยกแขนขึ้นและลง------------------ข้างศอกตอนแรก
-            ,{0,0,0,0,0,0,0,0}            //arm กางแขนและหุบแขนทาง ข้างลำตัว---------ข้างศอกตอนแรก ด้านข้างลำตัว
-            ,{0,0,0,0,0,0,0,0}            //arm กางแบนและหุบแขนในแนว ตั้งฉากกับลำตัว-----ปลายมือแนวแขนขนานกับหัวไหล่
-            ,{0,0,0,0,0,0,0,0}            //arm หมุนข้อไหล่ขึ้นและลง---------------ปลายมือ ต้นแขนขนานกับหัวไหล่ และหักข้อศอกให้แขนท่อนล่างขนานกับลำตัว
-            ,{0,0,0,0,0,0,0,0}            //arm เหยียดและงอข้อศอก----------------เหนือหัวไหล่ขนานกับแขน
-            ,{0,0,0,0,0,0,0,0}            //leg งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน----บริเวณหัวเข็มขัด
-            ,{0,0,0,0,0,0,0,0}            //leg กางและหุบข้อตะโพก----------------วางระหว่างข้อเท้าทั้งสองด้าน
-            ,{0,0,0,0,0,0,0,0}            //leg หมุนข้อตะโพกเข้าและออก-------------
+             {0,0,0,0}            //arm ยกแขนขึ้นและลง------------------ข้างศอกตอนแรก
+            ,{0,0,0,0}            //arm กางแขนและหุบแขนทาง ข้างลำตัว---------ข้างศอกตอนแรก ด้านข้างลำตัว
+            ,{0,0,0,0}             //arm กางแบนและหุบแขนในแนว ตั้งฉากกับลำตัว-----ปลายมือแนวแขนขนานกับหัวไหล่
+            ,{0,0,0,0}             //arm หมุนข้อไหล่ขึ้นและลง---------------ปลายมือ ต้นแขนขนานกับหัวไหล่ และหักข้อศอกให้แขนท่อนล่างขนานกับลำตัว
+            ,{0,0,0,0}             //arm เหยียดและงอข้อศอก----------------เหนือหัวไหล่ขนานกับแขน
+            ,{0,0,0,0}             //leg งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน----บริเวณหัวเข็มขัด
+            ,{0,0,0,0}             //leg กางและหุบข้อตะโพก----------------วางระหว่างข้อเท้าทั้งสองด้าน
+            ,{0,0,0,0}             //leg หมุนข้อตะโพกเข้าและออก-------------
     };
 
     public DataArray() {
+
     }
 
     public double[] getCurrentTreatData() {return currentTreatData;}
@@ -88,6 +95,8 @@ public class DataArray {
     }
 
     @NonNull
+
+
     public static int getTreatNumber(String treatName){
         switch (treatName) {
             case "ยกแขนขึ้นและลง":
@@ -111,9 +120,40 @@ public class DataArray {
         }
     }
 
-    //public void setCurrentTreatName(String treatName) {this.currentTreatName = treatName; }
-
-    public static void setDefaultBodyData(){
-
+    public static int[] getTreatNodePosition(String[] arrayTreatNode){
+        int[] arrayTreatNodePos = new int[]{0,0,0,0,0,0,0,0};
+        for (String treatNode: arrayTreatNode){
+            switch (treatNode) {
+                case "elbow":
+                    arrayTreatNodePos[0] = 1;
+                    break;
+                case "wrist":
+                    arrayTreatNodePos[1] = 1;
+                    break;
+                case "knee":
+                    arrayTreatNodePos[2] = 1;
+                    break;
+                case "ankle":
+                    arrayTreatNodePos[3] = 1;
+                    break;
+                case "default_elbow":
+                    arrayTreatNodePos[4] = 1;
+                    break;
+                case "default_wrist":
+                    arrayTreatNodePos[5] = 1;
+                    break;
+                case "default_knee":
+                    arrayTreatNodePos[6] = 1;
+                    break;
+                case "default_ankle":
+                    arrayTreatNodePos[7] = 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+        return arrayTreatNodePos;
     }
+
+
 }

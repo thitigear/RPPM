@@ -65,16 +65,13 @@
     <!--New Round Activity -->
     <string name="newRound_button_startRound">Start Running</string>
 
-    <!-- RunningActivity -->
-    <string name="running_button_stopScan">Stop Running</string>
-
     <!-- ResultActivity -->
     <string name="tResult_RoundSummary">Round Summary</string>
     <string name="tResult_LeftPercent">Left :</string>
     <string name="tResult_RightPercent">Right :</string>
     <string name="tResult_AngleSim">Angle Simulation</string>
     <string name="tResult_Status">Status</string>
-    <string name="title_activity_nevigation_drawer">NevigationDrawerActivity</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawerActivity</string>
 
     <string name="under_header_line">_</string>
 
@@ -107,13 +104,24 @@
     <string name="fragment_leg_home_caption">LEGS RECOVERING</string>
     <string name="fragment_leg_home_desc">กายภาพบำบัดส่วนขา</string>
 
+    <!-- fragment_doing -->
+    <string name="fragment_doing_tv_treatName">ชื่อท่</string>
+    <string name="fragment_doing_but_stop">หยุด</string>
+    <string name="fragment_doing_tv_set">เซ็ต</string>
+    <string name="fragment_doing_tv_time01">ทำไป</string>
+    <string name="fragment_doing_tv_time02">ครั้ง</string>
+    <string name="fragment_doing_tv_angle01">มุม</string>
+    <string name="fragment_doing_tv_angle02">องศา</string>
+
     <!-- Caution -->
     <string name="caution_header">ข้อห้ามและข้อควรระวังของการทำกายภาพบำบัด</string>
     <string name="caution_button"><b>เข้าใจ</b></string>
-    <string name="caution_1">1. ห้ามเคลื่อนไหวข้อต่อเกินองศาปกติ</string>
-    <string name="caution_2">2. ผู้ป่วยที่มีกระดูกหักและยังไม่ติดไม่ควรทำ</string>
-    <string name="caution_3">3. ผู้ป่วยมีภาวะโรคหลอดเลือดอุดตันควรระมัดระวัง</string>
-    <string name="caution_4">4. ผู้ป่วยที่มีข้ออักเสบระยะเฉียบพลันหรือมีแผลเปิดควรระมัดระวัง</string>
+    <string name="caution_1">1. การเคลื่อนไหวข้อให้ผู้ป่วยควรทำช้าๆ</string>
+    <string name="caution_2">2. ควรทำการเคลื่อนไหวให้สุดองศาของการเคลื่อนไหวที่ปกติ แต่ควรระวังในรายที่มีการดามเหล็กอยู่ภายในข้อ ภายในกระดูก ต้องไม่ทำเกินกว่าที่ผู้ป่วยทำได้</string>
+    <string name="caution_3">3. ในแต่ละท่าทำซ้ำๆท่าละ 10-20 ครั้ง วันละ 2 รอบระหว่างทำให้ผู้ป่วยคิดอยู่เสมอว่ากำลังทำการเคลื่อนไหวด้วยตนเอง</string>
+    <string name="caution_4">4. ไม่ควรทำการเคลื่อนไหวหลังจากรับประทานอาหารอิ่มใหม่ๆ หรือในขณะผู้ป่วยมีไข้</string>
+    <string name="caution_5">5. หากผู้ป่วยมีภาวะข้ออักเสบระยะเฉียบพลัน หรือแผลเปิดควรทำการเคลื่อนไหวในข้อต่อนั้นด้วยความระมัดระวัง</string>
+    <string name="caution_6">6. ขณะทำการเคลื่อนไหวข้อ ถ้าผู้ป่วยปวด หรือพบปัญหาอย่างอื่นตามมา ควรหยุดและปรึกษาแพทย์หรือนักกายภาพบำบัด ไม่ควรให้ผู้ป่วยนอนอย่างเดียวนานๆ ควรให้ผู้ป่วยลุกขึ้นมานั่งบ่อยๆ ควรได้รับการฟื้นฟูทางกายภาพบำบัดอย่างต่อเนื่อง</string>
 
     <!-- Load App -->
     <string name="load_app_header">ประโยชน์ของการทำกายภาพบำบัด</string>
@@ -125,15 +133,111 @@
     <string name="load_app_content6">6. ลด และป้องกันอาการปวด, เมื่อย ตามข้อและกล้ามเนื้อ</string>
     <string name="load_app_button">เริ่มทำกายภาพ</string>
 
-    <!-- ชื่อท่า Treat Name -->
-    <string name="treat_arm_1">ยกแขนขึ้นและลง</string>
-    <string name="treat_arm_2">กางแขนและหุบแขนทางข้างลำตัว</string>
-    <string name="treat_arm_3">กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว</string>
-    <string name="treat_arm_4">หมุนข้อไหล่ขึ้นและลง</string>
-    <string name="treat_arm_5">เหยียดและงอข้อศอก</string>
+    <!-- MANUAL FRAGMENT -->
+    <string name="manual_header">คู่มือการใช้งาน</string>
+    <string-array name="manual_choice">
+        <item>เมนูของแอพพลิเคชัน</item>
+        <item>การใช้งานฟังก์ชันกายภาพบำบัด</item>
+        <item>ตำแหน่งเซ็นเซอร์และตำแหน่งการวางโทรศัพท์มือถือ</item>
+        <item>ข้อแนะนำอื่นๆ</item>
+    </string-array>
 
-    <string name="treat_leg_1">งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน</string>
-    <string name="treat_leg_2">กางและหุบข้อตะโพก</string>
-    <string name="treat_leg_3">หมุนข้อตะโพกเข้าและออก</string>
+    <string name="manual_basic_01">เมนูของแอพพลิเคชัน</string>
+    <string name="manual_basic_02">***ข้อสำคัญ: ไอคอนเพื่อเปิดแถบเมนูจะอยู่บริเวณมุมซ้ายบนของหน้าจอแอปพลิเคชัน โดยเมนูของแอปพลิเคชันมีดังนี้</string>
+    <string name="manual_basic_03">1.1 หน้าแรก: เลือกประเภทการทำกายภาพบำบัด (แขน / ขา)</string>
+    <string name="manual_basic_04">1.2 ตรวจสอบสถานะอุปกรณ์: แสดงอุปกรณ์เซนเซอร์ที่เชื่อมต่อกับแอปพลิเคชันผ่านบลูทูธ</string>
+    <string name="manual_basic_05">1.3 การกายภาพบำบัดส่วนแขน: เลือกท่ากายภาพบำบัดส่วนแขน มี 5 ท่า ได้แก่ ท่ายกแขนขึ้นและลง, ท่ากางแขนและหุบแขนทางข้างลำตัว, ท่ากางแขนและหุบแขนในแนวตั้งฉากกับลำตัว, ท่าหมุนข้อไหล่ขึ้นและลง, ท่าเหยียดและงอข้อศอก</string>
+    <string name="manual_basic_06">1.4 การกายภาพบำบัดส่วนขา: เลือกท่ากายภาพบำบัดส่วนขา มี 3 ท่า ได้แก่ ท่างอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน, ท่ากางและหุบข้อตะโพก, ท่าหมุนข้อตะโพกเข้าและออก</string>
+    <string name="manual_basic_07">1.5 คู่มือการใช้งาน: วิธีการใช้งานแอปพลิเคชัน</string>
+
+    <string name="manual_func_01">การใช้งานฟังก์ชันกายภาพบำบัด</string>
+    <string name="manual_func_02">***ข้อสำคัญ: กรุณาเปิดใช้งานบลูทูธในโทรศัพท์มือถือก่อนเปิดใช้งานแอปพลิเคชัน และ กรุณาปฏิบัติตามข้อควรระวัง / ข้อห้าม หรือข้อแนะนำต่างๆ ที่ระบุไว้ในแอปพลิเคชันอย่างเคร่งครัดเพื่อป้องกันการเกิดอันตรายจากการทำกายภาพบำบัด</string>
+    <string name="manual_func_03">2.1 เมื่อกดไอคอนของแอปพลิเคชัน จะแสดงหน้า “ประโยชน์ของการทำกายภาพบำบัด”</string>
+    <string name="manual_func_04">2.2 เมื่อกด “เริ่มทำกายภาพ” จะแสดงหน้าแรกให้ผู้ใช้เลือกประเภทการทำกายภาพบำบัดที่ต้องการ โดยจะมี 2 ประเภทคือ กายภาพบำบัดส่วนแขน และกายภาพบำบัดส่วนขา</string>
+    <string name="manual_func_05">2.3 เมื่อเลือกประเภทที่ต้องการ จะแสดงกล่องข้อความ “ข้อห้ามและข้อควรระวังของการทำกายภาพบำบัด”</string>
+    <string name="manual_func_06">2.4 เมื่อกด “เข้าใจ” จะแสดงหน้าให้ผู้ใช้เลือกท่ากายภาพที่ต้องการ</string>
+    <string name="manual_func_07">2.5 เมื่อเลือกท่าที่ต้องการแล้ว จะแสดงกล่องข้อความให้ผู้ใช้กรอก “ตัวเลข” เพื่อเป็นการกำหนดจำนวนเซ็ตในการทำกายภาพบำบัด โดยแต่ละเซ็ตมีจำนวน 10 ครั้ง</string>
+    <string name="manual_func_08">2.6 เมื่อกรอกจำนวนรอบและกด “ตกลง” แล้วจะแสดงหน้าเริ่มทำกายภาพบำบัดที่จะแสดงข้อมูลต่างๆ ในการทำกายภาพบำบัด ได้แก่ ชื่อท่า, จำนวนเซ็ต(ที่ผู้ป่วยทำได้ / ที่ผู้ใช้กำหนด), จำนวนครั้งที่ทำกายภาพบำบัด(ที่ผู้ป่วยทำได้ / 10 ครั้ง) และค่ามุมในหน่วยองศาที่ผู้ป่วยทำได้</string>
+    <string name="manual_func_09">2.7 เมื่อกด “หยุด” จะมีกล่องข้อความให้ผู้ใช้เลือกว่าจะ “กลับไปหน้าก่อนหน้า” หรือ “ทำต่อ”</string>
+    <string name="manual_func_09_1">2.7.1 ถ้าเลือก “กลับไปหน้าก่อนหน้า” จะแสดงหน้าเลือกท่ากายภาพให้ผู้ใช้เลือกท่าอื่นๆ</string>
+    <string name="manual_func_09_2">2.7.2 ถ้าเลือก “ทำต่อ” จะกลับเข้าสู่การทำกายภาพบำบัดตามเดิม</string>
+    <string name="manual_func_10">2.8 เมื่อทำครบแต่ละเซ็ต จะมีกล่องข้อความแสดงเพื่อแจ้งให้ผู้ใช้ทราบ และให้เลือกว่าจะ “จบการทำกายภาพ” หรือ “ทำต่อ”</string>
+    <string name="manual_func_10_1">2.8.1 ถ้าเลือก “จบการทำกายภาพ” จะแสดงหน้าเลือกท่ากายภาพให้ผู้ใช้เลือกท่าอื่นๆ</string>
+    <string name="manual_func_10_2">2.8.2 ถ้าเลือก “ทำต่อ” จะแสดงกล่องข้อความให้ผู้ใช้กำหนดจำนวนเซ็ตในการทำกายภาพอีกครั้ง และกลับเข้าสู่การทำกายภาพบำบัดตามเดิม</string>
+
+    <string name="manual_pos_01">ตำแหน่งเซ็นเซอร์และตำแหน่งการวางโทรศัพท์มือถือ</string>
+    <string name="manual_pos_02">***ข้อสำคัญ: ผู้ใช้สามารถตรวจสอบสถานะการเชื่อมต่อระหว่างอุปกรณ์เซนเซอร์กับแอปพลิเคชันได้ที่เมนู “ตรวจสอบสถานะอุปกรณ์”</string>
+    <string name="manual_pos_03_0">3.1 ตำแหน่งของอุปกรณ์เซนเซอร์</string>
+    <string name="manual_pos_03_1">แอปพลิเคชันนี้ทำงานร่วมกับอุปกรณ์เซนเซอร์ iBeacon จำนวน 8 ตัว ได้แก่</string>
+    <string name="manual_pos_03_2">A. ข้อมือด้านซ้าย      B. ข้อมือด้านขวา</string>
+    <string name="manual_pos_03_3">C. ข้อพับศอกด้านซ้าย    D. ข้อพับศอกด้านขวา</string>
+    <string name="manual_pos_03_4">E. หัวเข่าด้านซ้าย      F. หัวเข่าด้านขวา</string>
+    <string name="manual_pos_03_5">G. ข้อเท้าด้านซ้าย	     H. ข้อเท้าด้านขวา</string>
+    <string name="manual_pos_03_6">โดยอุปกรณ์เซนเซอร์ iBeacon ทั้ง 8 ตัวจะถูกใส่เอาไว้ในกับผ้ารัดข้อที่จะนำมาใส่ตามส่วนต่างๆ ของร่างกายผู้ป่วยตามตำแหน่งที่กำหนด (A.-F.)</string>
+    <string name="manual_pos_04_0">3.2 ตำแหน่งของโทรศัพท์มือถือ</string>
+    <string name="manual_pos_04_1">กายภาพบำบัดส่วนแขน</string>
+    <string name="manual_pos_04_2">A. ท่ายกแขนขึ้นและลง: ขนานกับอุปกรณ์เซนเซอร์ในตำแหน่งข้อพับศอกในท่าเริ่มต้น</string>
+    <string name="manual_pos_04_3">B. ท่ากางแขนและหุบแขนทางข้างลำตัว: ขนานกับอุปกรณ์เซนเซอร์ในตำแหน่งข้อพับศอกในท่าเริ่มต้น</string>
+    <string name="manual_pos_04_4">C. ท่ากางแขนและหุบแขนในแนวตั้งฉากกับลำตัว: ขนานกับอุปกรณ์เซนเซอร์ในตำแหน่งข้อพับศอกในท่าเริ่มต้น</string>
+    <string name="manual_pos_04_5">D. ท่าหมุนข้อไหล่ขึ้นและลง: ขนานกับอุปกรณ์เซนเซอร์ในตำแหน่งข้อมือในท่าเริ่มต้น</string>
+    <string name="manual_pos_04_6">E. ท่าเหยียดและงอข้อศอก: ขนานกับอุปกรณ์เซนเซอร์ในตำแหน่งข้อมือในท่าเริ่มต้น</string>
+    <string name="manual_pos_04_7">กายภาพบำบัดส่วนขา</string>
+    <string name="manual_pos_04_8">A. ท่างอขาและเหยียดข้อตะโพกและข้อเข่าพร้อมกัน: บริเวณหัวเข็มขัด</string>
+    <string name="manual_pos_04_9">B. ท่ากางและหุบข้อตะโพก: ขนานกับอุปกรณ์เซนเซอร์ในตำแหน่งข้อเท้าในท่าเริ่มต้น</string>
+    <string name="manual_pos_04_10">C. ท่าหมุนข้อตะโพกเข้าและออก: บริเวณหัวเข็มขัด</string>
+
+
+    <string name="manual_rec_01">4.1 เมื่อใช้งานอุปกรณ์เซนเซอร์เสร็จ ต้องนำออกจากผ้ารัดข้อให้เรียบร้อยก่อนถอดผ้ารัดข้อออกจากร่างกายผู้ป่วย เพื่อป้องกันความเสียหายที่อาจเกิดขึ้นกับตัวอุปกรณ์เซนเซอร์</string>
+    <string name="manual_rec_02">4.2 หากไม่ได้ใช้งาน ห้าม ใส่ถ่านอุปกรณ์เซนเซอร์ iBeacon ค้างไว้เพราะอุปกรณ์นี้ไม่มีสวิตช์เปิด-ปิด ดังนั้นเมื่อใส่ถ่าน พลังงานของถ่านก็จะลดลงเรื่อยๆ แม้จะไม่ได้เชื่อมต่อกับแอปพลิเคชัน</string>
+    <string name="manual_rec_03">4.3 อุปกรณ์เซนเซอร์ iBeacon รองรับ Bluetooth 4.0 ขึ้นไป และแอปพลิเคชันนี้สามารถทำงานได้บนระบบปฏิบัติการ Android 5.0 (Lolipop) ขึ้นไปเท่านั้น</string>
+
+
+    <!-- Device ADDRESS -->
+    <string-array name="device_address">
+        <item>D4:36:39:DE:54:CB</item>
+        <item>D4:36:39:DE:54:CD</item>
+        <item>D4:36:39:DE:55:82</item>
+        <item>D4:36:39:DE:56:A1</item>
+        <item>D4:36:39:DE:56:FC</item>
+        <item>D4:36:39:DE:57:5D</item>
+        <item>D4:36:39:DE:57:AA</item>
+        <item>D4:36:39:DE:57:D0</item>
+    </string-array>
+
+    <!-- ชื่อท่า Treat Name -->
+    <string-array name="treat_arm">
+        <item>ยกแขนขึ้นและลง</item>
+        <item>กางแขนและหุบแขนทางข้างลำตัว</item>
+        <item>กางแขนและหุบแขนในแนวตั้งฉากกับลำตัว</item>
+        <item>หมุนข้อไหล่ขึ้นและลง</item>
+        <item>เหยียดและงอข้อศอก</item>
+    </string-array>
+    <string-array name="treat_leg">
+        <item>งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน</item>
+        <item>กางและหุบข้อตะโพก</item>
+        <item>หมุนข้อตะโพกเข้าและออก</item>
+    </string-array>
+
+    <!-- Node ที่ใช้ในแต่ละท่า -->
+    <string-array name="treat_arm_1_node">
+        <item>default_elbow</item>
+        <item>elbow</item>
+    </string-array>
+    <string-array name="treat_arm_2_node">
+        <item></item>
+        <item></item>
+    </string-array>
+    <string-array name="treat_arm_3_node">
+        <item>default_elbow</item>
+        <item>elbow</item>
+    </string-array>
+    <string-array name="treat_arm_4_node">
+        <item>default_elbow</item>
+        <item>elbow</item>
+    </string-array>
+    <string-array name="treat_arm_5_node">
+        <item>default_elbow</item>
+        <item>elbow</item>
+    </string-array>
 
 </resources>

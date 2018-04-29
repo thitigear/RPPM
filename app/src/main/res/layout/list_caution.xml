@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true">
 
         <TableLayout
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="200dp">
 
             <TextView android:text="@string/caution_1"
@@ -49,6 +49,20 @@
             <TextView />
 
             <TextView android:text="@string/caution_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+
+            <TextView android:text="@string/caution_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/text_content"/>
+            <TextView />
+
+            <TextView android:text="@string/caution_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 

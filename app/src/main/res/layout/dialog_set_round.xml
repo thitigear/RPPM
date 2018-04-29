@@ -19,6 +19,7 @@
         android:ems="7"
         android:inputType="numberDecimal"
 
+        android:hint="ไม่ควรเกิน 5 เซ็ต"
         android:text=""
         android:layout_alignBaseline="@id/dialog_setRound_tv_1"
         android:layout_width="wrap_content"
@@ -32,10 +33,17 @@
         android:layout_toEndOf="@id/dialog_setRound_editText_num"
         android:layout_width="50dp"
 
-        android:text="รอบ"
+        android:text="เซ็ต"
         android:textAlignment="textEnd"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_sub_header"/>
+
+    <TextView android:text="1 เซ็ต = 10 ครั้ง"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_width="wrap_content"
+        android:textSize="@dimen/text_content"/>
 
 
 </RelativeLayout>

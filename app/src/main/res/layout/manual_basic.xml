@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarAlwaysDrawVerticalTrack="true">
+
+    <RelativeLayout
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:padding="20dp">
+
+        <TextView android:text="@string/manual_basic_02"
+            android:id="@+id/manual_basic_tv_001"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textRed"
+            android:textSize="@dimen/text_content"
+            android:textStyle="italic" />
+
+        <TextView android:text="@string/manual_basic_03"
+            android:id="@+id/manual_basic_tv_002"
+            android:layout_below="@id/manual_basic_tv_001"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary2"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_basic_04"
+            android:id="@+id/manual_basic_tv_003"
+            android:layout_below="@id/manual_basic_tv_002"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary2"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_basic_05"
+            android:id="@+id/manual_basic_tv_004"
+            android:layout_below="@id/manual_basic_tv_003"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary2"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_basic_06"
+            android:id="@+id/manual_basic_tv_005"
+            android:layout_below="@id/manual_basic_tv_004"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary2"
+            android:textSize="16sp"/>
+
+        <TextView android:text="@string/manual_basic_07"
+            android:id="@+id/manual_basic_tv_006"
+            android:layout_below="@id/manual_basic_tv_005"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary2"
+            android:textSize="@dimen/text_content"/>
+
+    </RelativeLayout>
+
+
+</ScrollView>

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarAlwaysDrawHorizontalTrack="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp">
+
+        <TextView android:text="@string/manual_pos_02"
+            android:id="@+id/manual_pos_tv_001"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textRed"
+            android:textSize="@dimen/text_content"
+            android:textStyle="italic" />
+
+        <TextView android:text="@string/manual_pos_03_0"
+            android:id="@+id/manual_pos_tv_002"
+            android:layout_below="@id/manual_pos_tv_001"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"
+            android:textStyle="bold"/>
+
+        <TextView android:text="@string/manual_pos_03_1"
+            android:id="@+id/manual_pos_tv_003"
+            android:layout_below="@id/manual_pos_tv_002"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_03_2"
+            android:id="@+id/manual_pos_tv_004"
+            android:layout_below="@id/manual_pos_tv_003"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="16dp"/>
+
+        <TextView android:text="@string/manual_pos_03_3"
+            android:id="@+id/manual_pos_tv_005"
+            android:layout_below="@id/manual_pos_tv_004"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="16dp"/>
+
+        <TextView android:text="@string/manual_pos_03_4"
+            android:id="@+id/manual_pos_tv_006"
+            android:layout_below="@id/manual_pos_tv_005"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="16dp"/>
+
+        <TextView android:text="@string/manual_pos_03_5"
+            android:id="@+id/manual_pos_tv_007"
+            android:layout_below="@id/manual_pos_tv_006"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="16dp"/>
+
+        <TextView android:text="@string/manual_pos_03_6"
+            android:id="@+id/manual_pos_tv_008"
+            android:layout_below="@id/manual_pos_tv_007"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_04_0"
+            android:id="@+id/manual_pos_tv_009"
+            android:layout_below="@id/manual_pos_tv_008"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"
+            android:textStyle="bold"/>
+
+        <TextView android:text="@string/manual_pos_04_1"
+            android:id="@+id/manual_pos_tv_010"
+            android:layout_below="@id/manual_pos_tv_009"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_04_2"
+            android:id="@+id/manual_pos_tv_011"
+            android:layout_below="@id/manual_pos_tv_010"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_04_3"
+            android:id="@+id/manual_pos_tv_012"
+            android:layout_below="@id/manual_pos_tv_011"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_04_4"
+            android:id="@+id/manual_pos_tv_013"
+            android:layout_below="@id/manual_pos_tv_012"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_04_5"
+            android:id="@+id/manual_pos_tv_014"
+            android:layout_below="@id/manual_pos_tv_013"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_04_6"
+            android:id="@+id/manual_pos_tv_015"
+            android:layout_below="@id/manual_pos_tv_014"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_04_7"
+            android:id="@+id/manual_pos_tv_016"
+            android:layout_below="@id/manual_pos_tv_015"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_04_8"
+            android:id="@+id/manual_pos_tv_017"
+            android:layout_below="@id/manual_pos_tv_016"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_04_9"
+            android:id="@+id/manual_pos_tv_018"
+            android:layout_below="@id/manual_pos_tv_017"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_pos_04_10"
+            android:id="@+id/manual_pos_tv_019"
+            android:layout_below="@id/manual_pos_tv_018"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+    </RelativeLayout>
+</ScrollView>

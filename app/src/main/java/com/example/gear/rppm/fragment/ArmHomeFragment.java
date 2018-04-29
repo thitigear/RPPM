@@ -53,25 +53,21 @@ public class ArmHomeFragment extends Fragment{
             , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history
             , R.drawable.ic_action_menu_home, R.drawable.ic_action_menu_setting};
 
-    private String[] armTreat = { "ยกแขนขึ้นและลง", "กางแขนและหุบแขนทางข้างลำตัว", "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว"
-            , "หมุนข้อไหล่ขึ้นและลง", "เหยียดและงอข้อศอก"};
-
+    /*PARAMETER*/
     private String mParam1;
     private String mParam2;
+    private String[] armTreat;
 
     /* UI Component */
     private EditText setRoundEditText;
     private ListView armListView;
-
     private View view;
 
-    private CautionAdapter cautionAdapter;
+    /*Class*/
     private CustomListViewAdapter chooseTreatmentAdapter;
 
+    /*OnFragmentInteractionListener*/
     private OnFragmentInteractionListener mListener;
-
-    private ReplaceFragment mReplaceFragment;
-
 
     public ArmHomeFragment() {
         // Required empty public constructor
@@ -112,11 +108,12 @@ public class ArmHomeFragment extends Fragment{
 
         ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนแขน");
 
-        /*Choose Arm Treatment*/
-        chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),armTreat, resId);
+        /*Setup important adapter*/
+        armTreat = getResources().getStringArray(R.array.treat_arm);
+        chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),armTreat);
 
+        /*Setup ListView*/
         armListView = (ListView) view.findViewById(R.id.fragment_arm_home_lv);
-
         armListView.setAdapter(chooseTreatmentAdapter);
         armListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int treatNumber, long arg3) {
@@ -193,13 +190,19 @@ public class ArmHomeFragment extends Fragment{
                 if(setRoundEditText.getText().equals("")){
                     Toast.makeText(view.getContext(), "กรุณาใส่จำนวนรอบที่ต้องการ", Toast.LENGTH_LONG).show();
                 } else {
-                    setRoundNumber = Integer.parseInt(""+setRoundEditText.getText());
-                    if(setRoundNumber > 0 && setRoundNumber <= 5){
-                        replaceDoingFragment(CURRENT_TREAT, "arm", setRoundNumber);
-                    } else {
-                        Toast.makeText(view.getContext(), "จำนวนต้องอยู่ระหว่าง 1 ถึง 5", Toast.LENGTH_LONG).show();
-                        Log.e("No. of Round:", ""+ setRoundNumber);
+                    try {
+                        setRoundNumber = Integer.parseInt(""+setRoundEditText.getText());
+
+                        if(setRoundNumber > 0 && setRoundNumber <= 5){
+                            replaceDoingFragment(CURRENT_TREAT, "arm", setRoundNumber);
+                        } else {
+                            Toast.makeText(view.getContext(), "จำนวนต้องอยู่ระหว่าง 1 ถึง 5", Toast.LENGTH_LONG).show();
+                            Log.e("No. of Round:", ""+ setRoundNumber);
+                        }
+                    } catch (Exception e){
+                        Toast.makeText(view.getContext(), "กรุณาใส่จำนวนรอบที่ต้องการ", Toast.LENGTH_LONG).show();
                     }
+
                 }
 
             }
@@ -216,7 +219,7 @@ public class ArmHomeFragment extends Fragment{
         alertDialog.getButton(alertDialog.BUTTON_POSITIVE);
         alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
         setRoundEditText = (EditText) alertDialog.findViewById(R.id.dialog_setRound_editText_num);
-        setRoundEditText.setHint("ไม่ควรเกิน 5 รอบ");
+
     }
 
 }

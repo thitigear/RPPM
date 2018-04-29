@@ -42,23 +42,25 @@ public class LegHomeFragment extends Fragment {
     private int[] resId = { R.drawable.ic_action_menu_add
             , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history};
 
-    private String[] legTreat = { "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน", "กางและหุบข้อตะโพก", "หมุนข้อตะโพกเข้าและออก"};
+
 
     // TODO: Rename and change types of parameters
     private int setRoundNumber;
     private String mParam1;
     private String mParam2;
+    private String[] legTreat;
     private static String CURRENT_TREAT;
 
     /* UI Component */
     private EditText setRoundEditText;
     private ListView legListView;
-
-    private OnFragmentInteractionListener mListener;
-
     private View view;
+
+    /*Class*/
     private CustomListViewAdapter chooseTreatmentAdapter;
 
+    /*OnFragmentInteractionListener*/
+    private OnFragmentInteractionListener mListener;
 
     public LegHomeFragment() {
         // Required empty public constructor
@@ -99,12 +101,14 @@ public class LegHomeFragment extends Fragment {
 
         ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนขา");
 
-        //Choose Arm Treatment
-        chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),legTreat, resId);
+        /*Setup Important param*/
+        legTreat = getResources().getStringArray(R.array.treat_leg);
+        chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),legTreat);
 
+        /*Setup ListView*/
         legListView = (ListView) view.findViewById(R.id.fragment_leg_home_lv);
-
         legListView.setAdapter(chooseTreatmentAdapter);
+
         legListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int treatNumber, long arg3) {
                 showSetRound();
@@ -199,7 +203,7 @@ public class LegHomeFragment extends Fragment {
         alertDialog.getButton(alertDialog.BUTTON_POSITIVE);
         alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
         setRoundEditText = (EditText) alertDialog.findViewById(R.id.dialog_setRound_editText_num);
-        setRoundEditText.setHint("ไม่ควรเกิน 5 รอบ");
+
     }
 
 }

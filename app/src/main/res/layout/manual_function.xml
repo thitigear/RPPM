@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbarAlwaysDrawVerticalTrack="true" >
+
+    <RelativeLayout
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="20dp">
+
+        <TextView android:text="@string/manual_func_02"
+            android:id="@+id/manual_func_tv_001"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textRed"
+            android:textSize="@dimen/text_content"
+            android:textStyle="italic"/>
+
+        <TextView android:text="@string/manual_func_03"
+            android:id="@+id/manual_func_tv_002"
+            android:layout_below="@id/manual_func_tv_001"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_04"
+            android:id="@+id/manual_func_tv_003"
+            android:layout_below="@id/manual_func_tv_002"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_05"
+            android:id="@+id/manual_func_tv_004"
+            android:layout_below="@id/manual_func_tv_003"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_06"
+            android:id="@+id/manual_func_tv_005"
+            android:layout_below="@id/manual_func_tv_004"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_07"
+            android:id="@+id/manual_func_tv_006"
+            android:layout_below="@id/manual_func_tv_005"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_08"
+            android:id="@+id/manual_func_tv_007"
+            android:layout_below="@id/manual_func_tv_006"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_09"
+            android:id="@+id/manual_func_tv_008"
+            android:layout_below="@id/manual_func_tv_007"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_09_1"
+            android:id="@+id/manual_func_tv_009"
+            android:layout_below="@id/manual_func_tv_008"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_09_2"
+            android:id="@+id/manual_func_tv_010"
+            android:layout_below="@id/manual_func_tv_009"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_10"
+            android:id="@+id/manual_func_tv_011"
+            android:layout_below="@id/manual_func_tv_010"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_10_1"
+            android:id="@+id/manual_func_tv_012"
+            android:layout_below="@id/manual_func_tv_011"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+        <TextView android:text="@string/manual_func_10_2"
+            android:id="@+id/manual_func_tv_013"
+            android:layout_below="@id/manual_func_tv_012"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content"/>
+
+    </RelativeLayout>
+
+</ScrollView>

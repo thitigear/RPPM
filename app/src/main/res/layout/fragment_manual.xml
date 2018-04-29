@@ -6,9 +6,26 @@
     tools:context=".fragment.ManualFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Manual fragment" />
+        android:layout_height="match_parent">
+
+        <TextView android:text="@string/manual_header"
+            android:id="@+id/fragment_manual_tv_header"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_sub_header"
+            android:textStyle="bold"/>
+
+        <ListView android:id="@+id/fragment_manual_lv"
+            android:layout_centerHorizontal="true"
+            android:layout_height="400dp"
+            android:layout_marginTop="100dp"
+            android:layout_width="320dp"/>
+
+    </RelativeLayout>
 
 </FrameLayout>

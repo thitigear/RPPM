@@ -1,15 +1,25 @@
 package com.example.gear.rppm.fragment;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.example.gear.rppm.R;
 import com.example.gear.rppm.activity.MainActivity;
+import com.example.gear.rppm.other.CustomListViewAdapter;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,8 +38,15 @@ public class ManualFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String[] manualChoice;
+    private String[] manualBasic;
 
+    /*UI Component*/
+    private ListView frag_manual_lv_01;
     private View view;
+
+    /*Import Class*/
+    private CustomListViewAdapter adapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -71,6 +88,21 @@ public class ManualFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_manual, container, false);
         ((MainActivity)getActivity()).setToolbarTitle(R.string.nav_manual);
 
+        /*Setup important param*/
+        manualChoice = getResources().getStringArray(R.array.manual_choice);
+        adapter = new CustomListViewAdapter(getContext(), manualChoice);
+
+        /*Setup ListView*/
+        frag_manual_lv_01 = (ListView) view.findViewById(R.id.fragment_manual_lv);
+        frag_manual_lv_01.setAdapter(adapter);
+
+        frag_manual_lv_01.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("MANUAL Fragment:", manualChoice[position]);
+                showManualDialog(manualChoice[position]);
+            }
+        });
 
         return view;
     }
@@ -113,4 +145,66 @@ public class ManualFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    //AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
+    public void showManualDialog(String title){
+        final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
+        alertDialogBuilder.setTitle(title);
+
+        switch (title){
+            case "เมนูของแอพพลิเคชัน":
+                alertDialogBuilder.setView(R.layout.manual_basic);
+
+                alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                break;
+            case "การใช้งานฟังก์ชันกายภาพบำบัด":
+                alertDialogBuilder.setView(R.layout.manual_function);
+                alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                break;
+            case "ตำแหน่งเซ็นเซอร์และตำแหน่งการวางโทรศัพท์มือถือ":
+                alertDialogBuilder.setView(R.layout.manual_position);
+                alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                break;
+            case "ข้อแนะนำอื่นๆ":
+                alertDialogBuilder.setView(R.layout.manual_rec);
+                alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                    }
+                });
+                break;
+        }
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+        alertDialog.getButton(alertDialog.BUTTON_POSITIVE);
+
+    }
+
+    /**private void settingDialog(int layout_id,int array_id){
+        manualBasic = getResources().getStringArray(R.array.manual_basic_array);
+        alertDialogBuilder.setView(R.layout.manual_basic);
+
+        CustomListViewAdapter dialogAdapter = new CustomListViewAdapter(getContext(), manualBasic);
+        ListView manual_basic_lv = (ListView) view.findViewById(R.id.manual_basic_lv_001);
+        manual_basic_lv.setAdapter(dialogAdapter);
+
+        alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+    }*/
 }
