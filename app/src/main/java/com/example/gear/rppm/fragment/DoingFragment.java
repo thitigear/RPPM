@@ -179,6 +179,8 @@ public class DoingFragment extends Fragment {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
 
+        setupSound();
+
         /*Show Getting Default body Dialog */
         //showDefaultBodyDialog();
 
@@ -208,7 +210,7 @@ public class DoingFragment extends Fragment {
                     setAngleTextView(angle);
                     double nowAngle = Double.parseDouble(""+tv_angleNum.getText());
                     int treatNum = DataArray.getTreatNumber(CURRENT_TREAT);
-                    if(treatNum >= 0 && treatNum < 5){
+                    if(treatNum >= 0 && treatNum <= 4){
                         calculateArmRound(nowAngle); }
                     else if(treatNum == 5){
                         calculateLegTreat1Round(nowAngle);}
@@ -216,7 +218,7 @@ public class DoingFragment extends Fragment {
                         calculateLegTreat2Round(nowAngle); }
                     else if(treatNum == 7){
                         calculateLegTreat3Round(nowAngle); }
-                    getDataHandler.postDelayed(this, 1000);
+                    getDataHandler.postDelayed(this, 750);
                 }
             }, 1000);
         } catch (Exception e) {
@@ -286,6 +288,7 @@ public class DoingFragment extends Fragment {
         tempAngle = 0;
         currentTime = 0;
         currentSet = 1;
+        ringtone.stop();
     }
     private static void setNowDistance(String deviceAddress, double distance){
         switch (deviceAddress){
@@ -416,8 +419,13 @@ public class DoingFragment extends Fragment {
         mAlertBuilder.setPositiveButton("ทำต่อ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                currentTime = 0;
                 maxAngle = 0;
                 ringtone.stop();
+                currentSet += 1;
+
+                tv_timeNum.setText(Utils.intToString(currentTime));
+                tv_setNum.setText(Utils.intToString(currentSet));
             }
         });
 
@@ -440,7 +448,6 @@ public class DoingFragment extends Fragment {
         alertDialog.getButton(alertDialog.BUTTON_POSITIVE);
         alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
         maxAngleAllRound[currentSet] = maxAngle;
-        playNotiSound();
     }
     private void showFinishDialog(){
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
@@ -454,11 +461,11 @@ public class DoingFragment extends Fragment {
         mAlertBuilder.setNegativeButton("กลับไปหน้าเลือกท่า", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                setZero();
+                stopScan(backgroundScanCallback);
+                getActivity().onBackPressed();
                 try {
-                    setZero();
-                    stopScan(backgroundScanCallback);
-                    ringtone.stop();
-                    getActivity().onBackPressed();
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -468,7 +475,6 @@ public class DoingFragment extends Fragment {
         AlertDialog alertDialog = mAlertBuilder.create();
         alertDialog.show();
         alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
-        playNotiSound();
     }
         /*Calculate Round*/
             //ARM
@@ -487,12 +493,11 @@ public class DoingFragment extends Fragment {
                     if(currentTime == 10 && currentSet == maxSet){
                         currentTime = 0;
                         tv_timeNum.setText(Utils.intToString(currentTime));
+                        ringtone.play();
                         showFinishDialog();
                     } else if(currentTime == 10 && currentSet != maxSet){
+                        ringtone.play();
                         showFinishOneSetDialog();
-                        currentTime = 0;
-                        currentSet += 1;
-                        tv_timeNum.setText(Utils.intToString(currentTime));
                     }
                 }
             }
@@ -516,12 +521,11 @@ public class DoingFragment extends Fragment {
                     if(currentTime == 10 && currentSet == maxSet){
                         currentTime = 0;
                         tv_timeNum.setText(Utils.intToString(currentTime));
+                        ringtone.play();
                         showFinishDialog();
                     } else if(currentTime == 10 && currentSet != maxSet){
-                        currentTime = 0;
+                        ringtone.play();
                         showFinishOneSetDialog();
-                        currentSet += 1;
-                        tv_timeNum.setText(Utils.intToString(currentTime));
                     }
                 }
             }
@@ -544,12 +548,11 @@ public class DoingFragment extends Fragment {
                     if(currentTime == 10 && currentSet == maxSet){
                         currentTime = 0;
                         tv_timeNum.setText(Utils.intToString(currentTime));
+                        ringtone.play();
                         showFinishDialog();
                     } else if(currentTime == 10 && currentSet != maxSet){
-                        currentTime = 0;
+                        ringtone.play();
                         showFinishOneSetDialog();
-                        currentSet += 1;
-                        tv_timeNum.setText(Utils.intToString(currentTime));
 
 
                     }
@@ -560,7 +563,6 @@ public class DoingFragment extends Fragment {
         }
     }
     private void calculateLegTreat3Round(double angle){
-        /**
         try {
             if (!isCountThisRound){
                 if(angle <= 90.0){
@@ -577,18 +579,14 @@ public class DoingFragment extends Fragment {
                         tv_timeNum.setText(String.format("%d",currentTime));
                         showFinishDialog();
                     } else if(currentTime == 10 && currentSet != maxSet){
-                        currentTime = 0;
+                        ringtone.play();
                         showFinishOneSetDialog();
-                        currentSet += 1;
-                        tv_timeNum.setText(String.format("%d",currentTime));
-
-
                     }
                 }
             }
         } catch (Exception e){
             Log.e("Exception", ""+e);
-        }*/
+        }
     }
         /*Calculate Summary Angle*/
     private void calculateMaxAnglePerRound(double angle){
@@ -597,11 +595,10 @@ public class DoingFragment extends Fragment {
         }
     }
         /*Notification Sound*/
-    private void playNotiSound(){
+    private void setupSound(){
         try {
             Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             ringtone = RingtoneManager.getRingtone(view.getContext(), notification);
-            ringtone.play();
         } catch (Exception e) {
             e.printStackTrace();
         }
