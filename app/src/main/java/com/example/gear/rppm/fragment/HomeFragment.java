@@ -92,7 +92,7 @@ public class HomeFragment extends Fragment{
 
         v = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ((MainActivity)getActivity()).setToolbarTitle("หน้าแรก");
+        ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_home);
 
         frag_home_choice_arm = (Button) v.findViewById(R.id.fragment_home_button1);
         frag_home_choice_leg = (Button) v.findViewById(R.id.fragment_home_button2);

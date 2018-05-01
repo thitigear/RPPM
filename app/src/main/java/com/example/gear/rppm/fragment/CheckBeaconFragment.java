@@ -126,7 +126,7 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_check_beacon, container, false);
-        ((MainActivity)getActivity()).setToolbarTitle("ตรวจสอบสถานะอุปกรณ์");
+        ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_check_beacon);
 
         beaconListView = (ListView) view.findViewById(R.id.fragment_chk_beacon_lv);
 

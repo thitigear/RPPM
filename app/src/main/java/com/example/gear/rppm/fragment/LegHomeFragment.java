@@ -99,7 +99,7 @@ public class LegHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_leg_home, container, false);
 
-        ((MainActivity)getActivity()).setToolbarTitle("การกายภาพบำบัดส่วนขา");
+        ((MainActivity)getActivity()).setToolbarTitleByString("การกายภาพบำบัดส่วนขา");
 
         /*Setup Important param*/
         legTreat = getResources().getStringArray(R.array.treat_leg);

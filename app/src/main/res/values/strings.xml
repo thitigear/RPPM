@@ -105,13 +105,14 @@
     <string name="fragment_leg_home_desc">กายภาพบำบัดส่วนขา</string>
 
     <!-- fragment_doing -->
-    <string name="fragment_doing_tv_treatName">ชื่อท่</string>
     <string name="fragment_doing_but_stop">หยุด</string>
-    <string name="fragment_doing_tv_set">เซ็ต</string>
-    <string name="fragment_doing_tv_time01">ทำไป</string>
-    <string name="fragment_doing_tv_time02">ครั้ง</string>
     <string name="fragment_doing_tv_angle01">มุม</string>
     <string name="fragment_doing_tv_angle02">องศา</string>
+    <string name="fragment_doing_tv_set">เซ็ต</string>
+    <string name="fragment_doing_tv_slash">/</string>
+    <string name="fragment_doing_tv_treatName">ชื่อท่า</string>
+    <string name="fragment_doing_tv_time01">ทำไป</string>
+    <string name="fragment_doing_tv_time02">ครั้ง</string>
 
     <!-- Caution -->
     <string name="caution_header">ข้อห้ามและข้อควรระวังของการทำกายภาพบำบัด</string>

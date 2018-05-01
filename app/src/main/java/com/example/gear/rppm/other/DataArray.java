@@ -24,7 +24,7 @@ public class DataArray extends Fragment {
     private String[] treatName = new String[]{
             "ยกแขนขึ้นและลง"
             , "กางแขนและหุบแขนทางข้างลำตัว"
-            , "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว"
+            , "กางแขนและหุบแขนในแนวตั้งฉากกับลำตัว"
             , "หมุนข้อไหล่ขึ้นและลง"
             , "เหยียดและงอข้อศอก"
             , "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน"
@@ -68,7 +68,9 @@ public class DataArray extends Fragment {
     public void setCurrentTreatData(String treatName){currentTreatData = defaultTreatData[getTreatNumber(treatName)]; }
 
 
-    public static double[] getCurrentTreatData(@NonNull String treatName) {return defaultTreatData[getTreatNumber(treatName)];}
+    public static double[] getCurrentTreatData(@NonNull String treatName) {
+        return defaultTreatData[getTreatNumber(treatName)];
+    }
 
     @NonNull
     public static int getDeviceAdrressNumber(String deviceAddress){
@@ -103,7 +105,7 @@ public class DataArray extends Fragment {
                 return 0;
             case "กางแขนและหุบแขนทางข้างลำตัว":
                 return 1;
-            case "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว":
+            case "กางแขนและหุบแขนในแนวตั้งฉากกับลำตัว":
                 return 2;
             case "หมุนข้อไหล่ขึ้นและลง":
                 return 3;

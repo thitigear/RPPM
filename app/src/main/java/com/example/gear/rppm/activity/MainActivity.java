@@ -1,5 +1,7 @@
 package com.example.gear.rppm.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,10 +25,10 @@ import com.example.gear.rppm.fragment.LegHomeFragment;
 import com.example.gear.rppm.fragment.ManualFragment;
 
 import org.altbeacon.beacon.Beacon;
-import org.altbeacon.beacon.BeaconManager;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity
@@ -41,8 +43,6 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private Handler mHandler;
-    private BeaconManager mBeaconManager;
-    //private ScanDeviceActivity scanDeviceActivity;
 
     // index to identify current nav menu item
     private int navItemIndex = 0;
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             navItemIndex = 0;
             CURRENT_TAG = TAG_HOME;
-            setToolbarTitle("หน้าแรก");
+            setToolbarTitleByString("หน้าแรก");
             loadFragment();
         }
 
@@ -119,7 +119,7 @@ public class MainActivity extends AppCompatActivity
                 // update the main content by replacing fragments
                 Fragment fragment = getFragment();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+                //fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
                 fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
                 fragmentTransaction.commitAllowingStateLoss();
             }
@@ -142,7 +142,6 @@ public class MainActivity extends AppCompatActivity
             case 0:
                 // home fragment
                 HomeFragment homeFragment = new HomeFragment();
-                setToolbarTitle("หน้าแรก");
                 return homeFragment;
             case 1:
                 // check beacon fragment
@@ -166,25 +165,19 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    /**
-     * public void setToolbarTitle(int navItemIndex) {
-        getSupportActionBar().setTitle(activityTitles[navItemIndex]);
-
-     }*/
-
-    public void setToolbarTitle(int title_id) {
+    public void setToolbarTitleById(int title_id) {
         getSupportActionBar().setTitle(title_id);
     }
-
-    public void setToolbarTitle(String title) {
+    public void setToolbarTitleByString(String title) {
         getSupportActionBar().setTitle(title);
     }
-
     public void setToolbarTitle() {
         getSupportActionBar().setTitle(activityTitles[navItemIndex]);
     }
 
-    public void selectNavMenu() { navigationView.getMenu().getItem(navItemIndex).setChecked(true);
+    public void selectNavMenu() {
+
+        navigationView.getMenu().getItem(navItemIndex).setChecked(true);
         //navigationView.getMenu().getItem(navItemIndex).setChecked(true);
 
     }
@@ -222,6 +215,7 @@ public class MainActivity extends AppCompatActivity
                         break;
                     default:
                         navItemIndex = 0;
+                        CURRENT_TAG = TAG_HOME;
                 }
 
                 //Checking if the item is in checked state or not, if not make it in checked state
@@ -232,7 +226,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 menuItem.setChecked(true);
 
-                loadFragment(); // old loadHomeFragment
+                loadFragment();
 
                 return true;
             }
@@ -269,9 +263,8 @@ public class MainActivity extends AppCompatActivity
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawers();
-
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out);
+            //fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out);
             fragmentTransaction.commitAllowingStateLoss();
             return;
         }
@@ -288,7 +281,7 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
             else {
-                setToolbarTitle("หน้าแรก");
+                setToolbarTitleByString("หน้าแรก");
             }
         }
         super.onBackPressed();

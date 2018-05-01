@@ -86,7 +86,7 @@ public class ManualFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_manual, container, false);
-        ((MainActivity)getActivity()).setToolbarTitle(R.string.nav_manual);
+        ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_manual);
 
         /*Setup important param*/
         manualChoice = getResources().getStringArray(R.array.manual_choice);

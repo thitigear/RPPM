@@ -23,13 +23,13 @@ public class DistanceAngle {
 
     public static double findSolutionAndAngle(String treatName, double[] defaultBody, double[] distance){
         //distance = {elbow, wrist, knee, ankle}
-        shin = distance[3] - distance[2];
+        shin = defaultBody[3] - defaultBody[2];
         switch (treatName) {
             case "ยกแขนขึ้นและลง":
                 return findSameSideAngle(defaultBody[0], distance[0]);
             case "กางแขนและหุบแขนทางข้างลำตัว":
                 return findSameSideAngle(defaultBody[0], distance[0]);
-            case "กางแบนและหุบแขนในแนวตั้งฉากกับลำตัว":
+            case "กางแขนและหุบแขนในแนวตั้งฉากกับลำตัว":
                 return findSameSideAngle(defaultBody[0], distance[0]);
             case "หมุนข้อไหล่ขึ้นและลง":
                 return findSameSideAngle(defaultBody[1], distance[1]);
@@ -42,7 +42,7 @@ public class DistanceAngle {
             case "หมุนข้อตะโพกเข้าและออก":
                 return findKneeAngle(distance, distance[2], distance[3], shin);
             default:
-                return -1;
+                return 0;
         }
     }
 

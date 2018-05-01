@@ -10,12 +10,16 @@
 
     <dimen name="content_header_space_height">40dp</dimen>
 
-    <!-- Text Header & Content -->
+    <!-- Text -->
     <dimen name="text_header">24sp</dimen>
     <dimen name="text_sub_header">22sp</dimen>
     <dimen name="text_content">18sp</dimen>
 
     <dimen name="text_header_mtop">30dp</dimen>
+
+    <!-- TextView -->
+    <dimen name="tv_textHeight">35dp</dimen>
+    <dimen name="tv_textWidth">50dp</dimen>
 
     <!--Dialog Dimension -->
     <dimen name="dialog_mtop">40dp</dimen>

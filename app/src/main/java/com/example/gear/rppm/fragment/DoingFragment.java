@@ -77,8 +77,6 @@ public class DoingFragment extends Fragment {
 
     /*Distance and Angle Param*/
     private static double angle;
-    private static double averageAngle = 0;
-    private static double tempAngle = 0;
     private static double maxAngle = 0;
     private static double[] maxAngleAllRound = new double[]{0,0,0,0,0};
     private static double distance;
@@ -174,12 +172,12 @@ public class DoingFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_doing, container, false);
 
-        ((MainActivity)getActivity()).setToolbarTitle("เริ่มทำกายภาพ");
+        ((MainActivity)getActivity()).setToolbarTitleByString("เริ่มทำกายภาพ");
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
 
-        setupSound();
+        Utils.setupSound(view.getContext());
 
         /*Show Getting Default body Dialog */
         //showDefaultBodyDialog();
@@ -202,6 +200,7 @@ public class DoingFragment extends Fragment {
         /*getDataEvery X second*/
         try {
             getDataHandler = new Handler();
+            int delay = 500;
             getDataHandler.postDelayed(new Runnable(){
                 public void run(){
                     //do something
@@ -218,9 +217,9 @@ public class DoingFragment extends Fragment {
                         calculateLegTreat2Round(nowAngle); }
                     else if(treatNum == 7){
                         calculateLegTreat3Round(nowAngle); }
-                    getDataHandler.postDelayed(this, 750);
+                    getDataHandler.postDelayed(this, 500);
                 }
-            }, 1000);
+            }, delay);
         } catch (Exception e) {
             Log.e("Error!!!!!!!!!!!!!! :", e.getMessage());
         }
@@ -284,11 +283,9 @@ public class DoingFragment extends Fragment {
     /*Set Variable*/
     private void setZero(){
         maxAngle = 0;
-        averageAngle = 0;
-        tempAngle = 0;
         currentTime = 0;
         currentSet = 1;
-        ringtone.stop();
+        Utils.stopNotificationSound();
     }
     private static void setNowDistance(String deviceAddress, double distance){
         switch (deviceAddress){
@@ -319,13 +316,13 @@ public class DoingFragment extends Fragment {
         tv_maxTime = (TextView) view.findViewById(R.id.fragment_doing_timeMax);         //จำนวนครั้งสูงสุดที่ทำได่้ในรอบนั้นๆ
         tv_angleNum = (TextView) view.findViewById(R.id.fragment_doing_angleNum);       //จำนวนมุมที่ทำได้ตอนนี้
 
-        tv_lElbow = (TextView) view.findViewById(R.id.doing_lElbow);
+        //tv_lElbow = (TextView) view.findViewById(R.id.doing_elbow);
         //tv_rElbow = (TextView) view.findViewById(R.id.doing_rElbow);
-        tv_lWrist = (TextView) view.findViewById(R.id.doing_lWrist);
+        //tv_lWrist = (TextView) view.findViewById(R.id.doing_lWrist);
         //tv_rWrist = (TextView) view.findViewById(R.id.doing_rWrist);
-        tv_lKnee = (TextView) view.findViewById(R.id.doing_lKnee);
+        //tv_lKnee = (TextView) view.findViewById(R.id.doing_lKnee);
         //tv_rKnee = (TextView) view.findViewById(R.id.doing_rKnee);
-        tv_lAnkle = (TextView) view.findViewById(R.id.doing_lAnkle);
+        //tv_lAnkle = (TextView) view.findViewById(R.id.doing_lAnkle);
         //tv_rAnkle = (TextView) view.findViewById(R.id.doing_rAnkle);
 
         butStop = (Button) view.findViewById(R.id.fragment_doing_buttonStop);           //Button Stop
@@ -385,6 +382,20 @@ public class DoingFragment extends Fragment {
         }
 
     }
+
+        /*Dialog Condition when finish round or set*/
+    private void conditionToShowFinishDialog(){
+        if(currentTime == 10 && currentSet == maxSet){
+            currentTime = 0;
+            tv_timeNum.setText(Utils.intToString(currentTime));
+            showFinishDialog();
+            Utils.playNotificationSound();
+        } else if(currentTime == 10 && currentSet != maxSet){
+            showFinishOneSetDialog();
+            Utils.playNotificationSound();
+        }
+    }
+
         /*Show Dialog While Condition(TRUE)*/
     private void showPauseCaution(){
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
@@ -421,7 +432,7 @@ public class DoingFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 currentTime = 0;
                 maxAngle = 0;
-                ringtone.stop();
+                Utils.stopNotificationSound();
                 currentSet += 1;
 
                 tv_timeNum.setText(Utils.intToString(currentTime));
@@ -434,7 +445,7 @@ public class DoingFragment extends Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 try{
                     setZero();
-                    ringtone.stop();
+                    Utils.stopNotificationSound();
                     stopScan(backgroundScanCallback);
                     getActivity().onBackPressed();
                 } catch (Exception e){
@@ -476,6 +487,7 @@ public class DoingFragment extends Fragment {
         alertDialog.show();
         alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
     }
+
         /*Calculate Round*/
             //ARM
     private void calculateArmRound(double angle){
@@ -486,19 +498,10 @@ public class DoingFragment extends Fragment {
                     currentTime += 1;
                 }
             }else{
-                if(angle <= 15){
+                if(angle <= 30){
                     tv_timeNum.setText(Utils.intToString(currentTime));
                     isCountThisRound = false;
-
-                    if(currentTime == 10 && currentSet == maxSet){
-                        currentTime = 0;
-                        tv_timeNum.setText(Utils.intToString(currentTime));
-                        ringtone.play();
-                        showFinishDialog();
-                    } else if(currentTime == 10 && currentSet != maxSet){
-                        ringtone.play();
-                        showFinishOneSetDialog();
-                    }
+                    conditionToShowFinishDialog();
                 }
             }
         } catch (Exception e){
@@ -517,20 +520,12 @@ public class DoingFragment extends Fragment {
                 if(angle >= 160){
                     tv_timeNum.setText(Utils.intToString(currentTime));
                     isCountThisRound = false;
-
-                    if(currentTime == 10 && currentSet == maxSet){
-                        currentTime = 0;
-                        tv_timeNum.setText(Utils.intToString(currentTime));
-                        ringtone.play();
-                        showFinishDialog();
-                    } else if(currentTime == 10 && currentSet != maxSet){
-                        ringtone.play();
-                        showFinishOneSetDialog();
-                    }
+                    conditionToShowFinishDialog();
                 }
             }
         } catch (Exception e){
-            Log.e("Exception", ""+e);
+            Log.e("CalcLegTreat 1 E:", "");
+            e.printStackTrace();
         }
     }
     private void calculateLegTreat2Round(double angle){
@@ -541,21 +536,11 @@ public class DoingFragment extends Fragment {
                     currentTime += 1;
                 }
             }else{
-                if(angle <= 15){
+                if(angle <= 30){
                     tv_timeNum.setText(Utils.intToString(currentTime));
                     isCountThisRound = false;
 
-                    if(currentTime == 10 && currentSet == maxSet){
-                        currentTime = 0;
-                        tv_timeNum.setText(Utils.intToString(currentTime));
-                        ringtone.play();
-                        showFinishDialog();
-                    } else if(currentTime == 10 && currentSet != maxSet){
-                        ringtone.play();
-                        showFinishOneSetDialog();
-
-
-                    }
+                    conditionToShowFinishDialog();
                 }
             }
         } catch (Exception e){
@@ -573,41 +558,26 @@ public class DoingFragment extends Fragment {
                 if(angle >= 160){
                     tv_timeNum.setText(String.format("%d",currentTime));
                     isCountThisRound = false;
-
-                    if(currentTime == 10 && currentSet == maxSet){
-                        currentTime = 0;
-                        tv_timeNum.setText(String.format("%d",currentTime));
-                        showFinishDialog();
-                    } else if(currentTime == 10 && currentSet != maxSet){
-                        ringtone.play();
-                        showFinishOneSetDialog();
-                    }
+                    conditionToShowFinishDialog();
                 }
             }
         } catch (Exception e){
             Log.e("Exception", ""+e);
         }
     }
+
         /*Calculate Summary Angle*/
     private void calculateMaxAnglePerRound(double angle){
         if(angle > maxAngle) {
             maxAngle = angle;
         }
     }
-        /*Notification Sound*/
-    private void setupSound(){
-        try {
-            Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-            ringtone = RingtoneManager.getRingtone(view.getContext(), notification);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
         /*Start Stop Beacon Scanner*/
     public static void startScan(ScanCallback mScanCallback){ bluetoothLeScanner.startScan(mScanCallback); }
     public static void stopScan(ScanCallback mScanCallback){ bluetoothLeScanner.stopScan(mScanCallback); }
 
-    /*Test TextView SetText*/
+        /*Test TextView SetText*/
     private static void setTestTextView(String address,double distance, double angle){
 
         Log.e("ANGLE!!!!!!!!!!!!:", String.format("%.2f",angle));
@@ -650,105 +620,10 @@ public class DoingFragment extends Fragment {
         }
     }
     private static void setAngleTextView(double angle){
-        Log.e("ANGLE!!!!!!!!!!!!:", String.format("%.2f",angle));
-        tv_angleNum.setText(Utils.doubleToString(angle));
+        int iAngle = (int) angle;
+        Log.e("ANGLE!!!!!!!!!!!!:", String.format("%d",iAngle));
+        tv_angleNum.setText(Utils.intToString((int)angle));
     }
-
-    /*ShowDefaultBodyDialog & SetDefaultBody*/
-    /**
-    private void showDefaultBodyDialog(){
-
-        AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
-        mAlertBuilder.setTitle("กำลังเก็บข้อมูลที่สำคัญ");
-        mAlertBuilder.setView(R.layout.dialog_default_body);
-
-        mAlertBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                isShowDefaultBodyDialogPosBut = true;
-
-            }
-        });
-
-        defaultBodyAlertDialog = mAlertBuilder.create();
-        defaultBodyAlertDialog.show();
-
-
-        if(isShowDefaultBodyDialogPosBut){
-            stopScan(defaultBodyScanCallback);
-            //Close Dialog
-        }
-        else {
-
-            try {
-                int i;
-
-                for (i = 1;i <= 5000;i++){
-                    bluetoothLeScanner.startScan(defaultBodyScanCallback);
-                    if(i == 5000){
-                        body[4] = body[4]/c_elbow;
-                        body[5] = body[5]/c_wrist;
-                        body[6] = body[6]/c_knee;
-                        body[7] = body[7]/c_ankle;
-                        Log.e("Body :", String.format("{%.2f,%.2f,%.2f,%.2f}",body[4],body[5],body[6],body[7]));
-
-                        defaultBodyAlertDialog.getButton(defaultBodyAlertDialog.BUTTON_POSITIVE);
-                    }
-                }
-
-            }finally {
-
-            }
-
-        }
-
-
-
-        TextView dialog_default_lElbow = (TextView) defaultBodyAlertDialog.findViewById(R.id.doing_default_lElbow_status);
-        //TextView dialog_default_rElbow = (TextView) defaultBodyAlertDialog.findViewById(R.id.doing_default_rElbow_status);
-        TextView dialog_default_lWrist = (TextView) defaultBodyAlertDialog.findViewById(R.id.doing_default_lWrist_status);
-        //TextView dialog_default_rWrist = (TextView) defaultBodyAlertDialog.findViewById(R.id.doing_default_rWrist_status);
-        TextView dialog_default_lKnee = (TextView) defaultBodyAlertDialog.findViewById(R.id.doing_default_lKnee_status);
-        //TextView dialog_default_rKnee = (TextView) defaultBodyAlertDialog.findViewById(R.id.doing_default_rKnee_status);
-        TextView dialog_default_lAnkle = (TextView) defaultBodyAlertDialog.findViewById(R.id.doing_default_lAnkle_status);
-        //TextView dialog_default_rAnkle = (TextView) defaultBodyAlertDialog.findViewById(R.id.doing_default_rAnkle_status);
-
-        //setRoundEditText = (EditText) alertDialog.findViewById(R.id.dialog_setRound_editText_num);
-        //setRoundEditText.setHint("ไม่ควรเกิน 5 รอบ");
-    }
-
-    /**
-    private static void setDefaultBody(String address, double distance){
-        switch (address) {
-            case "D4:36:39:DE:54:CB":
-                defaultBody[0] = distance;
-                break;
-            case "D4:36:39:DE:54:CD":
-                defaultBody[1] = distance;
-                break;
-            case "D4:36:39:DE:55:82":
-                defaultBody[2] = distance;
-                break;
-            case "D4:36:39:DE:56:A1":
-                defaultBody[3] = distance;
-                break;
-            case "D4:36:39:DE:56:FC":
-                defaultBody[4] = distance;
-                break;
-            case "D4:36:39:DE:57:5D":
-                defaultBody[5] = distance;
-                break;
-            case "D4:36:39:DE:57:AA":
-                defaultBody[6] = distance;
-                break;
-            case "D4:36:39:DE:57:D0":
-                defaultBody[7] = distance;
-                break;
-            default:
-                break;
-        }
-    }
-*/
 
     /*ScanCallBack*/
     protected static ScanCallback backgroundScanCallback = new ScanCallback() {
@@ -771,12 +646,10 @@ public class DoingFragment extends Fragment {
                     setNowDistance(deviceAddress, distance);
                     String msg = "";
                     for (double distance: nowDistance){
-                        msg += Utils.doubleToString(distance);
+                        msg += Utils.doubleToString(distance) + ", ";
                     }
                     Log.e(TAG, "Device Name:" + deviceName);
                     Log.e(TAG, "Device Address:" + deviceAddress);
-                    Log.e(TAG, "TxPowerLevel:" + txPowerLevel);
-                    Log.e(TAG, "Rssi:" + rssi);
                     Log.e(TAG, "Distance:" + distance);
                     Log.e("Now Distance Array", msg);
                     Log.e("Count Test!!", String.format("Count = %d", currentTime));
@@ -784,54 +657,10 @@ public class DoingFragment extends Fragment {
                     beaconData.put(deviceAddressNumber, new Object[]{deviceAddress, txPowerLevel, rssi});
 
                     angle = DistanceAngle.findSolutionAndAngle(CURRENT_TREAT, defaultBody, nowDistance);
-                    //if(angle < 0){angle = 0;}
-
-                    //setTestTextView(deviceAddress, distance, angle);
 
                 }
 
             }
         }
     };
-
-    /**
-    protected static ScanCallback defaultBodyScanCallback = new ScanCallback() {
-        @Override
-        public void onScanResult(int callbackType, ScanResult result) {
-            super.onScanResult(callbackType, result);
-
-            if (result.getDevice().getName() != null && result.getDevice().getUuids() == null) {
-                //if () {
-                    String deviceName = result.getDevice().getName();
-                    double txPowerLevel = result.getScanRecord().getTxPowerLevel();
-                    double rssi = result.getRssi();
-                    double distance = DistanceAngle.calculateDistance(txPowerLevel, rssi);
-
-                    switch (DataArray.getDeviceAdrressNumber(result.getDevice().getAddress())) {
-                        case 0:
-                            c_elbow += 1;
-                            body[4] += distance;
-
-                            //default_elbow_c += distance;
-                            break;
-                        case 1:
-                            c_wrist += 1;
-                            body[5] += distance;
-                            //default_wrist_c += distance;
-                            break;
-                        case 2:
-                            c_knee += 1;
-                            body[6] += distance;
-                            break;
-                        case 3:
-                            c_ankle += 1;
-                            body[7] += distance;
-                            break;
-                        default:
-                            break;
-                    }
-                //}
-            }
-        }
-    };*/
 }
