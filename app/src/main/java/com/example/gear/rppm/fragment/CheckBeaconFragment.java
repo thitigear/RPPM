@@ -20,6 +20,7 @@ import android.widget.ListView;
 import com.example.gear.rppm.*;
 import com.example.gear.rppm.activity.MainActivity;
 import com.example.gear.rppm.other.CheckBeaconListViewAdapter;
+import com.example.gear.rppm.other.Utils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -47,6 +48,8 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
     private String mParam1;
     private String mParam2;
 
+    private static String CURRENT_TAG = "check beacon";
+
     private OnFragmentInteractionListener mListener;
     private View view;
 
@@ -57,32 +60,18 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
 
     private CheckBeaconListViewAdapter beaconListAdapter;
 
-    private int[] capsuleRssiTxPower;
-    private int[] tempCapsuleRssiTxPower;
-
     private List<ScanFilter> filter;
     private ListView beaconListView;
 
-
-
-    //private Map<String, int[]> deviceList = new HashMap<String, int[]>();
     private Map<String, String> sDeviceList = new HashMap<>();
-    //private Map<String, ArrayList<>> oDeviceList = new HashMap<String, Object[]>();
-
-    private ScanResult mScanResult;
-    //private ScanFilter mScanFilter;
-    //private ScanSettings mScanSettings;
 
     private String my_UUID = "b911df37-a9d0-43bf-af14-0b4a3e20b50c";
 
-    private String[][] deviceListWithPart = { {"D4:36:39:DE:56:FC","HMSoft"}
-            , {"D4:36:39:DE:57:D0", "HMSoft"}
-            , {"Beacon3", "Beacon3 UUID"}
-            , {"Beacon4", "Beacon4 UUID"}
-            , {"Beacon5", "Beacon5 UUID"}
-            , {"Beacon6", "Beacon6 UUID"}
-            , {"Beacon7", "Beacon7 UUID"}
-            , {"Beacon8", "Beacon8 UUID"}};
+
+    private String[] deviceList = new String[]{"D4:36:39:DE:54:CB",
+            "D4:36:39:DE:54:CD",
+            "D4:36:39:DE:55:82",
+            "D4:36:39:DE:56:FC"};
 
     /**private int[] resId = { R.drawable.ic_action_menu_add
             , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history};
@@ -126,21 +115,13 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_check_beacon, container, false);
+        ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
         ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_check_beacon);
 
         beaconListView = (ListView) view.findViewById(R.id.fragment_chk_beacon_lv);
-
         beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), sDeviceList);
 
         startScan(mScanCallback);
-
-        beaconListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(view.getContext(), sDeviceList.keySet().toArray()[position].toString(), Toast.LENGTH_LONG).show();
-                //showDeviceDesc(position);
-            }
-        });
 
         return view;
     }
@@ -239,37 +220,28 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
 
-            //byte[] manufacturerData = mScanRecord.getManufacturerSpecificData(224);
-            //int mRssi = result.getRssi();
-
-            mScanResult = result;
-
             Log.e("ScanResult:", ""+ result.toString());
             Log.e("Device Name:", ""+ result.getDevice().getName());
             Log.e("Device Address:", ""+ result.getDevice().getAddress());
-            //Log.e("Device UUID:", ""+ Arrays.toString(mScanResult.getDevice().getUuids()));
-            //Log.e("Device UUID:", ""+ mScanRecord.getServiceUuids().toArray());
             Log.e("Device Type:", ""+ result.getDevice().getType());
-            // int mScanRecord.getTxPowerLevel()
 
             if(result.getDevice().getName() != null){
                 if (result.getDevice().getUuids() == null) {//-------------------------------------- Update Device Rssi & TxPowerLevel
-
 
                     if (sDeviceList.containsKey(result.getDevice().getAddress())) { //getAddress()
 
                         switch (result.getDevice().getAddress()){
                             case "D4:36:39:DE:54:CB":
-                                sDeviceList.put(result.getDevice().getAddress(), "" + "Elbow");
+                                sDeviceList.put(result.getDevice().getAddress(), "" + "ศอก");
                                 break;
                             case "D4:36:39:DE:54:CD":
-                                sDeviceList.put(result.getDevice().getAddress(), "" + "Wrist");
+                                sDeviceList.put(result.getDevice().getAddress(), "" + "ข้อมือ");
                                 break;
                             case "D4:36:39:DE:55:82":
-                                sDeviceList.put(result.getDevice().getAddress(), "" + "Knee");
+                                sDeviceList.put(result.getDevice().getAddress(), "" + "เข่า");
                                 break;
-                            case "D4:36:39:DE:56:A1":
-                                sDeviceList.put(result.getDevice().getAddress(), "" + "Ankle");
+                            case "D4:36:39:DE:56:FC":
+                                sDeviceList.put(result.getDevice().getAddress(), "" + "ข้อเท้า");
                                 break;
                         }
 
@@ -295,6 +267,5 @@ public class CheckBeaconFragment extends Fragment {//implements BeaconConsumer{
     private void startScan(ScanCallback scanCallback){
         bluetoothLeScanner.startScan(scanCallback);
     }
-
 
 }

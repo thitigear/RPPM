@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.INSTALL_SHORTCUT" />
-    <uses-permission android:name="android.permission.UNINSTALL_SHORTCUT" />
 
     <application
         android:allowBackup="true"
@@ -18,7 +17,6 @@
         <activity android:name=".activity.LoadAppActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -30,13 +28,10 @@
             </intent-filter>
         </activity>
 
-        <!-- Sliding Activity -->
-        <activity
-            android:name=".activity.SlidingActivity"
+        <!-- Sliding Menu Activity -->
+        <activity android:name=".activity.SlidingActivity"
             android:label="@string/title_activity_sliding"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".activity.ScanDeviceActivity"/>
 
     </application>
 

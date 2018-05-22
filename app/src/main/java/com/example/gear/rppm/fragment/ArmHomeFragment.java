@@ -35,7 +35,9 @@ public class ArmHomeFragment extends Fragment{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private String TAG_CURRENT = "";
+
+    private static String CURRENT_TAG = "arm";
+
     private String TAG_ARMHOME = "armHome";
     private String TAG_TREAT1 = "ยกแขนขึ้นและลง";
     private String TAG_TREAT2 = "กางแขนและหุบแขนทางข้างลำตัว";
@@ -45,13 +47,12 @@ public class ArmHomeFragment extends Fragment{
 
     private static String CURRENT_TREAT = "";
 
-
-
     // TODO: Rename and change types of parameters
-    private int setRoundNumber = 0;
     private int[] resId = { R.drawable.ic_action_menu_add
             , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history
             , R.drawable.ic_action_menu_home, R.drawable.ic_action_menu_setting};
+
+    private int setRoundNumber = 0;
 
     /*PARAMETER*/
     private String mParam1;
@@ -105,7 +106,7 @@ public class ArmHomeFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_arm_home, container, false);
-
+        ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
         ((MainActivity)getActivity()).setToolbarTitleByString("การกายภาพบำบัดส่วนแขน");
 
         /*Setup important adapter*/
@@ -174,7 +175,7 @@ public class ArmHomeFragment extends Fragment{
         DoingFragment.setFlagTreat(flagTreat);
         DoingFragment.setMaxSet(setRoundNumber);
 
-        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         transaction.replace(R.id.frame, new DoingFragment(), flagTreat);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -190,18 +191,22 @@ public class ArmHomeFragment extends Fragment{
             public void onClick(DialogInterface dialog, int which) {
                 Log.e("setRoundEditText", setRoundEditText.getText().toString());
 
-                if(setRoundEditText.getText().toString().equals("")){
-                    Toast.makeText(view.getContext(), "กรุณาใส่จำนวนรอบที่ต้องการ", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    setRoundNumber = Integer.parseInt(setRoundEditText.getText().toString());
-
-                    if(setRoundNumber > 0 && setRoundNumber <= 5){
-                        replaceDoingFragment(CURRENT_TREAT, "arm", setRoundNumber);
-                    } else {
-                        Toast.makeText(view.getContext(), "จำนวนต้องอยู่ระหว่าง 1 ถึง 5", Toast.LENGTH_LONG).show();
-                        Log.e("No. of Round:", ""+ setRoundNumber);
+                try {
+                    if(setRoundEditText.getText().toString().equals("")){
+                        Toast.makeText(view.getContext(), "กรุณาใส่จำนวนรอบที่ต้องการ", Toast.LENGTH_LONG).show();
                     }
+                    else {
+                        setRoundNumber = Integer.parseInt(setRoundEditText.getText().toString());
+
+                        if(setRoundNumber > 0 && setRoundNumber <= 5){
+                            replaceDoingFragment(CURRENT_TREAT, "arm", setRoundNumber);
+                        } else {
+                            Toast.makeText(view.getContext(), "จำนวนต้องอยู่ระหว่าง 1 ถึง 5", Toast.LENGTH_LONG).show();
+                            Log.e("No. of Round:", ""+ setRoundNumber);
+                        }
+                    }
+                } catch (Exception e){
+                    Toast.makeText(view.getContext(), "กรุณาใส่จำนวนรอบเป็นจำนวนเต็ม", Toast.LENGTH_LONG).show();
                 }
             }
 

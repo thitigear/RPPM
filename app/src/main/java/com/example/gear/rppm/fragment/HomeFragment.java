@@ -1,10 +1,8 @@
 package com.example.gear.rppm.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,7 +19,6 @@ import com.example.gear.rppm.other.CautionAdapter;
 
 import java.util.Objects;
 
-
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -30,6 +27,7 @@ import java.util.Objects;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class HomeFragment extends Fragment{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,10 +40,12 @@ public class HomeFragment extends Fragment{
     private String mParam1;
     private String mParam2;
 
+    private static String CURRENT_TAG = "home";
+
     private Button frag_home_choice_arm;
     private Button frag_home_choice_leg;
 
-    private static String TAG_CURRENT = "";
+    private static String TAG_CHOOSE_CURRENT = "";
 
     private static String TAG_ARM = "arm";
     private static String TAG_LEG = "leg";
@@ -89,10 +89,11 @@ public class HomeFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         v = inflater.inflate(R.layout.fragment_home, container, false);
 
+        ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
         ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_home);
+
 
         frag_home_choice_arm = (Button) v.findViewById(R.id.fragment_home_button1);
         frag_home_choice_leg = (Button) v.findViewById(R.id.fragment_home_button2);
@@ -101,7 +102,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Log.e(TAG_ARM, "ARM!!!!!!!!!!!!");
-                TAG_CURRENT = TAG_ARM;
+                TAG_CHOOSE_CURRENT = TAG_ARM;
                 showCaution();
             }
         });
@@ -110,7 +111,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 Log.e(TAG_LEG, "LEG!!!!!!!!!!!!");
-                TAG_CURRENT = TAG_LEG;
+                TAG_CHOOSE_CURRENT = TAG_LEG;
                 showCaution();
             }
         });
@@ -124,7 +125,6 @@ public class HomeFragment extends Fragment{
             mListener.onFragmentInteraction(uri);
         }
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -153,7 +153,6 @@ public class HomeFragment extends Fragment{
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
@@ -162,7 +161,7 @@ public class HomeFragment extends Fragment{
     public void replaceNewFragment(final Fragment newFragment, final String tag) {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         transaction.replace(R.id.frame, newFragment, tag);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -176,24 +175,20 @@ public class HomeFragment extends Fragment{
         mAlertBuilder.setPositiveButton("เข้าใจ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
-                if (Objects.equals(TAG_CURRENT, TAG_ARM)){
+                if (Objects.equals(TAG_CHOOSE_CURRENT, TAG_ARM)){
                     replaceNewFragment(new ArmHomeFragment(), TAG_ARM);
-                    TAG_CURRENT = "";
+                    TAG_CHOOSE_CURRENT = "";
 
-                } else if (Objects.equals(TAG_CURRENT, TAG_LEG)){
+                } else if (Objects.equals(TAG_CHOOSE_CURRENT, TAG_LEG)){
                     replaceNewFragment(new LegHomeFragment(), TAG_LEG);
-                    TAG_CURRENT = "";
-
+                    TAG_CHOOSE_CURRENT = "";
                 }
-
             }
         });
 
         AlertDialog alertDialog = mAlertBuilder.create();
         alertDialog.show();
         alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setBackgroundResource(R.drawable.button_buttom);
-
     }
 
 }

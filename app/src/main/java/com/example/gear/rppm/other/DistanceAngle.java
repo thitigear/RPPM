@@ -1,27 +1,10 @@
 package com.example.gear.rppm.other;
 
-import android.support.annotation.NonNull;
-
 public class DistanceAngle {
-    private static double elbow;
-    //private double rElbow;
-    private static double wrist;
-    //private double rWrist;
-    private static double knee;
-    //private double rKnee;
-    private static double ankle;
-    //private double rAnkle;
     private static double shin;
+    private static double[] defaultBody = new double[]{31.4, 54, 53.55, 88.85};
 
-    public double getDistance(int[] data){
-        return 0;
-    }
-
-    public double[] getAngle(double a, double b, double c){
-        return new double[]{Math.acos(b / a), Math.acos(c / a), Math.acos(c / b)};
-    }
-
-    public static double findSolutionAndAngle(String treatName, double[] defaultBody, double[] distance){
+    public static double findSolutionAndAngle(String treatName, double[] distance){
         //distance = {elbow, wrist, knee, ankle}
         shin = defaultBody[3] - defaultBody[2];
         switch (treatName) {
@@ -35,28 +18,30 @@ public class DistanceAngle {
                 return findSameSideAngle(defaultBody[1], distance[1]);
             case "เหยียดและงอข้อศอก":
                 return findSameSideAngle(defaultBody[1], distance[1]);
-            case "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน":
-                return findKneeAngle(distance, distance[2], distance[3], shin);
+            case "งอขาและเหยียดข้อตะโพกและข้อเข่าพร้อมกัน":
+                return findKneeAngle(distance[2], distance[3]); // สามเหลี่ยมด้านไม่เท่า
             case "กางและหุบข้อตะโพก":
-                return findSameSideAngle(distance[2], distance[2]);
-            case "หมุนข้อตะโพกเข้าและออก":
-                return findKneeAngle(distance, distance[2], distance[3], shin);
+                return findSameSideAngle(defaultBody[3], distance[3]);
+            case "ยกขาขึ้นทั้งขา":
+                return findSameSideAngle(defaultBody[3], distance[3]); // สามเหลี่ยมด้านไม่เท่า
             default:
                 return 0;
         }
     }
 
-    public static double findKneeAngle(double[] distance,double fKnee, double fAnkle, double fShin){
+    public static double findKneeAngle(double knee, double ankle){
         //power(3, 2) == 9
-        double s = (Math.pow(fKnee,2)+Math.pow(fShin,2)-Math.pow(fAnkle,2))/(2*fKnee*fShin);
+        double kk = Math.pow(knee,2);
+        double ss = Math.pow(shin,2);
+        double aa = Math.pow(ankle,2);
+        double s = (kk + ss - aa)/(2*knee*shin);
         //radian to Degree
         double r = Math.toDegrees(Math.acos(s));
 
         //Degree Condition
-        if (r == 180){return r;}
-        else if(r > 180){return 180;}
+        if(r > 180){return 180;}
         else if(r < 0){return 0;}
-        else {return r - 20;}
+        else {return r;}
     }
 
     public static double findSameSideAngle(double defaultElbow, double distance){
@@ -78,14 +63,10 @@ public class DistanceAngle {
         else {return r;}
     }
 
-    public static String getTextDouble(Double d){return String.format("%.4f", d);}
-
     public static double calculateDistance(double txPowerLevel, double rssi){
         /* Distance Formula is
          * d = 10 ^ ((P-Rssi) / 10n) (n ranges from 2 to 4);
          */
-        //double dTxPowerLevel = txPowerLevel*1.0;
-        double dTxPowerLevel = 0.0;
         double n = 4.0;
         double powValue = (txPowerLevel-rssi)/(10*n);
 
@@ -93,7 +74,5 @@ public class DistanceAngle {
         return Math.pow(10.0, powValue); // Distance
 
     }
-    public static Double[] getBodyHalf(double arm, double knee, double ankle, double shin){
-        return new Double[]{arm, knee, ankle, shin};
-    }
+
 }

@@ -15,14 +15,12 @@
         android:textAlignment="center"
         android:textColor="@color/textPrimary"
         android:layout_marginTop="20dp"/>
-
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="250dp"
         android:layout_marginTop="90dp"
         android:padding="10dp"
         android:layout_centerHorizontal="true">
-
         <TableLayout
             android:layout_width="wrap_content"
             android:layout_height="200dp">
@@ -33,35 +31,30 @@
 
                 android:textSize="@dimen/text_content"/>
             <TextView />
-
             <TextView android:text="@string/caution_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 android:textSize="@dimen/text_content"/>
             <TextView />
-
             <TextView android:text="@string/caution_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 android:textSize="@dimen/text_content"/>
             <TextView />
-
             <TextView android:text="@string/caution_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 android:textSize="@dimen/text_content"/>
             <TextView />
-
             <TextView android:text="@string/caution_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 android:textSize="@dimen/text_content"/>
             <TextView />
-
             <TextView android:text="@string/caution_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,8 +64,6 @@
 
         </TableLayout>
     </ScrollView>
-
-
 
     <!--Button android:id="@+id/list_caution_button"
         android:layout_width="match_parent"

@@ -1,7 +1,6 @@
 package com.example.gear.rppm.activity;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.bluetooth.BluetoothAdapter;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,13 +22,6 @@ import com.example.gear.rppm.fragment.CheckBeaconFragment;
 import com.example.gear.rppm.fragment.ArmHomeFragment;
 import com.example.gear.rppm.fragment.LegHomeFragment;
 import com.example.gear.rppm.fragment.ManualFragment;
-
-import org.altbeacon.beacon.Beacon;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
-
 
 public class MainActivity extends AppCompatActivity
         implements HomeFragment.OnFragmentInteractionListener
@@ -53,7 +45,16 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG_ARM = "arm";
     private static final String TAG_LEG = "leg";
     private static final String TAG_MANUAL = "manual";
-    public static String CURRENT_TAG = TAG_HOME;
+    private static final String TAG_DOING = "doing";
+
+    private static String TAG_DOING_CURRENT_DIALOG;
+
+    private static String TAG_DOING_DIALOG_FINISH_ALL = "finishAll";
+    private static String TAG_DOING_DIALOG_FINISH_ONE = "finishOne";
+    private static String TAG_DOING_DIALOG_PAUSE = "pause";
+    //public static String CURRENT_TAG = TAG_HOME;
+
+    private static String CURRENT_TAG;
 
     // toolbar titles respected to selected nav menu item
     private String[] activityTitles;
@@ -61,8 +62,6 @@ public class MainActivity extends AppCompatActivity
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
 
-
-    private Collection<Beacon> beacons = new HashSet<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +72,6 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar); //in app_bar_sliding_menu_xml
         setSupportActionBar(toolbar);
 
-        //selectToolbarNav();
-
         mHandler = new Handler();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -83,26 +80,33 @@ public class MainActivity extends AppCompatActivity
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
+
         setUpNavigationView();
 
         if (savedInstanceState == null) {
             navItemIndex = 0;
-            CURRENT_TAG = TAG_HOME;
+            //CURRENT_TAG = TAG_HOME;
             setToolbarTitleByString("หน้าแรก");
-            loadFragment();
+            //loadFragment();
+            replaceFragment(getFragment());
         }
-
-        //scanDeviceActivity = new ScanDeviceActivity();
 
     }
 
-    /***
-     * Load navigation menu header information
-     * like background image, profile image
-     * name, website, notifications action view (dot)
-     */
+    public void replaceFragment(final Fragment fragment){
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame, fragment, CURRENT_TAG);
+        transaction.addToBackStack(null);
+        transaction.commit();
 
-    public void loadFragment() {
+        //Closing drawer on item click
+        drawer.closeDrawers();
+
+        //invalidateOptionsMenu();
+
+    }
+
+    /*public void loadFragment() {
         // selecting appropriate nav menu item
         selectNavMenu();
         setToolbarTitle();
@@ -112,11 +116,10 @@ public class MainActivity extends AppCompatActivity
             return;
         }
 
-        // loaded with cross fade effect
         Runnable mPendingRunnable = new Runnable() {
             @Override
             public void run() {
-                // update the main content by replacing fragments
+                //replacing fragments
                 Fragment fragment = getFragment();
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 //fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -135,7 +138,7 @@ public class MainActivity extends AppCompatActivity
 
         // refresh toolbar menu
         invalidateOptionsMenu();
-    }
+    }*/
 
     public Fragment getFragment() {
         switch (navItemIndex) {
@@ -176,7 +179,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void selectNavMenu() {
-
         navigationView.getMenu().getItem(navItemIndex).setChecked(true);
         //navigationView.getMenu().getItem(navItemIndex).setChecked(true);
 
@@ -226,7 +228,8 @@ public class MainActivity extends AppCompatActivity
                 }
                 menuItem.setChecked(true);
 
-                loadFragment();
+                replaceFragment(getFragment());
+                //loadFragment();
 
                 return true;
             }
@@ -266,25 +269,61 @@ public class MainActivity extends AppCompatActivity
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             //fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,android.R.anim.fade_out);
             fragmentTransaction.commitAllowingStateLoss();
-            return;
+                return;
         }
 
-        /* This code loads home fragment when back key is pressed
-         * when user is in other fragment than home */
-        if (shouldLoadHomeFragOnBackPress) {
-            /* checking if user is on other navigation menu
-             * rather than home */
-            if (navItemIndex != 0) {
-                navItemIndex = 0;
-                CURRENT_TAG = TAG_HOME;
-                loadFragment();
-                return;
-            }
-            else {
-                setToolbarTitleByString("หน้าแรก");
-            }
+        switch (CURRENT_TAG){
+            case TAG_HOME:
+                /*Close Application*/
+                finishAndRemoveTask();
+            case TAG_DOING:
+                super.onBackPressed();
+                break;
+            /*case TAG_DOING:
+                if(TAG_DOING_CURRENT_DIALOG.equals(TAG_DOING_DIALOG_FINISH_ALL)){
+                    navItemIndex = 0;
+                    replaceFragment(getFragment());
+                } else if(TAG_DOING_CURRENT_DIALOG.equals(TAG_DOING_DIALOG_FINISH_ONE)){
+                    navItemIndex = 0;
+                    replaceFragment(getFragment());
+                } else if(TAG_DOING_CURRENT_DIALOG.equals(TAG_DOING_DIALOG_PAUSE)){
+
+                }
+                else {
+                    /*DO NOTHING*/
+                //}
+                //break;
+            default:
+                /* checking if user is on other navigation menu
+                 * rather than home */
+                if (navItemIndex != 0) {
+                    navItemIndex = 0;
+                    //CURRENT_TAG = TAG_HOME;
+                    //loadFragment();
+                    replaceFragment(getFragment());
+                } else {
+                    //super.onBackPressed();
+                    setToolbarTitleByString("หน้าแรก");
+                    replaceFragment(new HomeFragment());
+                }
+                break;
+
         }
-        super.onBackPressed();
+
+
+        //super.onBackPressed();
+    }
+
+    public void setCurrentTag(String currentTag) {
+        CURRENT_TAG = currentTag;
+    }
+
+    public static String getCurrentTag() {
+        return CURRENT_TAG;
+    }
+
+    public void setTagDoingCurrentDialog(String tagDoingCurrentDialog) {
+        TAG_DOING_CURRENT_DIALOG = tagDoingCurrentDialog;
     }
 
     @Override

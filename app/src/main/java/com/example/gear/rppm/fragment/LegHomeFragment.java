@@ -33,16 +33,16 @@ public class LegHomeFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private String TAG_CURRENT = "";
+
+    private String CURRENT_TAG = "leg";
+
     private String TAG_LEGHOME = "LegHome";
     private String TAG_TREAT1 = "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน";
     private String TAG_TREAT2 = "กางและหุบข้อตะโพก";
-    private String TAG_TREAT3 = "หมุนข้อตะโพกเข้าและออก";
+    private String TAG_TREAT3 = "ยกขาขึ้นทั้งขา";
 
     private int[] resId = { R.drawable.ic_action_menu_add
             , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history};
-
-
 
     // TODO: Rename and change types of parameters
     private int setRoundNumber;
@@ -98,7 +98,7 @@ public class LegHomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_leg_home, container, false);
-
+        ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
         ((MainActivity)getActivity()).setToolbarTitleByString("การกายภาพบำบัดส่วนขา");
 
         /*Setup Important param*/
@@ -167,7 +167,7 @@ public class LegHomeFragment extends Fragment {
         DoingFragment.setFlagTreat(flagTreat);
         DoingFragment.setMaxSet(setRoundNumber);
 
-        transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
+        //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
         transaction.replace(R.id.frame, new DoingFragment(), flagTreat);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -181,12 +181,22 @@ public class LegHomeFragment extends Fragment {
         mAlertBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                setRoundNumber = Integer.parseInt(""+setRoundEditText.getText());
-                if(setRoundNumber <= 0 || setRoundNumber > 5){
-                    Toast.makeText(view.getContext(), "จำนวนต้องอยู่ระหว่าง 1 ถึง 5", Toast.LENGTH_LONG).show();
-                    Log.e("No. of Round:", ""+ setRoundNumber);
-                } else {
-                    replaceDoingFragment(CURRENT_TREAT, "leg", setRoundNumber);
+                try {
+                    if(setRoundEditText.getText().toString().equals("")){
+                        Toast.makeText(view.getContext(), "กรุณาใส่จำนวนรอบที่ต้องการ", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        setRoundNumber = Integer.parseInt(setRoundEditText.getText().toString());
+
+                        if(setRoundNumber > 0 && setRoundNumber <= 5){
+                            replaceDoingFragment(CURRENT_TREAT, "arm", setRoundNumber);
+                        } else {
+                            Toast.makeText(view.getContext(), "จำนวนต้องอยู่ระหว่าง 1 ถึง 5", Toast.LENGTH_LONG).show();
+                            Log.e("No. of Round:", ""+ setRoundNumber);
+                        }
+                    }
+                } catch (Exception e){
+                    Toast.makeText(view.getContext(), "กรุณาใส่จำนวนรอบเป็นจำนวนเต็ม", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -203,7 +213,5 @@ public class LegHomeFragment extends Fragment {
         alertDialog.getButton(alertDialog.BUTTON_POSITIVE);
         alertDialog.getButton(alertDialog.BUTTON_NEGATIVE);
         setRoundEditText = (EditText) alertDialog.findViewById(R.id.dialog_setRound_editText_num);
-
     }
-
 }

@@ -29,7 +29,7 @@ public class DataArray extends Fragment {
             , "เหยียดและงอข้อศอก"
             , "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน"
             , "กางและหุบข้อตะโพก"
-            , "หมุนข้อตะโพกเข้าและออก"};
+            , "ยกขาขึ้นทั้งขา"};
 
     //private String[] deviceAddress = getResources().getStringArray(R.array.device_address);
 
@@ -37,9 +37,10 @@ public class DataArray extends Fragment {
             "D4:36:39:DE:54:CB"
             , "D4:36:39:DE:54:CD"
             , "D4:36:39:DE:55:82"
-            , "D4:36:39:DE:56:A1"};
+            , "D4:36:39:DE:56:FC"};
 
     /**= new String[]{
+     * D4:36:39:DE:56:A1
             , "D4:36:39:DE:56:FC"
             , "D4:36:39:DE:57:5D"
             , "D4:36:39:DE:57:AA"
@@ -56,7 +57,7 @@ public class DataArray extends Fragment {
             ,{0,0,0,0}             //arm เหยียดและงอข้อศอก----------------เหนือหัวไหล่ขนานกับแขน
             ,{0,0,0,0}             //leg งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน----บริเวณหัวเข็มขัด
             ,{0,0,0,0}             //leg กางและหุบข้อตะโพก----------------วางระหว่างข้อเท้าทั้งสองด้าน
-            ,{0,0,0,0}             //leg หมุนข้อตะโพกเข้าและออก-------------
+            ,{0,0,0,0}             //leg ยกขาขึ้นทั้งขา-------------
     };
 
     public DataArray() {
@@ -81,9 +82,9 @@ public class DataArray extends Fragment {
                 return 1;
             case "D4:36:39:DE:55:82":
                 return 2;
-            case "D4:36:39:DE:56:A1":
-                return 3;
             case "D4:36:39:DE:56:FC":
+                return 3;
+            case "D4:36:39:DE:56:A1":
                 return 4;
             case "D4:36:39:DE:57:5D":
                 return 5;
@@ -115,7 +116,7 @@ public class DataArray extends Fragment {
                 return 5;
             case "กางและหุบข้อตะโพก":
                 return 6;
-            case "หมุนข้อตะโพกเข้าและออก":
+            case "ยกขาขึ้นทั้งขา":
                 return 7;
             default:
                 return -1;

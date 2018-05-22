@@ -10,10 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.gear.rppm.R;
 import com.example.gear.rppm.activity.MainActivity;
@@ -38,8 +36,10 @@ public class ManualFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private static String CURRENT_TAG = "manual";
+
     private String[] manualChoice;
-    private String[] manualBasic;
 
     /*UI Component*/
     private ListView frag_manual_lv_01;
@@ -86,6 +86,8 @@ public class ManualFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_manual, container, false);
+
+        ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
         ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_manual);
 
         /*Setup important param*/
@@ -146,7 +148,6 @@ public class ManualFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    //AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
     public void showManualDialog(String title){
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         alertDialogBuilder.setTitle(title);
@@ -154,7 +155,6 @@ public class ManualFragment extends Fragment {
         switch (title){
             case "เมนูของแอพพลิเคชัน":
                 alertDialogBuilder.setView(R.layout.manual_basic);
-
                 alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -192,19 +192,4 @@ public class ManualFragment extends Fragment {
         alertDialog.getButton(alertDialog.BUTTON_POSITIVE);
 
     }
-
-    /**private void settingDialog(int layout_id,int array_id){
-        manualBasic = getResources().getStringArray(R.array.manual_basic_array);
-        alertDialogBuilder.setView(R.layout.manual_basic);
-
-        CustomListViewAdapter dialogAdapter = new CustomListViewAdapter(getContext(), manualBasic);
-        ListView manual_basic_lv = (ListView) view.findViewById(R.id.manual_basic_lv_001);
-        manual_basic_lv.setAdapter(dialogAdapter);
-
-        alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-            }
-        });
-    }*/
 }
