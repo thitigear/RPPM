@@ -447,7 +447,7 @@ public class DoingFragment extends Fragment {
     private void calculateArmRound(double angle){
         try {
             if (!isCountThisRound){
-                if(angle >= 90){
+                if(angle >= 45){
                     isCountThisRound = true;
                     currentTime += 1;
                 }
