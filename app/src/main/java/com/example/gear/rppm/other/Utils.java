@@ -26,4 +26,19 @@ public class Utils {
     public static void stopNotificationSound(){
         ringtone.stop();
     }
+
+    public static double calculateAverageAngleFromSumAngle(double[] maxAngleArray, int time){
+        double sumAngle = 0;
+        for (double angle: maxAngleArray){
+            sumAngle += angle;
+        }
+        return sumAngle/time;
+    }
+    public static int calculateAverageAngleWhenDoing(double[] maxAngleArray, int time){
+        if (time != 0){
+            return (int)Utils.calculateAverageAngleFromSumAngle(maxAngleArray, time);
+        }
+        else {return 0;}
+    }
+
 }

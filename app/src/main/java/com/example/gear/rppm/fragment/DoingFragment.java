@@ -336,10 +336,16 @@ public class DoingFragment extends Fragment {
     }
 
         /*Show Dialog While Condition(TRUE)*/
+    @SuppressLint("DefaultLocale")
     private void showPauseCaution(){
+        /*Calculate Average Angle with time you're doing*/
+        int averageAngle = Utils.calculateAverageAngleWhenDoing(maxAnglePerTime, currentTime);
+
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
-        mAlertBuilder.setTitle("หยุด");
-        mAlertBuilder.setMessage("หยุดชั่วคราว");
+        mAlertBuilder.setTitle("หยุดชั่วคราว");
+        mAlertBuilder.setMessage(String.format("มุมที่ทำได้มากที่สุด %d องศา %nมุมที่ทำได้เฉลี่ย %d องศา %nจากทั้งหมด %d ครั้ง"
+                , (int)maxAngle, averageAngle, currentTime
+        ));
 
         mAlertBuilder.setPositiveButton("ทำต่อ", new DialogInterface.OnClickListener() {
             @Override
