@@ -6,22 +6,22 @@
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
-    <!-- Navigation Drawer menu labels TH -->
-    <string name="nav_home">หน้าแรก</string>
-    <string name="nav_check_beacon">ตรวจสอบสถานะอุปกรณ์</string>
-    <string name="nav_arm">การกายภาพบำบัดส่วนแขน</string>
-    <string name="nav_leg">การกายภาพบำบัดส่วนขา</string>
-    <string name="nav_manual">คู่มือการใช้งาน</string>
-    <string name="nav_setting">ตั้งค่า</string>
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_home">Home</string>
+    <string name="nav_check_beacon">Check Devices</string>
+    <string name="nav_arm">Arms Recovering</string>
+    <string name="nav_leg">Legs Recovering</string>
+    <string name="nav_manual">User Manual</string>
+    <string name="nav_setting">Setting</string>
 
-    <!-- Toolbar titles when navigation menu item is selected TH -->
+    <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
-        <item>หน้าแรก</item>
-        <item>ตรวจสอบสถานะอุปกรณ์</item>
-        <item>การกายภาพบำบัดส่วนแขน</item>
-        <item>การกายภาพบำบัดส่วนขา</item>
-        <item>วิธีการใช้งาน</item>
-        <item>ตั้งค่า</item>
+        <item>Home</item>
+        <item>Check Device</item>
+        <item>Arms</item>
+        <item>Legs</item>
+        <item>Manual</item>
+        <item>Setting</item>
     </string-array>
 
     <string name="activity_title_about_us">About Us</string>
@@ -39,13 +39,14 @@
 
     <string name="nav_content_other">Other</string>
 
+    <!-- OLD STRING DATA FROM ARSM-->
     <!-- Popular Word -->
-    <string name="ok">ตกลง</string>
-    <string name="cancel">ยกเลิก</string>
-    <string name="elbow">ศอก</string>
-    <string name="wrist">ข้อมือ</string>
-    <string name="knee">เข่า</string>
-    <string name="ankle">ข้อเท้า</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="elbow">Elbow</string>
+    <string name="wrist">Wrist</string>
+    <string name="knee">Knee</string>
+    <string name="ankle">Ankle</string>
 
     <!-- MainActivity -->
     <string name="tArmL">L Arm</string>
@@ -81,78 +82,91 @@
 
     <string name="under_header_line">_</string>
 
-    <!-- allBeaconActivity -->
-    <string name="allbeacon_textView_device_connect">Connected</string>
-    <string name="allbeacon_textView_device_not_found">Not Found</string>
-
-    <!-- historyActivity -->
-    <string name="history_textView_header">Round History</string>
-    <string name="history_button_clearHistory">Clear History</string>
-
     <!-- Beacon -->
     <string name="beacon_D4_57_D0">D4:36:39:DE:57:D0</string>
     <string name="beacon_D4_56_C6">D4:36:39:DE:56:C6</string>
 
-    <!-- fragment_check_beacon TH -->
-    <string name="fragment_chk_beacon_caption">iBeacons STATUS CHECKING</string>
-    <string name="fragment_chk_beacon_desc">ตรวจสอบสถานะอุปกรณ์เซ็นเซอร์ iBeacon</string>
+    <!-- fragment_check_beacon EN -->
+    <string name="fragment_chk_beacon_caption">DEVICE CHECKING</string>
+    <string name="fragment_chk_beacon_desc">iBeacons STATUS CHECKING</string>
 
-    <!-- fragment_home TH -->
-    <string name="fragment_home_contentChoice">เลือกประเภทการทำกายภาพบำบัดที่ต้องการ</string>
+    <!-- fragment_home EN-->
+    <string name="fragment_home_contentChoice">Choose the type of physical therapy</string>
 
-    <!-- fragment_arm_home TH -->
-    <string name="fragment_arm_home_title">Arms</string>
+    <!-- fragment_arm_home EN-->
+    <string name="fragment_arm_home_title">Arms Recovering</string>
     <string name="fragment_arm_home_caption">ARMS RECOVERING</string>
-    <string name="fragment_arm_home_desc">กายภาพบำบัดส่วนแขน</string>
+    <string name="fragment_arm_home_desc">Arms Recovering</string>
 
-    <!-- fragment_leg_home TH -->
-    <string name="fragment_leg_home_title">Arms</string>
+    <!-- fragment_leg_home EN-->
+    <string name="fragment_leg_home_title">Legs Recovering</string>
     <string name="fragment_leg_home_caption">LEGS RECOVERING</string>
-    <string name="fragment_leg_home_desc">กายภาพบำบัดส่วนขา</string>
+    <string name="fragment_leg_home_desc">Legs Recovering</string>
 
-    <!-- showSetRound -->
-    <string name="showSetRound_title">ตั้งค่าการกายภาพบำบัด</string>
-    <string name="showSetRound_text_001">กรุณาใส่จำนวนรอบที่ต้องการ</string>
-    <string name="showSetRound_popup_1_5">จำนวนต้องอยู่ระหว่าง 1 ถึง 5</string>
-    <string name="showSetRound_popup_isNumber">กรุณาใส่จำนวนรอบเป็นจำนวนเต็ม</string>
+    <!-- showSetRound EN-->
+    <string name="showSetRound_title">Round Setting.</string>
+    <string name="showSetRound_text_001">Please enter number of sets that you want.</string>
+    <string name="showSetRound_popup_1_5">The number must be between 1 to 5.</string>
+    <string name="showSetRound_popup_isNumber">Please enter an integer number.</string>
 
-    <!-- layout Dialog setRound -->
-    <string name="layout_dialogSetRound_do">ทำ</string>
-    <string name="layout_dialogSetRound_text_noMore5">ไม่ควรเกิน 5 เซ็ต</string>
-    <string name="layout_dialogSetRound_set">เซ็ต</string>
-    <string name="layout_dialogSetRound_sets">เซ็ต</string>
-    <string name="layout_dialogSetRound_set_desc">1 เซ็ต = 10 ครั้ง</string>
+    <!-- layout Dialog setRound EN-->
+    <string name="layout_dialogSetRound_do">do</string>
+    <string name="layout_dialogSetRound_text_noMore5">Between 1 to 5</string>
+    <string name="layout_dialogSetRound_set">Set</string>
+    <string name="layout_dialogSetRound_sets">Sets</string>
+    <string name="layout_dialogSetRound_set_desc">1 set = 10 times</string>
 
-    <!-- fragment_doing TH -->
-    <string name="fragment_doing_header">Start Recovering</string>
-    <string name="fragment_doing_but_stop">หยุด</string>
-    <string name="fragment_doing_tv_angle01">มุม</string>
-    <string name="fragment_doing_tv_angle02">องศา</string>
-    <string name="fragment_doing_tv_set">เซ็ต</string>
+    <!-- fragment_doing EN-->
+    <string name="fragment_doing_but_stop">Pause</string>
+    <string name="fragment_doing_tv_angle01">Angle</string>
+    <string name="fragment_doing_tv_angle02">Degree</string>
+    <string name="fragment_doing_tv_set">Set</string>
     <string name="fragment_doing_tv_slash">/</string>
-    <string name="fragment_doing_tv_treatName">ชื่อท่า</string>
-    <string name="fragment_doing_tv_time01">ทำไป</string>
-    <string name="fragment_doing_tv_time02">ครั้ง</string>
-    <string name="fragment_doing_dialog_maxAngle">มุมที่ทำได้มากที่สุด</string>
-    <string name="fragment_doing_dialog_averageAngle">มุมที่ทำได้เฉลี่ย</string>
-    <string name="fragment_doing_dialog_but_001">ทำต่อ</string>
-    <string name="fragment_doing_dialog_but_002">กลับไปหน้าเลือกท่า</string>
-    <string name="fragment_doing_dialog_finishAll_title">คุณทำกายภาพครบทั้งหมดแล้ว</string>
-    <string name="fragment_doing_dialog_finishOne_title">หยุดพักชั่วคราว</string>
-    <string name="fragment_doing_dialog_pause_title">หยุดชั่วคราว</string>
-    <string name="fragment_doing_dialog_pause_doTime">จากทั้งหมด</string>
-    <!-- MANUAL FRAGMENT -->
-    <string name="manual_header">คู่มือการใช้งาน</string>
-    <string name="manual_button_ok">ตกลง</string>
+    <string name="fragment_doing_tv_treatName">Treat</string>
+    <string name="fragment_doing_tv_time01">Did</string>
+    <string name="fragment_doing_tv_time02">Time</string>
+    <string name="fragment_doing_dialog_maxAngle">Max Angle :</string>
+    <string name="fragment_doing_dialog_averageAngle">Average Angle :</string>
+    <string name="fragment_doing_dialog_but_001">Resume</string>
+    <string name="fragment_doing_dialog_but_002">Back</string>
+    <string name="fragment_doing_dialog_finishAll_title">Finish</string>
+    <string name="fragment_doing_dialog_finishOne_title">Get some rest</string>
+    <string name="fragment_doing_dialog_pause_title">Pause</string>
+    <string name="fragment_doing_dialog_pause_doTime">From</string>
+
+    <!-- Caution EN -->
+    <string name="caution_header">Caution</string>
+    <string name="caution_button"><b>Understand</b></string>
+    <string name="caution_1">1. Please do very slow</string>
+    <string name="caution_2">2. Should make a motion for most degrees of normal movement, but be careful with the internal fixation and must not do than the patient can do.</string>
+    <string name="caution_3">3. In each post, Do 2 sets 10–20 times </string>
+    <string name="caution_4">4. Should not do after the meal or while the patient has fever.</string>
+    <string name="caution_5">5. If the patient has acute arthritis or wound. Should do with caution.</string>
+    <string name="caution_6">6. While doing, if patient feel pain or has other problem. Should stop and consult a physician or a physiotherapist.</string>
+    <string name="caution_7">7. Should be continuously rehabilitated physiotherapy.</string>
+
+    <!-- Load App En -->
+    <string name="load_app_header">The benefits of physical therapy</string>
+    <string name="load_app_content1">1. Reduces the adhesion of various tissues such as muscles, tendons, etc.</string>
+    <string name="load_app_content2">2. Maintain state of the joints and the tissues</string>
+    <string name="load_app_content3">3. Reduce muscle contraction and help muscles to be flexible.</string>
+    <string name="load_app_content4">4. Stimulates blood circulation system</string>
+    <string name="load_app_content5">5. Help the joints to be normal.</string>
+    <string name="load_app_content6">6. Reduce and prevent pain, fatigue in joints and muscles</string>
+    <string name="load_app_button">Start physical therapy</string>
+
+    <!-- MANUAL FRAGMENT EN -->
+    <string name="manual_header">User Manual</string>
+    <string name="manual_button_ok">OK</string>
     <string-array name="manual_choice">
-        <item>เมนูของแอพพลิเคชัน</item>
-        <item>การใช้งานฟังก์ชันกายภาพบำบัด</item>
-        <item>ตำแหน่งเซ็นเซอร์และตำแหน่งการวางโทรศัพท์มือถือ</item>
-        <item>ข้อแนะนำอื่นๆ</item>
+        <item>Application\'s menu</item>
+        <item>How to use physical therapy function</item>
+        <item>How to set sensor and smart phone position</item>
+        <item>Others</item>
     </string-array>
 
-    <string name="manual_basic_01">เมนูของแอพพลิเคชัน</string>
-    <string name="manual_basic_02">***ข้อสำคัญ: ไอคอนเพื่อเปิดแถบเมนูจะอยู่บริเวณมุมซ้ายบนของหน้าจอแอปพลิเคชัน โดยเมนูของแอปพลิเคชันมีดังนี้</string>
+    <string name="manual_basic_01">Application\'s menu</string>
+    <string name="manual_basic_02">***Important: The menu\'s icon is on the upper left of the screen โดยเมนูของแอปพลิเคชันมีดังนี้</string>
     <string name="manual_basic_03">1.1 หน้าแรก: เลือกประเภทการทำกายภาพบำบัด (แขน / ขา)</string>
     <string name="manual_basic_04">1.2 ตรวจสอบสถานะอุปกรณ์: แสดงอุปกรณ์เซนเซอร์ที่เชื่อมต่อกับแอปพลิเคชันผ่านบลูทูธ</string>
     <string name="manual_basic_05">1.3 การกายภาพบำบัดส่วนแขน: เลือกท่ากายภาพบำบัดส่วนแขน มี 5 ท่า ได้แก่ ท่ายกแขนขึ้นและลง, ท่ากางแขนและหุบแขนทางข้างลำตัว, ท่ากางแขนและหุบแขนในแนวตั้งฉากกับลำตัว, ท่าหมุนข้อไหล่ขึ้นและลง, ท่าเหยียดและงอข้อศอก</string>
@@ -202,7 +216,7 @@
 
     <!-- SETTING Fragment -->
     <string name="setting_header">Setting</string>
-    <string name="setting_language">เปลี่ยนภาษา</string>
+    <string name="setting_language">Change Language</string>
     <string name="setting_apply">Apply</string>
     <string name="setting_cancel">Cancel</string>
     <!-- Language String Array -->
@@ -210,28 +224,6 @@
         <item>ไทย</item>
         <item>English</item>
     </string-array>
-
-    <!-- Caution TH -->
-    <string name="caution_header">ข้อห้ามและข้อควรระวังของการทำกายภาพบำบัด</string>
-    <string name="caution_1">1. การเคลื่อนไหวข้อให้ผู้ป่วยควรทำช้าๆ</string>
-    <string name="caution_2">2. ควรทำการเคลื่อนไหวให้สุดองศาของการเคลื่อนไหวที่ปกติ แต่ควรระวังในรายที่มีการดามเหล็กอยู่ภายในข้อ ภายในกระดูก ต้องไม่ทำเกินกว่าที่ผู้ป่วยทำได้</string>
-    <string name="caution_3">3. ในแต่ละท่าทำซ้ำๆท่าละ 10-20 ครั้ง วันละ 2 รอบระหว่างทำให้ผู้ป่วยคิดอยู่เสมอว่ากำลังทำการเคลื่อนไหวด้วยตนเอง</string>
-    <string name="caution_4">4. ไม่ควรทำการเคลื่อนไหวหลังจากรับประทานอาหารอิ่มใหม่ๆ หรือในขณะผู้ป่วยมีไข้</string>
-    <string name="caution_5">5. หากผู้ป่วยมีภาวะข้ออักเสบระยะเฉียบพลัน หรือแผลเปิดควรทำการเคลื่อนไหวในข้อต่อนั้นด้วยความระมัดระวัง</string>
-    <string name="caution_6">6. ขณะทำการเคลื่อนไหวข้อ ถ้าผู้ป่วยปวด หรือพบปัญหาอย่างอื่นตามมา ควรหยุดและปรึกษาแพทย์หรือนักกายภาพบำบัด</string>
-    <string name="caution_7">7. ควรได้รับการฟื้นฟูทางกายภาพบำบัดอย่างต่อเนื่อง</string>
-    <string name="caution_button"><b>เข้าใจ</b></string>
-
-    <!-- Load App TH -->
-    <string name="load_app_header">ประโยชน์ของการทำกายภาพบำบัด</string>
-    <string name="load_app_content1">1. ช่วยลดการยึดติดของเนื้อเยื่อต่างๆ เช่น กล้ามเนื้อ, เอ็นกล้ามเนื้อ เป็นต้น</string>
-    <string name="load_app_content2">2. ช่วยรักษาสภาพของข้อต่อ และเนื้อเยื่อบริเวณนั้นให้เป็นปกติ</string>
-    <string name="load_app_content3">3. ช่วยลดอาการเกร็งของกล้ามเนื้อ และช่วยทำให้กล้ามเนื้อมีสภาพความยืดหยุ่นปกติ</string>
-    <string name="load_app_content4">4. ช่วยกระตุ้นระบบหมุนเวียนโลหิต</string>
-    <string name="load_app_content5">5. ช่วยให้สภาพภายในของข้อต่ออยู่ในสภาพปกติ</string>
-    <string name="load_app_content6">6. ลด และป้องกันอาการปวด, เมื่อย ตามข้อและกล้ามเนื้อ</string>
-    <string name="load_app_button">เริ่มทำกายภาพ</string>
-
 
     <!-- Device ADDRESS -->
     <string-array name="device_address">
@@ -247,16 +239,16 @@
 
     <!-- ชื่อท่า Treat Name -->
     <string-array name="treat_arm">
-        <item>ยกแขนขึ้นและลง</item>
-        <item>กางแขนและหุบแขนทางข้างลำตัว</item>
-        <item>กางแขนและหุบแขนในแนวตั้งฉากกับลำตัว</item>
-        <item>หมุนข้อไหล่ขึ้นและลง</item>
-        <item>เหยียดและงอข้อศอก</item>
+        <item>Raise your arms up and down.</item>
+        <item>Openning and closing the arms via sides.</item>
+        <item>Opening and closing the arms perpendicular to the body.</item>
+        <item>Rotating shoulder joints up and down.</item>
+        <item>Stretch and bend the elbow.</item>
     </string-array>
     <string-array name="treat_leg">
-        <item>งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน</item>
-        <item>กางและหุบข้อตะโพก</item>
-        <item>ยกขาขึ้นทั้งขา</item>
+        <item>Bend the leg and stretch the hip and knee together.</item>
+        <item>Opening and closing of hip joint</item>
+        <item>Lift the legs up</item>
     </string-array>
 
     <!-- Node ที่ใช้ในแต่ละท่า -->

@@ -11,7 +11,7 @@
 
         android:layout_marginTop="15dp"
         android:layout_marginStart="30dp"
-        android:text="ทำ"
+        android:text="@string/layout_dialogSetRound_do"
         android:textAlignment="textStart"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_sub_header"/>
@@ -20,7 +20,7 @@
         android:ems="7"
         android:inputType="numberDecimal"
 
-        android:hint="ไม่ควรเกิน 5 เซ็ต"
+        android:hint="@string/layout_dialogSetRound_text_noMore5"
         android:text=""
         android:layout_alignTop="@id/dialog_setRound_tv_1"
         android:layout_width="wrap_content"
@@ -34,12 +34,12 @@
         android:layout_toEndOf="@id/dialog_setRound_editText_num"
         android:layout_width="50dp"
 
-        android:text="เซ็ต"
+        android:text="@string/layout_dialogSetRound_sets"
         android:textAlignment="textEnd"
         android:textColor="@color/textPrimary"
         android:textSize="@dimen/text_sub_header"/>
 
-    <TextView android:text="1 เซ็ต = 10 ครั้ง"
+    <TextView android:text="@string/layout_dialogSetRound_set_desc"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"

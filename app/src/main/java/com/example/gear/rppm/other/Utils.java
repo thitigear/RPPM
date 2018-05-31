@@ -1,6 +1,7 @@
 package com.example.gear.rppm.other;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -39,6 +40,10 @@ public class Utils {
             return (int)Utils.calculateAverageAngleFromSumAngle(maxAngleArray, time);
         }
         else {return 0;}
+    }
+
+    public static String getTextFromResource(Resources resources ,int id){
+        return (String) resources.getText(id);
     }
 
 }

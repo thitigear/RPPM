@@ -173,10 +173,12 @@ public class DoingFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_doing, container, false);
         ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
-        ((MainActivity)getActivity()).setToolbarTitleByString("เริ่มทำกายภาพ");
+        ((MainActivity)getActivity()).setToolbarTitleById(R.string.load_app_button);
+        //((MainActivity)getActivity()).setToolbarTitleByString("เริ่มทำกายภาพ");
 
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+
         /*Notification Sound Setup*/
         Utils.setupSound(view.getContext());
         /* UI Component */
@@ -224,8 +226,6 @@ public class DoingFragment extends Fragment {
         return view;
     }
 
-
-
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
@@ -264,7 +264,6 @@ public class DoingFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 
     /*Setter*/
     public static void setCurrentTreat(String currentTreat) {
@@ -342,18 +341,23 @@ public class DoingFragment extends Fragment {
         int averageAngle = Utils.calculateAverageAngleWhenDoing(maxAnglePerTime, currentTime);
 
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
-        mAlertBuilder.setTitle("หยุดชั่วคราว");
-        mAlertBuilder.setMessage(String.format("มุมที่ทำได้มากที่สุด %d องศา %nมุมที่ทำได้เฉลี่ย %d องศา %nจากทั้งหมด %d ครั้ง"
-                , (int)maxAngle, averageAngle, currentTime
+        mAlertBuilder.setTitle(getResources().getText(R.string.fragment_doing_dialog_pause_title));
+        mAlertBuilder.setMessage(String.format("%s %d %s %n%s %d %s %n%s %d %s"
+                , getResources().getText(R.string.fragment_doing_dialog_maxAngle), (int)maxAngle
+                , getResources().getText(R.string.fragment_doing_tv_angle02)
+                , getResources().getText(R.string.fragment_doing_dialog_averageAngle), averageAngle
+                , getResources().getText(R.string.fragment_doing_tv_angle02)
+                , getResources().getText(R.string.fragment_doing_dialog_pause_doTime),currentTime
+                , getResources().getText(R.string.fragment_doing_tv_time02)
         ));
 
-        mAlertBuilder.setPositiveButton("ทำต่อ", new DialogInterface.OnClickListener() {
+        mAlertBuilder.setPositiveButton(getResources().getText(R.string.fragment_doing_dialog_but_001), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });
 
-        mAlertBuilder.setNegativeButton("กลับไปหน้าเลือกท่า", new DialogInterface.OnClickListener() {
+        mAlertBuilder.setNegativeButton(getResources().getText(R.string.fragment_doing_dialog_but_002), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setZero();
@@ -371,7 +375,7 @@ public class DoingFragment extends Fragment {
     @SuppressLint("DefaultLocale")
     private void showFinishOneSetDialog(){
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
-        mAlertBuilder.setTitle("หยุดพักชั่วคราว");
+        mAlertBuilder.setTitle(getResources().getText(R.string.fragment_doing_dialog_finishOne_title));
 
         if (FLAG_TREAT.equals("leg")){
             mAlertBuilder.setMessage(String.format("คุณทำกายภาพครบ %d เซ็ตแล้ว %nมุมเฉลี่ย = %d องศา"
@@ -381,7 +385,7 @@ public class DoingFragment extends Fragment {
                     , currentSet, (int)maxAngle, (int)calculateAverageAngleFromSumAngle()));
         }
 
-        mAlertBuilder.setPositiveButton("ทำต่อ", new DialogInterface.OnClickListener() {
+        mAlertBuilder.setPositiveButton(getResources().getText(R.string.fragment_doing_dialog_but_001), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 currentTime = 0;
@@ -394,7 +398,7 @@ public class DoingFragment extends Fragment {
             }
         });
 
-        mAlertBuilder.setNegativeButton("กลับไปหน้าเลือกท่า", new DialogInterface.OnClickListener() {
+        mAlertBuilder.setNegativeButton(getResources().getText(R.string.fragment_doing_dialog_but_002), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try{
@@ -419,7 +423,7 @@ public class DoingFragment extends Fragment {
     @SuppressLint("DefaultLocale")
     private void showFinishDialog(){
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
-        mAlertBuilder.setTitle("คุณทำกายภาพครบทั้งหมดแล้ว");
+        mAlertBuilder.setTitle(getResources().getText(R.string.fragment_doing_dialog_finishAll_title));
         if (FLAG_TREAT.equals("leg")){
             mAlertBuilder.setMessage(String.format("คุณทำกายภาพครบ %d เซ็ตแล้ว %nมุมเฉลี่ย = %d องศา"
                     , currentSet, (int)calculateAverageAngleFromSumAngle()));
@@ -428,7 +432,7 @@ public class DoingFragment extends Fragment {
                     , currentSet, (int)maxAngle, (int)calculateAverageAngleFromSumAngle()));
         }
 
-        mAlertBuilder.setNegativeButton("กลับไปหน้าเลือกท่า", new DialogInterface.OnClickListener() {
+        mAlertBuilder.setNegativeButton(getResources().getText(R.string.fragment_doing_dialog_but_002), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {

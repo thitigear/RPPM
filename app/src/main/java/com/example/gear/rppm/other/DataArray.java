@@ -98,25 +98,31 @@ public class DataArray extends Fragment {
     }
 
     @NonNull
-
-
     public static int getTreatNumber(String treatName){
         switch (treatName) {
             case "ยกแขนขึ้นและลง":
+            case "Raise your arms up and down.":
                 return 0;
             case "กางแขนและหุบแขนทางข้างลำตัว":
+            case "Opening and closing the arms via sides.":
                 return 1;
             case "กางแขนและหุบแขนในแนวตั้งฉากกับลำตัว":
+            case "Opening and closing the arms perpendicular to the body.":
                 return 2;
             case "หมุนข้อไหล่ขึ้นและลง":
+            case "Rotating shoulder joints up and down.":
                 return 3;
             case "เหยียดและงอข้อศอก":
+            case "Stretch and bend the elbow.":
                 return 4;
             case "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน":
+            case "Bend the leg and stretch the hip and knee together.":
                 return 5;
             case "กางและหุบข้อตะโพก":
+            case "Opening and closing of hip joint":
                 return 6;
             case "ยกขาขึ้นทั้งขา":
+            case "Lift the legs up":
                 return 7;
             default:
                 return -1;

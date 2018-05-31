@@ -1,6 +1,8 @@
 package com.example.gear.rppm.activity;
 
-import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.le.ScanCallback;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +24,9 @@ import com.example.gear.rppm.fragment.CheckBeaconFragment;
 import com.example.gear.rppm.fragment.ArmHomeFragment;
 import com.example.gear.rppm.fragment.LegHomeFragment;
 import com.example.gear.rppm.fragment.ManualFragment;
+import com.example.gear.rppm.fragment.SettingFragment;
+
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity
         implements HomeFragment.OnFragmentInteractionListener
@@ -29,15 +34,19 @@ public class MainActivity extends AppCompatActivity
         , ArmHomeFragment.OnFragmentInteractionListener
         , LegHomeFragment.OnFragmentInteractionListener
         , DoingFragment.OnFragmentInteractionListener
-        , ManualFragment.OnFragmentInteractionListener{
+        , ManualFragment.OnFragmentInteractionListener
+        , SettingFragment.OnFragmentInteractionListener{
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private Handler mHandler;
+    private Configuration configuration = new Configuration();
 
     // index to identify current nav menu item
     private int navItemIndex = 0;
+
+    private ScanCallback scanCallback;
 
     // tags used to attach the fragments
     private static final String TAG_HOME = "home";
@@ -46,6 +55,7 @@ public class MainActivity extends AppCompatActivity
     private static final String TAG_LEG = "leg";
     private static final String TAG_MANUAL = "manual";
     private static final String TAG_DOING = "doing";
+    private static final String TAG_SETTING = "setting";
 
     private static String TAG_DOING_CURRENT_DIALOG;
 
@@ -55,13 +65,13 @@ public class MainActivity extends AppCompatActivity
     //public static String CURRENT_TAG = TAG_HOME;
 
     private static String CURRENT_TAG;
+    private static String CURRENT_LANGUAGE = "th";
 
     // toolbar titles respected to selected nav menu item
     private String[] activityTitles;
 
     // flag to load home fragment when user presses back key
     private boolean shouldLoadHomeFragOnBackPress = true;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,13 +90,13 @@ public class MainActivity extends AppCompatActivity
         // load toolbar titles from string resources
         activityTitles = getResources().getStringArray(R.array.nav_item_activity_titles);
 
-
         setUpNavigationView();
 
         if (savedInstanceState == null) {
             navItemIndex = 0;
             //CURRENT_TAG = TAG_HOME;
-            setToolbarTitleByString("หน้าแรก");
+            setToolbarTitleById(R.id.nav_home);
+            //setToolbarTitleByString("หน้าแรก");
             //loadFragment();
             replaceFragment(getFragment());
         }
@@ -94,6 +104,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void replaceFragment(final Fragment fragment){
+
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, fragment, CURRENT_TAG);
         transaction.addToBackStack(null);
@@ -106,70 +118,46 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    /*public void loadFragment() {
-        // selecting appropriate nav menu item
-        selectNavMenu();
-        setToolbarTitle();
-
-        if (getSupportFragmentManager().findFragmentByTag(CURRENT_TAG) != null) {
-            drawer.closeDrawers();
-            return;
-        }
-
-        Runnable mPendingRunnable = new Runnable() {
-            @Override
-            public void run() {
-                //replacing fragments
-                Fragment fragment = getFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                //fragmentTransaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
-                fragmentTransaction.commitAllowingStateLoss();
-            }
-        };
-
-        // If mPendingRunnable is not null, then add to the message queue
-        if (mPendingRunnable != null) {
-            mHandler.post(mPendingRunnable);
-        }
-
-        //Closing drawer on item click
-        drawer.closeDrawers();
-
-        // refresh toolbar menu
-        invalidateOptionsMenu();
-    }*/
-
     public Fragment getFragment() {
+        selectNavMenu();
         switch (navItemIndex) {
             case 0:
                 // home fragment
                 HomeFragment homeFragment = new HomeFragment();
+                CURRENT_TAG = TAG_HOME;
                 return homeFragment;
             case 1:
                 // check beacon fragment
                 CheckBeaconFragment checkBeaconFragment = new CheckBeaconFragment();
+                CURRENT_TAG = TAG_CHECK_BEACON;
                 return checkBeaconFragment;
             case 2:
                 // arm fragment
                 ArmHomeFragment armHomeFragment = new ArmHomeFragment();
+                CURRENT_TAG = TAG_ARM;
                 return armHomeFragment;
             case 3:
                 // leg fragment
                 LegHomeFragment legHomeFragment = new LegHomeFragment();
+                CURRENT_TAG = TAG_LEG;
                 return legHomeFragment;
             case 4:
-                // leg fragment
+                // Manual fragment
                 ManualFragment manualFragment = new ManualFragment();
+                CURRENT_TAG = TAG_MANUAL;
                 return manualFragment;
-
+            case 5:
+                // Setting fragment
+                SettingFragment settingFragment = new SettingFragment();
+                CURRENT_TAG = TAG_SETTING;
+                return settingFragment;
             default:
                 return new HomeFragment();
         }
     }
 
     public void setToolbarTitleById(int title_id) {
-        getSupportActionBar().setTitle(title_id);
+        getSupportActionBar().setTitle(getResources().getString(title_id));
     }
     public void setToolbarTitleByString(String title) {
         getSupportActionBar().setTitle(title);
@@ -214,6 +202,10 @@ public class MainActivity extends AppCompatActivity
                     case R.id.nav_manual:
                         navItemIndex = 4;
                         CURRENT_TAG = TAG_MANUAL;
+                        break;
+                    case R.id.nav_setting:
+                        navItemIndex = 5;
+                        CURRENT_TAG = TAG_SETTING;
                         break;
                     default:
                         navItemIndex = 0;
@@ -317,6 +309,9 @@ public class MainActivity extends AppCompatActivity
     public void setCurrentTag(String currentTag) {
         CURRENT_TAG = currentTag;
     }
+    public void setCurrentLanguage(String currentLanguage) {
+        CURRENT_LANGUAGE = currentLanguage;
+    }
 
     public static String getCurrentTag() {
         return CURRENT_TAG;
@@ -331,4 +326,39 @@ public class MainActivity extends AppCompatActivity
         //Empty
     }
 
+    public void updateLanguage(String language){
+        Intent refresh = new Intent(this, MainActivity.class);
+        switch (language){
+            case "th":
+                CURRENT_LANGUAGE = "th";
+                startActivity(refresh);
+                finish();
+                //navigationView.getResources().updateConfiguration(configuration, null);
+                break;
+            case "en":
+                CURRENT_LANGUAGE = "en";
+                startActivity(refresh);
+                finish();
+                //navigationView.getResources().updateConfiguration(configuration, null);
+                break;
+            default:
+                CURRENT_LANGUAGE = "th";
+                startActivity(refresh);
+                finish();
+                //navigationView.getResources().updateConfiguration(configuration, null);
+                break;
+        }
+    }
+
+    public void updateNavigationView(){
+        setUpNavigationView();
+    }
+
+    public void setScanCallback(ScanCallback scanCallback) {
+        this.scanCallback = scanCallback;
+    }
+
+    public static String getCurrentLanguage() {
+        return CURRENT_LANGUAGE;
+    }
 }

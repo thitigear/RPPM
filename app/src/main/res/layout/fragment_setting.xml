@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.SettingFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <TextView android:text="@string/setting_header"
+            android:id="@+id/fragment_setting_tv_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+
+            android:textSize="@dimen/text_header"
+            android:textColor="@color/textPrimary"/>
+
+        <TextView android:text="@string/setting_language"
+            android:id="@+id/fragment_setting_tv_001"
+            android:layout_below="@id/fragment_setting_tv_header"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+
+
+            android:textSize="@dimen/text_content"
+            android:textColor="@color/textPrimary" />
+
+        <Spinner
+            android:id="@+id/fragment_setting_spinner_language"
+            android:layout_alignTop="@id/fragment_setting_tv_001"
+            android:layout_below="@id/fragment_setting_tv_001"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/fragment_setting_tv_001"
+            android:layout_width="200dp"/>
+
+        <Button android:text="@string/setting_apply"
+            android:background="@drawable/button_buttom_green"
+            android:id="@+id/fragment_setting_but_apply"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="190dp"
+            android:textColor="@color/textSecondary"/>
+
+        <Button android:text="@string/setting_cancel"
+            android:background="@drawable/button_buttom_red2"
+            android:id="@+id/fragment_setting_but_cancel"
+            android:layout_alignTop="@id/fragment_setting_but_apply"
+            android:layout_below="@id/fragment_setting_but_apply"
+            android:layout_height="60dp"
+            android:layout_toEndOf="@id/fragment_setting_but_apply"
+            android:layout_width="190dp"
+            android:textColor="@color/textSecondary"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

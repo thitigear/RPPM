@@ -1,60 +1,58 @@
 package com.example.gear.rppm.fragment;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import com.example.gear.rppm.R;
 import com.example.gear.rppm.activity.MainActivity;
-import com.example.gear.rppm.other.CautionAdapter;
 
-import java.util.Objects;
+import java.util.Locale;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface
+ * {@link SettingFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link SettingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-
-public class HomeFragment extends Fragment{
+public class SettingFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    private int navItemIndex = 0;
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    private static String CURRENT_TAG = "home";
+    private static int spinnerItemPosition;
 
-    private Button frag_home_choice_arm;
-    private Button frag_home_choice_leg;
+    private static String CURRENT_TAG = "setting";
+    private static String[] languageName;
 
-    private static String TAG_CHOOSE_CURRENT = "";
+    private ArrayAdapter<String> languageAdapter;
 
-    private static String TAG_ARM = "arm";
-    private static String TAG_LEG = "leg";
+    private static Button frag_setting_but_apply;
+    private static Button frag_setting_but_cancel;
+    private static Spinner frag_setting_spinner_language;
+
+    private View view;
 
     private OnFragmentInteractionListener mListener;
-    private CautionAdapter cautionAdapter;
-    private View v;
 
-    public HomeFragment() {
+    public SettingFragment() {
         // Required empty public constructor
     }
 
@@ -64,11 +62,11 @@ public class HomeFragment extends Fragment{
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * @return A new instance of fragment Setting.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static SettingFragment newInstance(String param1, String param2) {
+        SettingFragment fragment = new SettingFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -89,33 +87,42 @@ public class HomeFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        v = inflater.inflate(R.layout.fragment_home, container, false);
-
+        view = inflater.inflate(R.layout.fragment_setting, container, false);
         ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
-        ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_home);
+        ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_setting);
 
-        frag_home_choice_arm = (Button) v.findViewById(R.id.fragment_home_button1);
-        frag_home_choice_leg = (Button) v.findViewById(R.id.fragment_home_button2);
+        setUI();
 
-        frag_home_choice_arm.setOnClickListener(new View.OnClickListener() {
+        languageName = getResources().getStringArray(R.array.language);
+
+        Log.e("Language", String.format("%s, %s", languageName[0], languageName[1]));
+
+        languageAdapter = new ArrayAdapter<String>(view.getContext()
+                , android.R.layout.simple_spinner_dropdown_item, languageName);
+
+        frag_setting_spinner_language.setAdapter(languageAdapter);
+
+
+        frag_setting_but_apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e(TAG_ARM, "ARM!!!!!!!!!!!!");
-                TAG_CHOOSE_CURRENT = TAG_ARM;
-                showCaution();
+                Log.e("item pos select", languageName[frag_setting_spinner_language.getSelectedItemPosition()]);
+                CheckBeaconFragment.clearSDeviceList();
+                Configuration config = new Configuration();
+                config.locale = new Locale(getLocaleFromSpinner(frag_setting_spinner_language.getSelectedItemPosition()));
+                getResources().updateConfiguration(config, null);
+
+            }
+        });
+        frag_setting_but_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((MainActivity)getActivity()).onBackPressed();
             }
         });
 
-        frag_home_choice_leg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.e(TAG_LEG, "LEG!!!!!!!!!!!!");
-                TAG_CHOOSE_CURRENT = TAG_LEG;
-                showCaution();
-            }
-        });
 
-        return v;
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -157,38 +164,25 @@ public class HomeFragment extends Fragment{
         void onFragmentInteraction(Uri uri);
     }
 
-    public void replaceNewFragment(final Fragment newFragment, final String tag) {
+    private void setUI(){
+        frag_setting_spinner_language = (Spinner) view.findViewById(R.id.fragment_setting_spinner_language);
+        frag_setting_but_apply = (Button) view.findViewById(R.id.fragment_setting_but_apply);
+        frag_setting_but_cancel = (Button) view.findViewById(R.id.fragment_setting_but_cancel);
 
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        //transaction.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out);
-        transaction.replace(R.id.frame, newFragment, tag);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
-    private void showCaution(){
-
-        AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(v.getContext());
-        mAlertBuilder.setView(R.layout.list_caution);
-
-        mAlertBuilder.setPositiveButton(getResources().getString(R.string.caution_button), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (Objects.equals(TAG_CHOOSE_CURRENT, TAG_ARM)){
-                    replaceNewFragment(new ArmHomeFragment(), TAG_ARM);
-                    TAG_CHOOSE_CURRENT = "";
-
-                } else if (Objects.equals(TAG_CHOOSE_CURRENT, TAG_LEG)){
-                    replaceNewFragment(new LegHomeFragment(), TAG_LEG);
-                    TAG_CHOOSE_CURRENT = "";
-                }
-            }
-        });
-
-        AlertDialog alertDialog = mAlertBuilder.create();
-        alertDialog.show();
-        alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setBackgroundResource(R.drawable.button_buttom);
-        alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.textSecondary));
+    private String getLocaleFromSpinner(int itemSelected_position){
+        switch (itemSelected_position){
+            case 0:
+                ((MainActivity)getActivity()).updateLanguage("th");
+                return "th";
+            case 1:
+                ((MainActivity)getActivity()).updateLanguage("en");
+                return "en";
+            default:
+                ((MainActivity)getActivity()).updateLanguage("th");
+                return "th";
+        }
     }
 
 }

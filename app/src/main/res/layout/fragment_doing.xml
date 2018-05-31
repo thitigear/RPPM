@@ -11,186 +11,203 @@
         android:layout_height="match_parent"
         android:padding="10dp">
 
-        <TextView android:text="Start Recovering"
+        <TextView
             android:id="@+id/fragment_doing_tv_001"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="40dp"
+            android:text="Start Recovering"
 
-            android:textSize="@dimen/text_header"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_header" />
 
-            <TextView android:text="ชื่อท่า"
-                android:id="@+id/fragment_doing_tv_treatName"
-                android:layout_below="@id/fragment_doing_tv_001"
-                android:layout_height="@dimen/tv_textHeight"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_width="@dimen/tv_textWidth"
+        <TextView
+            android:id="@+id/fragment_doing_tv_treatName"
+            android:layout_width="@dimen/tv_textWidth"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_below="@id/fragment_doing_tv_001"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/fragment_doing_tv_treatName"
 
 
-                android:textSize="@dimen/text_content"
-                android:textColor="@color/textPrimary" />
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content" />
 
-            <TextView android:id="@+id/fragment_startRe_treatName"
-                android:layout_width="250dp"
-                android:layout_height="60dp"
-                android:layout_alignTop="@id/fragment_doing_tv_treatName"
-                android:layout_marginStart="100dp"
+        <TextView
+            android:id="@+id/fragment_startRe_treatName"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:layout_alignTop="@id/fragment_doing_tv_treatName"
+            android:layout_marginStart="100dp"
 
-                android:text=""
-                android:textColor="@color/textPrimary"
-                android:textSize="20sp" />
+            android:text=""
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp" />
+
         <android.support.design.internal.BaselineLayout
             android:id="@+id/fragment_doing_baseLine"
+            android:layout_width="400dp"
+            android:layout_height="2dp"
             android:layout_below="@id/fragment_startRe_treatName"
             android:layout_centerHorizontal="true"
-            android:layout_height="2dp"
             android:layout_marginTop="25dp"
-            android:layout_width="400dp"
-            android:background="@color/textPrimary"/>
+            android:background="@color/textPrimary" />
 
-        <TextView android:text="@string/fragment_doing_tv_set"
+        <TextView
             android:id="@+id/fragment_doing_tv_set"
+            android:layout_width="@dimen/tv_textWidth"
+            android:layout_height="@dimen/tv_textHeight"
             android:layout_alignStart="@id/fragment_doing_tv_treatName"
             android:layout_below="@id/fragment_doing_baseLine"
-            android:layout_height="@dimen/tv_textHeight"
             android:layout_marginTop="25dp"
-            android:layout_width="@dimen/tv_textWidth"
+            android:text="@string/fragment_doing_tv_set"
 
-            android:textSize="@dimen/text_content"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content" />
 
-            <TextView android:id="@+id/fragment_doing_setNum"
-                android:background="#d4d4d4"
-                android:layout_alignTop="@id/fragment_doing_tv_set"
-                android:layout_height="@dimen/tv_textHeight"
-                android:layout_marginStart="20dp"
-                android:layout_toEndOf="@id/fragment_doing_tv_set"
-                android:layout_width="90dp"
-                android:text=""
-                android:textAlignment="center"
-                android:textColor="@color/textPrimary"
-                android:textSize="20sp" />
-            <TextView android:id="@+id/fragment_doing_slash1"
-                android:layout_alignTop="@id/fragment_doing_tv_set"
-                android:layout_height="@dimen/tv_textHeight"
-                android:layout_width="20dp"
-                android:layout_toEndOf="@id/fragment_doing_setNum"
+        <TextView
+            android:id="@+id/fragment_doing_setNum"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_alignTop="@id/fragment_doing_tv_set"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/fragment_doing_tv_set"
+            android:background="#d4d4d4"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp" />
 
-                android:text="@string/fragment_doing_tv_slash"
-                android:textAlignment="center"
-                android:textColor="@color/textPrimary"
-                android:textSize="20sp" />
+        <TextView
+            android:id="@+id/fragment_doing_slash1"
+            android:layout_width="20dp"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_alignTop="@id/fragment_doing_tv_set"
+            android:layout_toEndOf="@id/fragment_doing_setNum"
 
-            <TextView android:id="@+id/fragment_doing_setMax"
-                android:layout_alignTop="@id/fragment_doing_tv_set"
-                android:layout_height="@dimen/tv_textHeight"
-                android:layout_width="90dp"
-                android:layout_toEndOf="@id/fragment_doing_slash1"
+            android:text="@string/fragment_doing_tv_slash"
+            android:textAlignment="center"
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp" />
 
-                android:background="#d4d4d4"
+        <TextView
+            android:id="@+id/fragment_doing_setMax"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_alignTop="@id/fragment_doing_tv_set"
+            android:layout_toEndOf="@id/fragment_doing_slash1"
 
-                android:text=""
-                android:textAlignment="center"
-                android:textColor="@color/textPrimary"
-                android:textSize="20sp" />
+            android:background="#d4d4d4"
 
-        <TextView android:text="@string/fragment_doing_tv_time01"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/fragment_doing_tv_doTime"
+            android:layout_width="@dimen/tv_textWidth"
+            android:layout_height="@dimen/tv_textHeight"
             android:layout_alignStart="@id/fragment_doing_tv_set"
             android:layout_below="@id/fragment_doing_tv_set"
-            android:layout_height="@dimen/tv_textHeight"
             android:layout_marginTop="15dp"
-            android:layout_width="@dimen/tv_textWidth"
+            android:text="@string/fragment_doing_tv_time01"
 
-            android:textSize="@dimen/text_content"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content" />
 
-            <TextView android:id="@+id/fragment_doing_timeNum"
-                android:layout_alignTop="@id/fragment_doing_tv_doTime"
-                android:layout_toEndOf="@id/fragment_doing_tv_doTime"
-                android:layout_height="@dimen/tv_textHeight"
-                android:layout_width="90dp"
-                android:layout_marginStart="20dp"
+        <TextView
+            android:id="@+id/fragment_doing_timeNum"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_alignTop="@id/fragment_doing_tv_doTime"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/fragment_doing_tv_doTime"
 
-                android:background="#d4d4d4"
+            android:background="#d4d4d4"
 
-                android:text="0"
-                android:textAlignment="center"
-                android:textColor="@color/textPrimary"
-                android:textSize="20sp" />
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp" />
 
-            <TextView android:id="@+id/fragment_doing_slash"
-                android:layout_alignTop="@id/fragment_doing_tv_doTime"
-                android:layout_height="@dimen/tv_textHeight"
-                android:layout_width="20dp"
-                android:layout_toEndOf="@id/fragment_doing_timeNum"
+        <TextView
+            android:id="@+id/fragment_doing_slash"
+            android:layout_width="20dp"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_alignTop="@id/fragment_doing_tv_doTime"
+            android:layout_toEndOf="@id/fragment_doing_timeNum"
 
-                android:text="@string/fragment_doing_tv_slash"
-                android:textAlignment="center"
-                android:textColor="@color/textPrimary"
-                android:textSize="20sp" />
+            android:text="@string/fragment_doing_tv_slash"
+            android:textAlignment="center"
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp" />
 
-            <TextView android:id="@+id/fragment_doing_timeMax"
-                android:layout_alignTop="@id/fragment_doing_tv_doTime"
-                android:layout_height="@dimen/tv_textHeight"
-                android:layout_width="90dp"
-                android:layout_toEndOf="@id/fragment_doing_slash"
+        <TextView
+            android:id="@+id/fragment_doing_timeMax"
+            android:layout_width="80dp"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_alignTop="@id/fragment_doing_tv_doTime"
+            android:layout_toEndOf="@id/fragment_doing_slash"
 
-                android:background="#d4d4d4"
+            android:background="#d4d4d4"
 
-                android:text=""
-                android:textAlignment="center"
-                android:textColor="@color/textPrimary"
-                android:textSize="20sp" />
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp" />
 
-            <TextView android:text="@string/fragment_doing_tv_time02"
-                android:layout_alignTop="@id/fragment_doing_tv_doTime"
-                android:layout_height="@dimen/tv_textHeight"
-                android:layout_marginStart="10dp"
-                android:layout_toEndOf="@id/fragment_doing_timeMax"
-                android:layout_width="40dp"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_alignTop="@id/fragment_doing_tv_doTime"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/fragment_doing_timeMax"
+            android:text="@string/fragment_doing_tv_time02"
 
-                android:textSize="@dimen/text_content"
-                android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content" />
 
-        <TextView android:text="@string/fragment_doing_tv_angle01"
+        <TextView
             android:id="@+id/fragment_doing_tv_doAngle"
+            android:layout_width="@dimen/tv_textWidth"
+            android:layout_height="@dimen/tv_textHeight"
             android:layout_alignStart="@id/fragment_doing_tv_set"
             android:layout_below="@id/fragment_doing_tv_doTime"
-            android:layout_height="@dimen/tv_textHeight"
             android:layout_marginTop="15dp"
-            android:layout_width="@dimen/tv_textWidth"
+            android:text="@string/fragment_doing_tv_angle01"
 
-            android:textSize="@dimen/text_content"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content" />
 
-            <TextView android:id="@+id/fragment_doing_angleNum"
-                android:layout_alignTop="@id/fragment_doing_tv_doAngle"
-                android:layout_height="@dimen/tv_textHeight"
-                android:layout_toEndOf="@id/fragment_doing_tv_doAngle"
-                android:layout_width="200dp"
-                android:layout_marginStart="20dp"
-
-                android:background="#d4d4d4"
-
-                android:text="0"
-                android:textAlignment="center"
-                android:textColor="@color/textPrimary"
-                android:textSize="20sp" />
-
-        <TextView android:text="@string/fragment_doing_tv_angle02"
-            android:layout_alignTop="@id/fragment_doing_tv_doAngle"
+        <TextView
+            android:id="@+id/fragment_doing_angleNum"
+            android:layout_width="180dp"
             android:layout_height="@dimen/tv_textHeight"
+            android:layout_alignTop="@id/fragment_doing_tv_doAngle"
+            android:layout_marginStart="20dp"
+            android:layout_toEndOf="@id/fragment_doing_tv_doAngle"
+
+            android:background="#d4d4d4"
+
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/textPrimary"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tv_textHeight"
+            android:layout_alignTop="@id/fragment_doing_tv_doAngle"
             android:layout_marginStart="10dp"
             android:layout_toEndOf="@id/fragment_doing_angleNum"
-            android:layout_width="40dp"
+            android:text="@string/fragment_doing_tv_angle02"
 
             android:textAlignment="textEnd"
-            android:textSize="@dimen/text_content"
-            android:textColor="@color/textPrimary"/>
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/text_content" />
 
         <!--TextView android:text="lElbow" android:id="@+id/doing_tv_lElbow"
             android:layout_height="wrap_content"

@@ -107,7 +107,8 @@ public class ArmHomeFragment extends Fragment{
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_arm_home, container, false);
         ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
-        ((MainActivity)getActivity()).setToolbarTitleByString("การกายภาพบำบัดส่วนแขน");
+        ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_arm);
+        //((MainActivity)getActivity()).setToolbarTitleByString("การกายภาพบำบัดส่วนแขน");
 
         /*Setup important adapter*/
         armTreat = getResources().getStringArray(R.array.treat_arm);
@@ -183,17 +184,19 @@ public class ArmHomeFragment extends Fragment{
 
     private void showSetRound(){
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
-        mAlertBuilder.setTitle("ตั้งค่าการกายภาพบำบัด");
+        mAlertBuilder.setTitle(getResources().getString(R.string.showSetRound_title));
         mAlertBuilder.setView(R.layout.dialog_set_round);
 
-        mAlertBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
+        mAlertBuilder.setPositiveButton(getResources().getString(R.string.ok), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Log.e("setRoundEditText", setRoundEditText.getText().toString());
 
                 try {
                     if(setRoundEditText.getText().toString().equals("")){
-                        Toast.makeText(view.getContext(), "กรุณาใส่จำนวนรอบที่ต้องการ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(view.getContext()
+                                , getResources().getString(R.string.showSetRound_text_001)
+                                , Toast.LENGTH_LONG).show();
                     }
                     else {
                         setRoundNumber = Integer.parseInt(setRoundEditText.getText().toString());
@@ -201,18 +204,23 @@ public class ArmHomeFragment extends Fragment{
                         if(setRoundNumber > 0 && setRoundNumber <= 5){
                             replaceDoingFragment(CURRENT_TREAT, "arm", setRoundNumber);
                         } else {
-                            Toast.makeText(view.getContext(), "จำนวนต้องอยู่ระหว่าง 1 ถึง 5", Toast.LENGTH_LONG).show();
+                            Toast.makeText(view.getContext()
+                                    , getResources().getString(R.string.showSetRound_popup_1_5)
+                                    , Toast.LENGTH_LONG).show();
                             Log.e("No. of Round:", ""+ setRoundNumber);
                         }
                     }
                 } catch (Exception e){
-                    Toast.makeText(view.getContext(), "กรุณาใส่จำนวนรอบเป็นจำนวนเต็ม", Toast.LENGTH_LONG).show();
+                    Toast.makeText(view.getContext()
+                            , getResources().getString(R.string.showSetRound_popup_isNumber)
+                            , Toast.LENGTH_LONG).show();
                 }
             }
 
         });
 
-        mAlertBuilder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+        mAlertBuilder.setNegativeButton(getResources().getString(R.string.cancel)
+                , new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
