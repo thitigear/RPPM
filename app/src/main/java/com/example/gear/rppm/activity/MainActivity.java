@@ -28,20 +28,12 @@ import com.example.gear.rppm.fragment.SettingFragment;
 
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity
-        implements HomeFragment.OnFragmentInteractionListener
-        , CheckBeaconFragment.OnFragmentInteractionListener
-        , ArmHomeFragment.OnFragmentInteractionListener
-        , LegHomeFragment.OnFragmentInteractionListener
-        , DoingFragment.OnFragmentInteractionListener
-        , ManualFragment.OnFragmentInteractionListener
-        , SettingFragment.OnFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity{
 
     private NavigationView navigationView;
     private DrawerLayout drawer;
     private Toolbar toolbar;
     private Handler mHandler;
-    private Configuration configuration = new Configuration();
 
     // index to identify current nav menu item
     private int navItemIndex = 0;
@@ -104,8 +96,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void replaceFragment(final Fragment fragment){
-
-
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame, fragment, CURRENT_TAG);
         transaction.addToBackStack(null);
@@ -113,9 +103,6 @@ public class MainActivity extends AppCompatActivity
 
         //Closing drawer on item click
         drawer.closeDrawers();
-
-        //invalidateOptionsMenu();
-
     }
 
     public Fragment getFragment() {
@@ -319,11 +306,6 @@ public class MainActivity extends AppCompatActivity
 
     public void setTagDoingCurrentDialog(String tagDoingCurrentDialog) {
         TAG_DOING_CURRENT_DIALOG = tagDoingCurrentDialog;
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-        //Empty
     }
 
     public void updateLanguage(String language){

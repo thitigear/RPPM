@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,21 +22,13 @@ import com.example.gear.rppm.R;
 import com.example.gear.rppm.activity.MainActivity;
 import com.example.gear.rppm.other.CautionAdapter;
 import com.example.gear.rppm.other.CustomListViewAdapter;
+import com.example.gear.rppm.other.DataArray;
+import com.example.gear.rppm.other.FragmentArmLegRecyclerViewAdapter;
 import com.example.gear.rppm.other.ReplaceFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ArmHomeFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ArmHomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.HashMap;
+
 public class ArmHomeFragment extends Fragment{
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
     private static String CURRENT_TAG = "arm";
 
@@ -47,58 +41,28 @@ public class ArmHomeFragment extends Fragment{
 
     private static String CURRENT_TREAT = "";
 
-    // TODO: Rename and change types of parameters
     private int[] resId = { R.drawable.ic_action_menu_add
             , R.drawable.ic_action_menu_all_beacon, R.drawable.ic_action_menu_history
             , R.drawable.ic_action_menu_home, R.drawable.ic_action_menu_setting};
+    private HashMap<Integer, String> armTreatName = new HashMap<>();
 
     private int setRoundNumber = 0;
 
     /*PARAMETER*/
-    private String mParam1;
-    private String mParam2;
     private String[] armTreat;
 
     /* UI Component */
     private EditText setRoundEditText;
     private ListView armListView;
+    private RecyclerView rv_treatName;
     private View view;
 
-    /*Class*/
+    /*Adapter*/
     private CustomListViewAdapter chooseTreatmentAdapter;
-
-    /*OnFragmentInteractionListener*/
-    private OnFragmentInteractionListener mListener;
+    private FragmentArmLegRecyclerViewAdapter recyclerViewAdapter;
 
     public ArmHomeFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ArmHomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ArmHomeFragment newInstance(String param1, String param2) {
-        ArmHomeFragment fragment = new ArmHomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -106,16 +70,45 @@ public class ArmHomeFragment extends Fragment{
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_arm_home, container, false);
+
+        init();
+
+
+        return view;
+    }
+
+    private void init(){
+
+        //((MainActivity)getActivity()).setToolbarTitleByString("การกายภาพบำบัดส่วนแขน");
         ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
         ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_arm);
-        //((MainActivity)getActivity()).setToolbarTitleByString("การกายภาพบำบัดส่วนแขน");
 
-        /*Setup important adapter*/
+        initUI();
+
         armTreat = getResources().getStringArray(R.array.treat_arm);
-        chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),armTreat);
+        initAdapter();
 
-        /*Setup ListView*/
+        initListView();
+
+        //initRecyclerView();
+
+    }
+
+    private void initAdapter(){
+        recyclerViewAdapter = new FragmentArmLegRecyclerViewAdapter(
+                getContext(),
+                R.id.frag_home_arm_rv_treatName,
+                DataArray.getHashMapArmTreat());
+
+        chooseTreatmentAdapter = new CustomListViewAdapter(getContext(),armTreat);
+    }
+
+    private void initUI() {
         armListView = (ListView) view.findViewById(R.id.fragment_arm_home_lv);
+        rv_treatName = (RecyclerView) view.findViewById(R.id.frag_home_arm_rv_treatName);
+    }
+
+    private void initListView(){
         armListView.setAdapter(chooseTreatmentAdapter);
         armListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> arg0, View arg1, int treatNumber, long arg3) {
@@ -125,47 +118,12 @@ public class ArmHomeFragment extends Fragment{
                 //replaceDoingFragment(armTreat[treatNumber], "arm");
             }
         });
-
-        return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+    private void initRecyclerView(){
+        rv_treatName.setAdapter(recyclerViewAdapter);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        rv_treatName.setLayoutManager(layoutManager);
     }
 
     public void replaceDoingFragment(String currentTreat, String flagTreat, int setRoundNumber) {

@@ -2,7 +2,6 @@ package com.example.gear.rppm.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.DialogFragment;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
@@ -11,21 +10,16 @@ import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.media.Ringtone;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gear.rppm.R;
 import com.example.gear.rppm.activity.MainActivity;
@@ -33,23 +27,10 @@ import com.example.gear.rppm.other.DataArray;
 import com.example.gear.rppm.other.DistanceAngle;
 import com.example.gear.rppm.other.Utils;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DoingFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DoingFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class DoingFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
     private static String TAG = "DOING Fragment";
 
     private static String CURRENT_TREAT;
@@ -103,9 +84,6 @@ public class DoingFragment extends Fragment {
     private static String TAG_DIALOG_PAUSE = "pause";
     private static String deviceAddress;
 
-    private String mParam1;
-    private String mParam2;
-
     /*UI Component*/
     private Button butStop;
 
@@ -132,40 +110,12 @@ public class DoingFragment extends Fragment {
     private static BluetoothLeScanner bluetoothLeScanner;
 
     private View view;
-    private OnFragmentInteractionListener mListener;
 
     protected Handler getDataHandler;
     private Ringtone ringtone;
 
     public DoingFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment DoingFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static DoingFragment newInstance(String param1, String param2) {
-        DoingFragment fragment = new DoingFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -176,11 +126,6 @@ public class DoingFragment extends Fragment {
         ((MainActivity)getActivity()).setToolbarTitleById(R.string.load_app_button);
         //((MainActivity)getActivity()).setToolbarTitleByString("เริ่มทำกายภาพ");
 
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
-
-        /*Notification Sound Setup*/
-        Utils.setupSound(view.getContext());
         /* UI Component */
         defineUI();
         setFirstUI();
@@ -191,6 +136,13 @@ public class DoingFragment extends Fragment {
                 showPauseCaution();
             }
         });
+        /*Notification Sound Setup*/
+        Utils.setupSound(view.getContext());
+
+        /*set Bluetooth var*/
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+
         /*Run Beacon Scanner*/
         startScan(backgroundScanCallback);
 
@@ -200,70 +152,30 @@ public class DoingFragment extends Fragment {
             int delay = 250;
             getDataHandler.postDelayed(setTextViewAndCountRound, delay);
 
-            /*getDataHandler.postDelayed(new Runnable(){
-                public void run(){
-                    //do something
-                    calculateMaxAnglePerRound(angle);
-                    //setTestTextView("" + deviceAddress, distance, angle);
-                    setAngleTextView(angle);
-                    double nowAngle = Double.parseDouble(""+tv_angleNum.getText());
-                    int treatNum = DataArray.getTreatNumber(CURRENT_TREAT);
-                    if(treatNum >= 0 && treatNum <= 4){
-                        calculateArmRound(nowAngle); }
-                    else if(treatNum == 5){
-                        calculateLegTreat1Round(nowAngle);}
-                    else if(treatNum == 6){
-                        calculateLegTreat2Round(nowAngle); }
-                    else if(treatNum == 7){
-                        calculateLegTreat3Round(nowAngle); }
-                    getDataHandler.postDelayed(this, 500);
-                }
-            }, delay);*/
-
         } catch (Exception e) {
             Log.e("Error!!!!!!!!!!!!!! :", e.getMessage());
         }
         return view;
     }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+    /*getDataHandler.postDelayed(new Runnable(){
+                    public void run(){
+                        //do something
+                        calculateMaxAnglePerRound(angle);
+                        //setTestTextView("" + deviceAddress, distance, angle);
+                        setAngleTextView(angle);
+                        double nowAngle = Double.parseDouble(""+tv_angleNum.getText());
+                        int treatNum = DataArray.getTreatNumber(CURRENT_TREAT);
+                        if(treatNum >= 0 && treatNum <= 4){
+                            calculateArmRound(nowAngle); }
+                        else if(treatNum == 5){
+                            calculateLegTreat1Round(nowAngle);}
+                        else if(treatNum == 6){
+                            calculateLegTreat2Round(nowAngle); }
+                        else if(treatNum == 7){
+                            calculateLegTreat3Round(nowAngle); }
+                        getDataHandler.postDelayed(this, 500);
+                    }
+                }, delay);*/
 
     /*Setter*/
     public static void setCurrentTreat(String currentTreat) {
@@ -453,6 +365,64 @@ public class DoingFragment extends Fragment {
     }
 
         /*Calculate Round*/
+    private void calculateRound(double angle, double count_angle, double reset_angle, int treat_num){
+        try {
+            if(treat_num == 5){
+                if (!isCountThisRound){
+                    if(angle <= count_angle){
+                        isCountThisRound = true;
+                        currentTime += 1;
+                    }
+                }else{
+                    if(angle >= reset_angle){
+                        tv_timeNum.setText(Utils.intToString(currentTime));
+                        isCountThisRound = false;
+                        maxAnglePerTime[currentTime-1] = tempAngle;
+                        tempAngle = 0;
+                        conditionToShowFinishDialog();
+                    }
+                }
+            }
+            /*treatNum != 5*/
+            else {
+                if (!isCountThisRound){
+                    if(angle >= count_angle){
+                        isCountThisRound = true;
+                        currentTime += 1;
+                    }
+                }else{
+                    if(angle <= reset_angle){
+                        tv_timeNum.setText(Utils.intToString(currentTime));
+                        isCountThisRound = false;
+                        maxAnglePerTime[currentTime-1] = tempAngle;
+                        tempAngle = 0;
+                        conditionToShowFinishDialog();
+                    }
+                }
+            }
+
+        } catch (Exception e){
+            Log.e("Exception :", "");
+            e.printStackTrace();
+        }
+    }
+    private void calculateRoundCondition(){
+        //define value
+        double nowAngle = Double.parseDouble(""+tv_angleNum.getText());
+        int treatNum = DataArray.getTreatNumber(CURRENT_TREAT);
+        //condition & condition value
+        if(treatNum == 5){
+            //leg
+            calculateRound(nowAngle, 60,160, treatNum);
+        } else if (treatNum == 6 || treatNum == 7){
+            //leg
+            calculateRound(nowAngle, 30, 25, treatNum);
+        } else {
+            //arm
+            calculateRound(nowAngle, 45, 30, treatNum);
+        }
+    }
+
             //ARM
     private void calculateArmRound(double angle){
         try {
@@ -516,26 +486,6 @@ public class DoingFragment extends Fragment {
             Log.e("Exception", ""+e);
         }
     }
-    private void calculateLegTreat3Round(double angle){
-        try {
-            if (!isCountThisRound){
-                if(angle >= 30){
-                    isCountThisRound = true;
-                    currentTime += 1;
-                }
-            }else{
-                if(angle <= 25){
-                    tv_timeNum.setText(Utils.intToString(currentTime));
-                    isCountThisRound = false;
-                    maxAnglePerTime[currentTime-1] = tempAngle;
-                    tempAngle = 0;
-                    conditionToShowFinishDialog();
-                }
-            }
-        } catch (Exception e){
-            Log.e("Exception", ""+e);
-        }
-    }
 
         /*Calculate Summary Angle*/
     private void calculateMaxAnglePerRound(double angle){
@@ -563,17 +513,21 @@ public class DoingFragment extends Fragment {
             setAngleTextView(angle);
             double nowAngle = Double.parseDouble(""+tv_angleNum.getText());
             int treatNum = DataArray.getTreatNumber(CURRENT_TREAT);
-            if(treatNum >= 0 && treatNum <= 4){
-                calculateArmRound(nowAngle); }
-            else if(treatNum == 5){
-                calculateLegTreat1Round(nowAngle);}
-            else if(treatNum == 6){
-                calculateLegTreat2Round(nowAngle); }
-            else if(treatNum == 7){
-                calculateLegTreat3Round(nowAngle); }
+
+            calculateRoundCondition();
+
             getDataHandler.postDelayed(this, 500);
         }
-    };
+
+    };/*
+            if(treatNum == 5){
+                calculateRound(nowAngle, 60,160, treatNum);
+            } else if (treatNum == 6 || treatNum == 7){
+                calculateRound(nowAngle, 30, 25, treatNum);
+            } else {
+                calculateRound(nowAngle, 45, 30, treatNum);
+            }
+         */
 
         /*Start Stop Beacon Scanner*/
     public static void startScan(ScanCallback mScanCallback){ bluetoothLeScanner.startScan(mScanCallback); }
@@ -609,21 +563,16 @@ public class DoingFragment extends Fragment {
                     for (double distance: nowDistance){
                         msg += Utils.doubleToString(distance) + ", ";
                     }
-                    Log.e(TAG, "Device Name:" + deviceName);
-                    Log.e(TAG, "Device Address:" + deviceAddress);
-                    Log.e(TAG, "Distance:" + distance);
-                    Log.e("Now Distance Array", msg);
-                    Log.e("Count Test!!", String.format("Count = %d", currentTime));
-
                     beaconData.put(deviceAddressNumber, new Object[]{deviceAddress, txPowerLevel, rssi});
-
                     angle = DistanceAngle.findSolutionAndAngle(CURRENT_TREAT, nowDistance);
-
                 }
-
             }
         }
     };
-
+/*Log.e(TAG, "Device Name:" + deviceName);
+                    Log.e(TAG, "Device Address:" + deviceAddress);
+                    Log.e(TAG, "Distance:" + distance);
+                    Log.e("Now Distance Array", msg);
+                    Log.e("Count Test!!", String.format("Count = %d", currentTime));*/
 
 }

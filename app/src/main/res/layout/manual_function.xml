@@ -14,7 +14,7 @@
             android:id="@+id/manual_func_tv_001"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:textColor="@color/textRed"
+            android:textColor="@color/red_red001"
             android:textSize="@dimen/text_content"
             android:textStyle="italic"/>
 

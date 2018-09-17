@@ -24,4 +24,9 @@
     <!--Dialog Dimension -->
     <dimen name="dialog_mtop">40dp</dimen>
 
+    <!-- Font Size -->
+    <dimen name="FontSize14">14sp</dimen>
+    <dimen name="FontSize18">18sp</dimen>
+    <dimen name="FontSize22">22sp</dimen>
+
 </resources>

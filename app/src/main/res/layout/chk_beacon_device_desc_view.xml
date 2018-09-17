@@ -15,7 +15,7 @@
         android:layout_width="200dp"
         android:layout_height="40dp"
 
-        android:background="@color/tv_001"
+        android:background="@color/blue_blue001"
 
         android:layout_alignBaseline="@id/chk_beacon_device_desc_name"
         android:layout_toEndOf="@id/chk_beacon_device_desc_name"/>

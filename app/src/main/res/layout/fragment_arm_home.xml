@@ -6,35 +6,67 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
 
-        <TextView
-            android:textSize="@dimen/text_header"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_arm_home_caption"
-            android:textColor="@color/textPrimary"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_arm_home_caption"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/text_header"/>
 
-        <TextView
-            android:textSize="@dimen/text_sub_header"
-            android:layout_centerHorizontal="true"
+            <TextView
+                android:textSize="@dimen/text_sub_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fragment_arm_home_desc"/>
+        </LinearLayout>
+
+        <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
-            android:text="@string/fragment_arm_home_desc"/>
+            android:layout_height="match_parent">
 
-        <ListView android:id="@+id/fragment_arm_home_lv"
-            android:layout_width="300dp"
-            android:layout_height="400dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ListView android:id="@+id/fragment_arm_home_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginBottom="25dp"/>
 
-            android:layout_marginTop="130dp"
-            android:layout_centerHorizontal="true"/>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/frag_home_arm_rv_treatName"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginBottom="25dp"/>
+            </LinearLayout>
 
-    </RelativeLayout>
+        </ScrollView>
+
+
+
+    </LinearLayout>
 
 </FrameLayout>

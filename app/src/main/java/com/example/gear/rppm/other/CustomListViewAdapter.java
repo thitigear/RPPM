@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.gear.rppm.R;
@@ -56,7 +55,7 @@ public class CustomListViewAdapter extends BaseAdapter{
 
         TextView textView = (TextView)convertView.findViewById(R.id.clv_row_textView);
         textView.setText(strName[position]);
-        textView.setBackgroundResource(R.color.tv_001);
+        textView.setBackgroundResource(R.color.blue_blue001);
 
         //ImageView imageView = (ImageView)convertView.findViewById(R.id.clv_row_imageView);
         //imageView.setBackgroundResource(resId[position]);

@@ -21,7 +21,7 @@ public class DataArray extends Fragment {
     private double rAnkle;
     private double[] currentTreatData;
     private double[][] defaultBodyData = new double[8][8]; //แยกเป็นท่าๆ
-    private String[] treatName = new String[]{
+    private static String[] treatName = new String[]{
             "ยกแขนขึ้นและลง"
             , "กางแขนและหุบแขนทางข้างลำตัว"
             , "กางแขนและหุบแขนในแนวตั้งฉากกับลำตัว"
@@ -30,8 +30,6 @@ public class DataArray extends Fragment {
             , "งอขาและเหยียดข้อสะโพกและข้อเข่าพร้อมกัน"
             , "กางและหุบข้อตะโพก"
             , "ยกขาขึ้นทั้งขา"};
-
-    //private String[] deviceAddress = getResources().getStringArray(R.array.device_address);
 
     private String[] deviceAddress = new String[]{
             "D4:36:39:DE:54:CB"
@@ -164,5 +162,12 @@ public class DataArray extends Fragment {
         return arrayTreatNodePos;
     }
 
+    public static HashMap<Integer, String> getHashMapArmTreat(){
+        HashMap<Integer, String> armTreat = new HashMap<>();
+        for (int index = 0; index < 5; index++){
+            armTreat.put(index, treatName[index]);
+        }
+        return armTreat;
+    }
 
 }

@@ -19,7 +19,7 @@
     <color name="textPrimary2">#353535</color>
     <color name="textSecondary">#FFFFFF</color>
     <color name="textHeader">#ff4646</color>
-    <color name="textRed">#c21c1c</color>
+    <color name="red_red001">#c21c1c</color>
 
     <color name="alert_text_positive">#0077ff</color>
 
@@ -27,8 +27,10 @@
 
     <color name="outputTextBackground">#dfdfdf</color>
 
-    <color name="tv_001">#79b7fd</color>
 
     <color name="buttonBackground">#69c7d2</color>
     <color name="buttonRed">#ff4848</color>
+
+    <color name="blue_blue001">#79b7fd</color>
+    <color name="white_white">#FFF</color>
 </resources>
