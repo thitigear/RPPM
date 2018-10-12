@@ -6,22 +6,20 @@
     <string name="openDrawer">open_drawer</string>
     <string name="closeDrawer">close_drawer</string>
 
-    <!-- Navigation Drawer menu labels TH -->
+    <!-- Navigation Drawer menu labels -->
     <string name="nav_home">หน้าแรก</string>
     <string name="nav_check_beacon">ตรวจสอบสถานะอุปกรณ์</string>
     <string name="nav_arm">การกายภาพบำบัดส่วนแขน</string>
     <string name="nav_leg">การกายภาพบำบัดส่วนขา</string>
     <string name="nav_manual">คู่มือการใช้งาน</string>
-    <string name="nav_setting">ตั้งค่า</string>
 
-    <!-- Toolbar titles when navigation menu item is selected TH -->
+    <!-- Toolbar titles when navigation menu item is selected -->
     <string-array name="nav_item_activity_titles">
         <item>หน้าแรก</item>
         <item>ตรวจสอบสถานะอุปกรณ์</item>
         <item>การกายภาพบำบัดส่วนแขน</item>
         <item>การกายภาพบำบัดส่วนขา</item>
         <item>วิธีการใช้งาน</item>
-        <item>ตั้งค่า</item>
     </string-array>
 
     <string name="activity_title_about_us">About Us</string>
@@ -39,13 +37,9 @@
 
     <string name="nav_content_other">Other</string>
 
+    <!-- OLD STRING DATA FROM ARSM-->
     <!-- Popular Word -->
-    <string name="ok">ตกลง</string>
-    <string name="cancel">ยกเลิก</string>
-    <string name="elbow">ศอก</string>
-    <string name="wrist">ข้อมือ</string>
-    <string name="knee">เข่า</string>
-    <string name="ankle">ข้อเท้า</string>
+    <string name="ok">OK</string>
 
     <!-- MainActivity -->
     <string name="tArmL">L Arm</string>
@@ -93,38 +87,24 @@
     <string name="beacon_D4_57_D0">D4:36:39:DE:57:D0</string>
     <string name="beacon_D4_56_C6">D4:36:39:DE:56:C6</string>
 
-    <!-- fragment_check_beacon TH -->
+    <!-- fragment_check_beacon -->
     <string name="fragment_chk_beacon_caption">iBeacons STATUS CHECKING</string>
     <string name="fragment_chk_beacon_desc">ตรวจสอบสถานะอุปกรณ์เซ็นเซอร์ iBeacon</string>
 
-    <!-- fragment_home TH -->
+    <!-- fragment_home -->
     <string name="fragment_home_contentChoice">เลือกประเภทการทำกายภาพบำบัดที่ต้องการ</string>
 
-    <!-- fragment_arm_home TH -->
+    <!-- fragment_arm_home -->
     <string name="fragment_arm_home_title">Arms</string>
     <string name="fragment_arm_home_caption">ARMS RECOVERING</string>
     <string name="fragment_arm_home_desc">กายภาพบำบัดส่วนแขน</string>
 
-    <!-- fragment_leg_home TH -->
+    <!-- fragment_leg_home -->
     <string name="fragment_leg_home_title">Arms</string>
     <string name="fragment_leg_home_caption">LEGS RECOVERING</string>
     <string name="fragment_leg_home_desc">กายภาพบำบัดส่วนขา</string>
 
-    <!-- showSetRound -->
-    <string name="showSetRound_title">ตั้งค่าการกายภาพบำบัด</string>
-    <string name="showSetRound_text_001">กรุณาใส่จำนวนรอบที่ต้องการ</string>
-    <string name="showSetRound_popup_1_5">จำนวนต้องอยู่ระหว่าง 1 ถึง 5</string>
-    <string name="showSetRound_popup_isNumber">กรุณาใส่จำนวนรอบเป็นจำนวนเต็ม</string>
-
-    <!-- layout Dialog setRound -->
-    <string name="layout_dialogSetRound_do">ทำ</string>
-    <string name="layout_dialogSetRound_text_noMore5">ไม่ควรเกิน 5 เซ็ต</string>
-    <string name="layout_dialogSetRound_set">เซ็ต</string>
-    <string name="layout_dialogSetRound_sets">เซ็ต</string>
-    <string name="layout_dialogSetRound_set_desc">1 เซ็ต = 10 ครั้ง</string>
-
-    <!-- fragment_doing TH -->
-    <string name="fragment_doing_header">Start Recovering</string>
+    <!-- fragment_doing -->
     <string name="fragment_doing_but_stop">หยุด</string>
     <string name="fragment_doing_tv_angle01">มุม</string>
     <string name="fragment_doing_tv_angle02">องศา</string>
@@ -133,17 +113,29 @@
     <string name="fragment_doing_tv_treatName">ชื่อท่า</string>
     <string name="fragment_doing_tv_time01">ทำไป</string>
     <string name="fragment_doing_tv_time02">ครั้ง</string>
-    <string name="fragment_doing_dialog_maxAngle">มุมที่ทำได้มากที่สุด</string>
-    <string name="fragment_doing_dialog_averageAngle">มุมที่ทำได้เฉลี่ย</string>
-    <string name="fragment_doing_dialog_but_001">ทำต่อ</string>
-    <string name="fragment_doing_dialog_but_002">กลับไปหน้าเลือกท่า</string>
-    <string name="fragment_doing_dialog_finishAll_title">คุณทำกายภาพครบทั้งหมดแล้ว</string>
-    <string name="fragment_doing_dialog_finishOne_title">หยุดพักชั่วคราว</string>
-    <string name="fragment_doing_dialog_pause_title">หยุดชั่วคราว</string>
-    <string name="fragment_doing_dialog_pause_doTime">จากทั้งหมด</string>
+
+    <!-- Caution -->
+    <string name="caution_header">ข้อห้ามและข้อควรระวังของการทำกายภาพบำบัด</string>
+    <string name="caution_button"><b>เข้าใจ</b></string>
+    <string name="caution_1">1. การเคลื่อนไหวข้อให้ผู้ป่วยควรทำช้าๆ</string>
+    <string name="caution_2">2. ควรทำการเคลื่อนไหวให้สุดองศาของการเคลื่อนไหวที่ปกติ แต่ควรระวังในรายที่มีการดามเหล็กอยู่ภายในข้อ ภายในกระดูก ต้องไม่ทำเกินกว่าที่ผู้ป่วยทำได้</string>
+    <string name="caution_3">3. ในแต่ละท่าทำซ้ำๆท่าละ 10-20 ครั้ง วันละ 2 รอบระหว่างทำให้ผู้ป่วยคิดอยู่เสมอว่ากำลังทำการเคลื่อนไหวด้วยตนเอง</string>
+    <string name="caution_4">4. ไม่ควรทำการเคลื่อนไหวหลังจากรับประทานอาหารอิ่มใหม่ๆ หรือในขณะผู้ป่วยมีไข้</string>
+    <string name="caution_5">5. หากผู้ป่วยมีภาวะข้ออักเสบระยะเฉียบพลัน หรือแผลเปิดควรทำการเคลื่อนไหวในข้อต่อนั้นด้วยความระมัดระวัง</string>
+    <string name="caution_6">6. ขณะทำการเคลื่อนไหวข้อ ถ้าผู้ป่วยปวด หรือพบปัญหาอย่างอื่นตามมา ควรหยุดและปรึกษาแพทย์หรือนักกายภาพบำบัด ไม่ควรให้ผู้ป่วยนอนอย่างเดียวนานๆ ควรให้ผู้ป่วยลุกขึ้นมานั่งบ่อยๆ ควรได้รับการฟื้นฟูทางกายภาพบำบัดอย่างต่อเนื่อง</string>
+
+    <!-- Load App -->
+    <string name="load_app_header">ประโยชน์ของการทำกายภาพบำบัด</string>
+    <string name="load_app_content1">1. ช่วยลดการยึดติดของเนื้อเยื่อต่างๆ เช่น กล้ามเนื้อ, เอ็นกล้ามเนื้อ เป็นต้น</string>
+    <string name="load_app_content2">2. ช่วยรักษาสภาพของข้อต่อ และเนื้อเยื่อบริเวณนั้นให้เป็นปกติ</string>
+    <string name="load_app_content3">3. ช่วยลดอาการเกร็งของกล้ามเนื้อ และช่วยทำให้กล้ามเนื้อมีสภาพความยืดหยุ่นปกติ</string>
+    <string name="load_app_content4">4. ช่วยกระตุ้นระบบหมุนเวียนโลหิต</string>
+    <string name="load_app_content5">5. ช่วยให้สภาพภายในของข้อต่ออยู่ในสภาพปกติ</string>
+    <string name="load_app_content6">6. ลด และป้องกันอาการปวด, เมื่อย ตามข้อและกล้ามเนื้อ</string>
+    <string name="load_app_button">เริ่มทำกายภาพ</string>
+
     <!-- MANUAL FRAGMENT -->
     <string name="manual_header">คู่มือการใช้งาน</string>
-    <string name="manual_button_ok">ตกลง</string>
     <string-array name="manual_choice">
         <item>เมนูของแอพพลิเคชัน</item>
         <item>การใช้งานฟังก์ชันกายภาพบำบัด</item>
@@ -199,38 +191,6 @@
     <string name="manual_rec_01">4.1 เมื่อใช้งานอุปกรณ์เซนเซอร์เสร็จ ต้องนำออกจากผ้ารัดข้อให้เรียบร้อยก่อนถอดผ้ารัดข้อออกจากร่างกายผู้ป่วย เพื่อป้องกันความเสียหายที่อาจเกิดขึ้นกับตัวอุปกรณ์เซนเซอร์</string>
     <string name="manual_rec_02">4.2 หากไม่ได้ใช้งาน ห้าม ใส่ถ่านอุปกรณ์เซนเซอร์ iBeacon ค้างไว้เพราะอุปกรณ์นี้ไม่มีสวิตช์เปิด-ปิด ดังนั้นเมื่อใส่ถ่าน พลังงานของถ่านก็จะลดลงเรื่อยๆ แม้จะไม่ได้เชื่อมต่อกับแอปพลิเคชัน</string>
     <string name="manual_rec_03">4.3 อุปกรณ์เซนเซอร์ iBeacon รองรับ Bluetooth 4.0 ขึ้นไป และแอปพลิเคชันนี้สามารถทำงานได้บนระบบปฏิบัติการ Android 5.0 (Lolipop) ขึ้นไปเท่านั้น</string>
-
-    <!-- SETTING Fragment -->
-    <string name="setting_header">Setting</string>
-    <string name="setting_language">เปลี่ยนภาษา</string>
-    <string name="setting_apply">Apply</string>
-    <string name="setting_cancel">Cancel</string>
-    <!-- Language String Array -->
-    <string-array name="language">
-        <item>ไทย</item>
-        <item>English</item>
-    </string-array>
-
-    <!-- Caution TH -->
-    <string name="caution_header">ข้อห้ามและข้อควรระวังของการทำกายภาพบำบัด</string>
-    <string name="caution_1">1. การเคลื่อนไหวข้อให้ผู้ป่วยควรทำช้าๆ</string>
-    <string name="caution_2">2. ควรทำการเคลื่อนไหวให้สุดองศาของการเคลื่อนไหวที่ปกติ แต่ควรระวังในรายที่มีการดามเหล็กอยู่ภายในข้อ ภายในกระดูก ต้องไม่ทำเกินกว่าที่ผู้ป่วยทำได้</string>
-    <string name="caution_3">3. ในแต่ละท่าทำซ้ำๆท่าละ 10-20 ครั้ง วันละ 2 รอบระหว่างทำให้ผู้ป่วยคิดอยู่เสมอว่ากำลังทำการเคลื่อนไหวด้วยตนเอง</string>
-    <string name="caution_4">4. ไม่ควรทำการเคลื่อนไหวหลังจากรับประทานอาหารอิ่มใหม่ๆ หรือในขณะผู้ป่วยมีไข้</string>
-    <string name="caution_5">5. หากผู้ป่วยมีภาวะข้ออักเสบระยะเฉียบพลัน หรือแผลเปิดควรทำการเคลื่อนไหวในข้อต่อนั้นด้วยความระมัดระวัง</string>
-    <string name="caution_6">6. ขณะทำการเคลื่อนไหวข้อ ถ้าผู้ป่วยปวด หรือพบปัญหาอย่างอื่นตามมา ควรหยุดและปรึกษาแพทย์หรือนักกายภาพบำบัด</string>
-    <string name="caution_7">7. ควรได้รับการฟื้นฟูทางกายภาพบำบัดอย่างต่อเนื่อง</string>
-    <string name="caution_button"><b>เข้าใจ</b></string>
-
-    <!-- Load App TH -->
-    <string name="load_app_header">ประโยชน์ของการทำกายภาพบำบัด</string>
-    <string name="load_app_content1">1. ช่วยลดการยึดติดของเนื้อเยื่อต่างๆ เช่น กล้ามเนื้อ, เอ็นกล้ามเนื้อ เป็นต้น</string>
-    <string name="load_app_content2">2. ช่วยรักษาสภาพของข้อต่อ และเนื้อเยื่อบริเวณนั้นให้เป็นปกติ</string>
-    <string name="load_app_content3">3. ช่วยลดอาการเกร็งของกล้ามเนื้อ และช่วยทำให้กล้ามเนื้อมีสภาพความยืดหยุ่นปกติ</string>
-    <string name="load_app_content4">4. ช่วยกระตุ้นระบบหมุนเวียนโลหิต</string>
-    <string name="load_app_content5">5. ช่วยให้สภาพภายในของข้อต่ออยู่ในสภาพปกติ</string>
-    <string name="load_app_content6">6. ลด และป้องกันอาการปวด, เมื่อย ตามข้อและกล้ามเนื้อ</string>
-    <string name="load_app_button">เริ่มทำกายภาพ</string>
 
 
     <!-- Device ADDRESS -->

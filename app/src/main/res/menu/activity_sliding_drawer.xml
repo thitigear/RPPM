@@ -24,10 +24,6 @@
             android:id="@+id/nav_manual"
             android:icon="@drawable/ic_svg_menu_manual_24px"
             android:title="@string/nav_manual" />
-        <item
-            android:id="@+id/nav_setting"
-            android:icon="@drawable/ic_svg_menu_settings_24px"
-            android:title="@string/nav_setting" />
     </group>
 
 </menu>

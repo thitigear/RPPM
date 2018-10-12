@@ -50,6 +50,7 @@ public class HomeFragment extends Fragment{
         ((MainActivity) getActivity()).setCurrentTag(CURRENT_TAG);
         ((MainActivity) getActivity()).setToolbarTitleById(R.string.nav_home);
 
+
         frag_home_choice_arm = (Button) v.findViewById(R.id.fragment_home_button1);
         frag_home_choice_leg = (Button) v.findViewById(R.id.fragment_home_button2);
 
@@ -88,7 +89,7 @@ public class HomeFragment extends Fragment{
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(v.getContext());
         mAlertBuilder.setView(R.layout.list_caution);
 
-        mAlertBuilder.setPositiveButton(getResources().getString(R.string.caution_button), new DialogInterface.OnClickListener() {
+        mAlertBuilder.setPositiveButton("เข้าใจ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if (Objects.equals(TAG_CHOOSE_CURRENT, TAG_ARM)){
@@ -105,7 +106,6 @@ public class HomeFragment extends Fragment{
         AlertDialog alertDialog = mAlertBuilder.create();
         alertDialog.show();
         alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setBackgroundResource(R.drawable.button_buttom);
-        alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.textSecondary));
     }
 
 }

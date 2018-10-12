@@ -39,15 +39,15 @@ public class CheckBeaconFragment extends Fragment {
 
     //-------------------------------------------------------------------------------------
 
-    BluetoothAdapter bluetoothAdapter;
-    static BluetoothLeScanner bluetoothLeScanner;
+    BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+    BluetoothLeScanner bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
 
     private CheckBeaconListViewAdapter beaconListAdapter;
 
     private List<ScanFilter> filter;
     private ListView beaconListView;
 
-    private static Map<String, String> sDeviceList = new HashMap<>();
+    private Map<String, String> sDeviceList = new HashMap<>();
 
     private String my_UUID = "b911df37-a9d0-43bf-af14-0b4a3e20b50c";
 
@@ -74,15 +74,11 @@ public class CheckBeaconFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_check_beacon, container, false);
         ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
         ((MainActivity)getActivity()).setToolbarTitleById(R.string.nav_check_beacon);
-        //((MainActivity)getActivity()).setToolbarTitleByString("ตรวจสอบสถานะอุปกรณ์");
-
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
-
-        startScan(mScanCallback);
 
         beaconListView = (ListView) view.findViewById(R.id.fragment_chk_beacon_lv);
         beaconListAdapter = new CheckBeaconListViewAdapter(getContext(), sDeviceList);
+
+        startScan(mScanCallback);
 
         return view;
     }
@@ -153,36 +149,19 @@ public class CheckBeaconFragment extends Fragment {
 
                     if (sDeviceList.containsKey(result.getDevice().getAddress())) { //getAddress()
 
-                        if(MainActivity.getCurrentLanguage().equals("th")){
-                            switch (result.getDevice().getAddress()) {
-                                case "D4:36:39:DE:54:CB":
-                                    sDeviceList.put(result.getDevice().getAddress(), "ศอก");
-                                    break;
-                                case "D4:36:39:DE:54:CD":
-                                    sDeviceList.put(result.getDevice().getAddress(), "ข้อมือ");
-                                    break;
-                                case "D4:36:39:DE:55:82":
-                                    sDeviceList.put(result.getDevice().getAddress(), "เข่า");
-                                    break;
-                                case "D4:36:39:DE:56:FC":
-                                    sDeviceList.put(result.getDevice().getAddress(), "ข้อเท้า");
-                                    break;
-                            }
-                        } else {
-                            switch (result.getDevice().getAddress()) {
-                                case "D4:36:39:DE:54:CB":
-                                    sDeviceList.put(result.getDevice().getAddress(), "Elbow");
-                                    break;
-                                case "D4:36:39:DE:54:CD":
-                                    sDeviceList.put(result.getDevice().getAddress(), "Wrist");
-                                    break;
-                                case "D4:36:39:DE:55:82":
-                                    sDeviceList.put(result.getDevice().getAddress(), "Knee");
-                                    break;
-                                case "D4:36:39:DE:56:FC":
-                                    sDeviceList.put(result.getDevice().getAddress(), "Ankle");
-                                    break;
-                            }
+                        switch (result.getDevice().getAddress()){
+                            case "D4:36:39:DE:54:CB":
+                                sDeviceList.put(result.getDevice().getAddress(), "" + "ศอก");
+                                break;
+                            case "D4:36:39:DE:54:CD":
+                                sDeviceList.put(result.getDevice().getAddress(), "" + "ข้อมือ");
+                                break;
+                            case "D4:36:39:DE:55:82":
+                                sDeviceList.put(result.getDevice().getAddress(), "" + "เข่า");
+                                break;
+                            case "D4:36:39:DE:56:FC":
+                                sDeviceList.put(result.getDevice().getAddress(), "" + "ข้อเท้า");
+                                break;
                         }
 
                         beaconListAdapter.setsBeaconList(sDeviceList);
@@ -206,14 +185,6 @@ public class CheckBeaconFragment extends Fragment {
 
     private void startScan(ScanCallback scanCallback){
         bluetoothLeScanner.startScan(scanCallback);
-    }
-
-    public static void stopScan(ScanCallback scanCallback){
-        bluetoothLeScanner.stopScan(scanCallback);
-    }
-
-    public static void clearSDeviceList(){
-        sDeviceList.clear();
     }
 
 }

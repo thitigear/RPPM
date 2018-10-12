@@ -70,42 +70,37 @@ public class ManualFragment extends Fragment {
 
         switch (title){
             case "เมนูของแอพพลิเคชัน":
-            case "Application's menu":
                 alertDialogBuilder.setView(R.layout.manual_basic);
-                alertDialogBuilder.setPositiveButton(getResources().getText(R.string.manual_button_ok), new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
                 break;
             case "การใช้งานฟังก์ชันกายภาพบำบัด":
-            case "How to use physical therapy function":
                 alertDialogBuilder.setView(R.layout.manual_function);
-                alertDialogBuilder.setPositiveButton(getResources().getText(R.string.manual_button_ok), new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
                 break;
             case "ตำแหน่งเซ็นเซอร์และตำแหน่งการวางโทรศัพท์มือถือ":
-            case "How to set sensor and smart phone position":
                 alertDialogBuilder.setView(R.layout.manual_position);
-                alertDialogBuilder.setPositiveButton(getResources().getText(R.string.manual_button_ok), new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
                 break;
             case "ข้อแนะนำอื่นๆ":
-            case "Others":
                 alertDialogBuilder.setView(R.layout.manual_rec);
-                alertDialogBuilder.setPositiveButton(getResources().getText(R.string.manual_button_ok), new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setPositiveButton("ตกลง", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
                 break;
-
         }
 
         AlertDialog alertDialog = alertDialogBuilder.create();

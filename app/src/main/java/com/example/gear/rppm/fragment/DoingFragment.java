@@ -123,9 +123,15 @@ public class DoingFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_doing, container, false);
         ((MainActivity)getActivity()).setCurrentTag(CURRENT_TAG);
-        ((MainActivity)getActivity()).setToolbarTitleById(R.string.load_app_button);
-        //((MainActivity)getActivity()).setToolbarTitleByString("เริ่มทำกายภาพ");
+        ((MainActivity)getActivity()).setToolbarTitleByString("เริ่มทำกายภาพ");
 
+<<<<<<< HEAD
+=======
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+        /*Notification Sound Setup*/
+        Utils.setupSound(view.getContext());
+>>>>>>> parent of 6966bb7... final v 3-2
         /* UI Component */
         defineUI();
         setFirstUI();
@@ -157,6 +163,7 @@ public class DoingFragment extends Fragment {
         }
         return view;
     }
+<<<<<<< HEAD
     /*getDataHandler.postDelayed(new Runnable(){
                     public void run(){
                         //do something
@@ -176,6 +183,50 @@ public class DoingFragment extends Fragment {
                         getDataHandler.postDelayed(this, 500);
                     }
                 }, delay);*/
+=======
+
+
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+>>>>>>> parent of 6966bb7... final v 3-2
+
 
     /*Setter*/
     public static void setCurrentTreat(String currentTreat) {
@@ -253,23 +304,18 @@ public class DoingFragment extends Fragment {
         int averageAngle = Utils.calculateAverageAngleWhenDoing(maxAnglePerTime, currentTime);
 
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
-        mAlertBuilder.setTitle(getResources().getText(R.string.fragment_doing_dialog_pause_title));
-        mAlertBuilder.setMessage(String.format("%s %d %s %n%s %d %s %n%s %d %s"
-                , getResources().getText(R.string.fragment_doing_dialog_maxAngle), (int)maxAngle
-                , getResources().getText(R.string.fragment_doing_tv_angle02)
-                , getResources().getText(R.string.fragment_doing_dialog_averageAngle), averageAngle
-                , getResources().getText(R.string.fragment_doing_tv_angle02)
-                , getResources().getText(R.string.fragment_doing_dialog_pause_doTime),currentTime
-                , getResources().getText(R.string.fragment_doing_tv_time02)
+        mAlertBuilder.setTitle("หยุดชั่วคราว");
+        mAlertBuilder.setMessage(String.format("มุมที่ทำได้มากที่สุด %d องศา %nมุมที่ทำได้เฉลี่ย %d องศา %nจากทั้งหมด %d ครั้ง"
+                , (int)maxAngle, averageAngle, currentTime
         ));
 
-        mAlertBuilder.setPositiveButton(getResources().getText(R.string.fragment_doing_dialog_but_001), new DialogInterface.OnClickListener() {
+        mAlertBuilder.setPositiveButton("ทำต่อ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
             }
         });
 
-        mAlertBuilder.setNegativeButton(getResources().getText(R.string.fragment_doing_dialog_but_002), new DialogInterface.OnClickListener() {
+        mAlertBuilder.setNegativeButton("กลับไปหน้าเลือกท่า", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 setZero();
@@ -287,7 +333,7 @@ public class DoingFragment extends Fragment {
     @SuppressLint("DefaultLocale")
     private void showFinishOneSetDialog(){
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
-        mAlertBuilder.setTitle(getResources().getText(R.string.fragment_doing_dialog_finishOne_title));
+        mAlertBuilder.setTitle("หยุดพักชั่วคราว");
 
         if (FLAG_TREAT.equals("leg")){
             mAlertBuilder.setMessage(String.format("คุณทำกายภาพครบ %d เซ็ตแล้ว %nมุมเฉลี่ย = %d องศา"
@@ -297,7 +343,7 @@ public class DoingFragment extends Fragment {
                     , currentSet, (int)maxAngle, (int)calculateAverageAngleFromSumAngle()));
         }
 
-        mAlertBuilder.setPositiveButton(getResources().getText(R.string.fragment_doing_dialog_but_001), new DialogInterface.OnClickListener() {
+        mAlertBuilder.setPositiveButton("ทำต่อ", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 currentTime = 0;
@@ -310,7 +356,7 @@ public class DoingFragment extends Fragment {
             }
         });
 
-        mAlertBuilder.setNegativeButton(getResources().getText(R.string.fragment_doing_dialog_but_002), new DialogInterface.OnClickListener() {
+        mAlertBuilder.setNegativeButton("กลับไปหน้าเลือกท่า", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try{
@@ -335,7 +381,7 @@ public class DoingFragment extends Fragment {
     @SuppressLint("DefaultLocale")
     private void showFinishDialog(){
         AlertDialog.Builder mAlertBuilder = new AlertDialog.Builder(view.getContext());
-        mAlertBuilder.setTitle(getResources().getText(R.string.fragment_doing_dialog_finishAll_title));
+        mAlertBuilder.setTitle("คุณทำกายภาพครบทั้งหมดแล้ว");
         if (FLAG_TREAT.equals("leg")){
             mAlertBuilder.setMessage(String.format("คุณทำกายภาพครบ %d เซ็ตแล้ว %nมุมเฉลี่ย = %d องศา"
                     , currentSet, (int)calculateAverageAngleFromSumAngle()));
@@ -344,7 +390,7 @@ public class DoingFragment extends Fragment {
                     , currentSet, (int)maxAngle, (int)calculateAverageAngleFromSumAngle()));
         }
 
-        mAlertBuilder.setNegativeButton(getResources().getText(R.string.fragment_doing_dialog_but_002), new DialogInterface.OnClickListener() {
+        mAlertBuilder.setNegativeButton("กลับไปหน้าเลือกท่า", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 try {
